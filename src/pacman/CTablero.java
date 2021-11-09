@@ -90,10 +90,10 @@ public class CTablero implements InterfaceGame{
         
         Random rnd = new Random();
         
-        switch (rnd.nextInt(6))
+        switch (rnd.nextInt(5))
         {
             case 0:
-                c = Color.BLACK;
+                c = Color.ORANGE;
                 break;
             case 1:
                  c = Color.BLUE;
@@ -107,9 +107,7 @@ public class CTablero implements InterfaceGame{
             case 4:
                  c = Color.RED;
                 break;
-            case 5:
-                 c = Color.WHITE;
-                break;
+            
                   
         }
         

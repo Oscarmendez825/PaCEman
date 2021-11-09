@@ -113,7 +113,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
      public void paintComponent(Graphics g)
      {
 //         fondo blanco
-         g.setColor(Color.white);
+         g.setColor(Color.black);
          g.fillRect(0, 0, getWidth(), getHeight());
          
 //         Se pintan los elementos
@@ -122,12 +122,12 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
             fantasmita.paintElements(g);
         }
          
-        for (CMuro cuadrito : tablero.cuadritos) 
+        for(CMuro cuadrito : tablero.cuadritos) 
         {
             cuadrito.paintElements(g);
         }
          
-        for (int i=0; i < tablero.coins.size();i++) {
+        for(int i=0; i < tablero.coins.size();i++) {
            tablero.coins.get(i).paintElements(g);
         }
          

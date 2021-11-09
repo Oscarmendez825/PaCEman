@@ -19,9 +19,9 @@ public class CMuro extends CGameObjects{
     @Override
     public void paintElements(Graphics g) {
 //       Un simple rectangulo cafe redondeado 
-        g.setColor(new Color(185, 122, 87));
+        g.setColor(Color.blue);
         g.fillRoundRect(iPosX, iPosY, 25, 25, 6, 6);
-        g.setColor(Color.black);
+        g.setColor(Color.white);
         g.drawRoundRect(iPosX, iPosY, 25, 25, 6, 6);
     }
     
