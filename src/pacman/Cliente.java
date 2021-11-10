@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Cliente implements Runnable {
 
@@ -34,12 +35,50 @@ public class Cliente implements Runnable {
             try{
                 while(true){
                     message = datain.readUTF();
-                    System.out.println(message);
+                    String[] separacion = message.split(";");
+                    System.out.println(Arrays.asList(separacion));
+                    accion(separacion);
                 }
             }catch(IOException e){
             }
 
         }
+         
+         private void accion(String[] cadena){
+             switch(cadena[0]){
+                 case "Enemigo":
+                     switch(cadena[1]){
+                         case "Shadow":
+                             System.out.println("Crear Shadow");
+                             break;
+                         case "Speedy":
+                             System.out.println("Crear Speedy");
+                             break;
+                         case "Bashful":
+                             System.out.println("Crear Bashful");
+                             break;   
+                         case "Pokey":
+                             System.out.println("Crear Pokey");
+                             break;
+                     }
+                 case "Fruta":
+                     switch(cadena[1]){
+                         case "Cereza":
+                             System.out.println("Crear Cereza");
+                             break;
+                         case "Fresa":
+                             System.out.println("Crear Fresa");
+                             break;
+                         case "Naranja":
+                             System.out.println("Crear Naranja");
+                             break;   
+                     }
+                 case "Pastilla":
+                     System.out.println("Crear Pastilla");
+                     break;
+             }
+         }
+        
 
          
 }

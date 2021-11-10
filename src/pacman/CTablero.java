@@ -141,7 +141,7 @@ private Thread thread;
         private void enviarDatos(String data){
        
             String mensaje ="";
-            mensaje = data.trim()+"\n";
+            mensaje = data.trim();
             client.mandarMensaje(mensaje);
     }
     
