@@ -21,8 +21,9 @@ public class CMuro extends CGameObjects{
 //       Un simple rectangulo cafe redondeado 
         g.setColor(Color.blue);
         g.fillRoundRect(iPosX, iPosY, 25, 25, 6, 6);
-        g.setColor(Color.white);
-        g.drawRoundRect(iPosX, iPosY, 25, 25, 6, 6);
+        g.setColor(Color.black);
+        g.fillRoundRect(iPosX+5, iPosY+5, 15, 15, 6, 6);
+        
     }
     
 }

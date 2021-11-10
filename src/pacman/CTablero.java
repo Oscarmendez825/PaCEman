@@ -3,7 +3,6 @@ package pacman;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 
 public class CTablero implements InterfaceGame{
@@ -13,30 +12,33 @@ public class CTablero implements InterfaceGame{
  public  ArrayList <CBomba>    bombas; 
  public  ArrayList <CMoneda>   coins; 
  public  ArrayList <CFantasma> fantasmitas;
+ public ArrayList <CPastilla>  pastillas;
+ public ArrayList <CFruta>     frutas;
  public  boolean               isBomba = false;
  
+ 
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                                 {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 4, 4, 1},
-                                 {1, 0, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 1},
-                                 {1, 0, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0, 0, 0, 0, 0, 0, 4, 4, 4, 1},
-                                 {1, 2, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
-                                 {1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 2, 1, 4, 4, 2, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 2, 0, 1, 4, 1, 4, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1, 4, 4, 1},
-                                 {1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 4, 1, 4, 4, 4, 1, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 2, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1},
+                                 {1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 2, 1, 4, 4, 2, 4, 4, 0, 0, 4, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 2, 0, 1, 4, 1, 4, 4, 4, 4, 4, 1, 1, 1, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1, 0, 0, 1},
+                                 {1, 5, 1, 2, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 4, 1, 4, 4, 0, 1, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 1},
                                  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
                                };
  
@@ -47,10 +49,14 @@ public class CTablero implements InterfaceGame{
     bombas      = new ArrayList<>();
     coins       = new ArrayList<>();   
     fantasmitas = new ArrayList<>();
+    pastillas = new ArrayList<>();
+    frutas = new ArrayList<>();
     
      int nMuros = 0;
      int nGhost = 0;
      int nCoins = 0;
+     int nPills = 0;
+     int nFruits = 0;
     
     for(int i=0; i < 23; i++)
     {
@@ -78,6 +84,18 @@ public class CTablero implements InterfaceGame{
 //                   Es moneda
                      coins.add(nCoins,new CMoneda(j*25,i*25));
                      nCoins++;
+                   break;
+                   
+               case 5:
+//                  Es pastilla
+                   pastillas.add(nPills, new CPastilla(j*25,i*25));
+                   nPills++;
+                   break;
+                   
+                case 6:
+//                  Es Fruta
+                   frutas.add(nFruits, new CFruta(Color.RED,j*25,i*25));
+                   nFruits++;
                    break;
            }
         }
@@ -107,8 +125,7 @@ public class CTablero implements InterfaceGame{
             case 4:
                  c = Color.RED;
                 break;
-            
-                  
+                      
         }
         
         return c;
@@ -129,6 +146,7 @@ public class CTablero implements InterfaceGame{
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;  
+      System.out.println(Pacman.getY());
     }
     
     private void moverGhost(int iPos)
@@ -244,6 +262,9 @@ public class CTablero implements InterfaceGame{
     {  
 //        si se acaban las monedas ganas
         checkCoins();
+        checkPastillas();
+        checkFrutas();
+        
         return coins.isEmpty();
     } 
 
@@ -254,10 +275,35 @@ public class CTablero implements InterfaceGame{
        {
             if( Pacman.getX() == coins.get(i).getX() && Pacman.getY() == coins.get(i).getY())
             {
-                coins.remove(i);//libera la memoria y elimina el objeto
+                coins.remove(i); 
+                
             }
        } 
     }
+    public void checkPastillas()
+    {
+       for(int i=0; i < pastillas.size() ;i++)
+       {
+            if( Pacman.getX() == pastillas.get(i).getX() && Pacman.getY() == pastillas.get(i).getY())
+            {
+                pastillas.remove(i); 
+                
+            }
+       } 
+    }
+    
+   public void checkFrutas()
+    {
+       for(int i=0; i < frutas.size() ;i++)
+       {
+            if( Pacman.getX() == frutas.get(i).getX() && Pacman.getY() == frutas.get(i).getY())
+            {
+                frutas.remove(i); 
+                
+            }
+       } 
+    }
+    
     
     public int getRandomDirection()
     {
@@ -267,7 +313,6 @@ public class CTablero implements InterfaceGame{
 
     @Override
     public void moverElemento(int iEstado) {
-//        No se utiliza 
     }
     
 }
