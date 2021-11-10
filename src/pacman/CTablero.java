@@ -3,7 +3,7 @@ package pacman;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.JOptionPane;
+
 
 
 public class CTablero implements InterfaceGame{
@@ -14,7 +14,8 @@ public class CTablero implements InterfaceGame{
  public  ArrayList <CMoneda>   coins; 
  public  ArrayList <CFantasma> fantasmitas;
  public  boolean isBomba = false;
- Cliente cliente;
+private Cliente client = new Cliente();
+private Thread thread;
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1},
                                  {1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 4, 4, 1},
@@ -42,6 +43,9 @@ public class CTablero implements InterfaceGame{
  
  public CTablero()
  {
+     //cliente = new Cliente();
+     thread = new Thread(client);
+     thread.start();
     Pacman      = new CPacman();
     cuadritos   = new ArrayList<>();
     bombas      = new ArrayList<>();
@@ -82,9 +86,7 @@ public class CTablero implements InterfaceGame{
            }
         }
     }
-    cliente = new Cliente();
-    Thread thread = new Thread(cliente);
-     thread.start();
+
  }
     
     public Color getRandomColor()
@@ -132,8 +134,15 @@ public class CTablero implements InterfaceGame{
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
-      System.out.println(Pacman.getX());
-      this.enviarDatos("Posicion/"+Pacman.getX()+" /"+Pacman.getY());
+      String posiciones = "JugadorPosicion;"+Pacman.getX()+";"+Pacman.getY();
+      enviarDatos(posiciones);
+      
+    }
+        private void enviarDatos(String data){
+       
+            String mensaje ="";
+            mensaje = data.trim()+"\n";
+            client.mandarMensaje(mensaje);
     }
     
     private void moverGhost(int iPos)
@@ -274,15 +283,5 @@ public class CTablero implements InterfaceGame{
     public void moverElemento(int iEstado) {
 //        No se utiliza 
     }
-    private void enviarDatos(String data){
-        try{
-            String outmessage = "";
-            outmessage = data.trim();
-            cliente.sendData(outmessage+"\n");
-            System.out.println(data);
-  
-        }catch (Exception e){
 
-        }
     }
-}
