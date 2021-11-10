@@ -13,8 +13,8 @@ public class CTablero implements InterfaceGame{
  public  ArrayList <CBomba>    bombas; 
  public  ArrayList <CMoneda>   coins; 
  public  ArrayList <CFantasma> fantasmitas;
- public  boolean               isBomba = false;
- 
+ public  boolean isBomba = false;
+ Cliente cliente;
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1},
                                  {1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 4, 4, 1},
@@ -82,6 +82,9 @@ public class CTablero implements InterfaceGame{
            }
         }
     }
+    cliente = new Cliente();
+    Thread thread = new Thread(cliente);
+     thread.start();
  }
     
     public Color getRandomColor()
@@ -128,7 +131,9 @@ public class CTablero implements InterfaceGame{
     {
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
-      iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;  
+      iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
+      System.out.println(Pacman.getX());
+      this.enviarDatos("Posicion/"+Pacman.getX()+" /"+Pacman.getY());
     }
     
     private void moverGhost(int iPos)
@@ -269,5 +274,15 @@ public class CTablero implements InterfaceGame{
     public void moverElemento(int iEstado) {
 //        No se utiliza 
     }
-    
+    private void enviarDatos(String data){
+        try{
+            String outmessage = "";
+            outmessage = data.trim();
+            cliente.sendData(outmessage+"\n");
+            System.out.println(data);
+  
+        }catch (Exception e){
+
+        }
+    }
 }
