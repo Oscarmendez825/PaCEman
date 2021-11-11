@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  */
 public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,InterfaceGame
 {
-    static  CTablero  tablero = new CTablero();
+    private CTablero  tablero = new CTablero();
     public boolean    isPause = false;
     private Thread    hilo;
     static int       iCont;
