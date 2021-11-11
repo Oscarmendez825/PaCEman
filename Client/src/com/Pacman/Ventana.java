@@ -1,4 +1,4 @@
-package pacman;
+package com.Pacman;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

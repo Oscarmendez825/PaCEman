@@ -1,4 +1,4 @@
-package pacman;
+package com.Pacman;
 
 import java.awt.Color;
 import java.io.DataInputStream;

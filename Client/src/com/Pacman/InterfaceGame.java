@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 
-package pacman;
+package com.Pacman;
 
 public interface InterfaceGame {
     int PAB=1;

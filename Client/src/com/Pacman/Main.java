@@ -1,4 +1,4 @@
-package pacman;
+package com.Pacman;
 
 
 public class Main {

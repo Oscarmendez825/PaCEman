@@ -1,4 +1,4 @@
-package pacman;
+package com.Pacman;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,15 +7,18 @@ import java.awt.Graphics;
  *
  * @author Gabriel
  */
-public class CPastilla extends CGameObjects{
+public class CFruta extends CGameObjects{
     
-    CPastilla(int X, int Y){
-        
+    private Color  cColor;
+    
+    CFruta(Color cFondo,int X, int Y){
+        cColor = cFondo;
         super.iPosX = X;
         super.iPosY = Y;
+ 
     }
-    
-    CPastilla(){
+ 
+    CFruta(){
         
     }
     
@@ -40,9 +43,12 @@ public class CPastilla extends CGameObjects{
 
     @Override
     public void paintElements(Graphics g) {
-        g.setColor(Color.yellow);
-        g.fillOval(iPosX, iPosY, 16, 16);
+        g.setColor(cColor);
+        
+        g.fillOval(iPosX, iPosY, 15, 15);
+        g.fillOval(iPosX+12, iPosY, 15, 15);
         
         
-    }  
+    }
+    
 }
