@@ -8,14 +8,17 @@ import java.util.Random;
 
 public class CTablero implements InterfaceGame{
  
- public  CPacman               Pacman; 
+ public  CPacman   Pacman; 
  public  ArrayList <CMuro>     cuadritos;
  public  ArrayList <CBomba>    bombas; 
  public  ArrayList <CMoneda>   coins; 
  public  ArrayList <CFantasma> fantasmitas;
  public  boolean isBomba = false;
-private Cliente client = new Cliente();
+private Cliente client;
 private Thread thread;
+private int nMuros = 0;
+private int nGhost = 0;
+private int nCoins = 0;
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1},
                                  {1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 4, 4, 1},
@@ -40,10 +43,34 @@ private Thread thread;
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1},
                                  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
                                };
+
+    public int getnMuros() {
+        return nMuros;
+    }
+
+    public void setnMuros(int nMuros) {
+        this.nMuros = nMuros;
+    }
+
+    public int getnGhost() {
+        return nGhost;
+    }
+
+    public void setnGhost(int nGhost) {
+        this.nGhost = nGhost;
+    }
+
+    public int getnCoins() {
+        return nCoins;
+    }
+
+    public void setnCoins(int nCoins) {
+        this.nCoins = nCoins;
+    }
  
  public CTablero()
  {
-     //cliente = new Cliente();
+     client = new Cliente(this);
      thread = new Thread(client);
      thread.start();
     Pacman      = new CPacman();
@@ -52,9 +79,7 @@ private Thread thread;
     coins       = new ArrayList<>();   
     fantasmitas = new ArrayList<>();
     
-     int nMuros = 0;
-     int nGhost = 0;
-     int nCoins = 0;
+     
     
     for(int i=0; i < 23; i++)
     {
@@ -88,7 +113,7 @@ private Thread thread;
     }
 
  }
-    
+  
     public Color getRandomColor()
     {
         Color c = Color.BLACK;
@@ -283,5 +308,15 @@ private Thread thread;
     public void moverElemento(int iEstado) {
 //        No se utiliza 
     }
+
+    public int[][] getiMatrizObj() {
+        return iMatrizObj;
+    }
+
+    public void setiMatrizObj(int[][] iMatrizObj) {
+        this.iMatrizObj = iMatrizObj;
+    }
+
+
 
     }

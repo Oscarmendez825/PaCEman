@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Cliente implements Runnable {
 
@@ -12,9 +13,12 @@ public class Cliente implements Runnable {
         private int genport = 1201;
         private DataInputStream datain;
         private DataOutputStream dataout;
-        String message = "";
-
-        public Cliente(){
+        private String message = "";
+        //private  ArrayList <CFantasma> fantasmitas;
+        private CTablero tablero;
+        
+        public Cliente(CTablero juego){
+            this.tablero = juego;
 
             try {
                 port = new Socket("127.0.0.1",genport);
@@ -50,6 +54,17 @@ public class Cliente implements Runnable {
                      switch(cadena[1]){
                          case "Shadow":
                              System.out.println("Crear Shadow");
+                             //AGREGAR FANTASMA (ERROR A VECES)
+                            Random random = new Random();
+                            int i = random.nextInt(22);
+                            int j = random.nextInt(22);
+                            while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3){
+                                i = random.nextInt(22);
+                                j = random.nextInt(22);
+                            }
+                             tablero.fantasmitas.add(tablero.getnGhost(),new CFantasma( tablero.getRandomColor(), i*25, j*25));
+                             tablero.getiMatrizObj()[i][j] = 2;
+                             tablero.setnGhost(tablero.getnGhost()+1);
                              break;
                          case "Speedy":
                              System.out.println("Crear Speedy");
@@ -61,6 +76,7 @@ public class Cliente implements Runnable {
                              System.out.println("Crear Pokey");
                              break;
                      }
+                     break;
                  case "Fruta":
                      switch(cadena[1]){
                          case "Cereza":
@@ -73,6 +89,7 @@ public class Cliente implements Runnable {
                              System.out.println("Crear Naranja");
                              break;   
                      }
+                     break;
                  case "Pastilla":
                      System.out.println("Crear Pastilla");
                      break;
