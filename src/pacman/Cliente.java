@@ -1,5 +1,6 @@
 package pacman;
 
+import java.awt.Color;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,7 +15,6 @@ public class Cliente implements Runnable {
         private DataInputStream datain;
         private DataOutputStream dataout;
         private String message = "";
-        //private  ArrayList <CFantasma> fantasmitas;
         private CTablero tablero;
         
         public Cliente(CTablero juego){
@@ -75,6 +75,7 @@ public class Cliente implements Runnable {
                              break;
                          case "Fresa":
                              System.out.println("Crear Fresa");
+                             addFruta();
                              break;
                          case "Naranja":
                              System.out.println("Crear Naranja");
@@ -83,6 +84,7 @@ public class Cliente implements Runnable {
                      break;
                  case "Pastilla":
                      System.out.println("Crear Pastilla");
+                     addPastilla();
                      break;
              }
          }
@@ -91,13 +93,37 @@ private void addFantasma(){
         Random random = new Random();
         int i = random.nextInt(22);
         int j = random.nextInt(22);
-        while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3){
+        while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
             i = random.nextInt(22);
             j = random.nextInt(22);
         }
          tablero.fantasmitas.add(tablero.getnGhost(),new CFantasma( tablero.getRandomColor(), i*25, j*25));
          tablero.getiMatrizObj()[i][j] = 2;
          tablero.setnGhost(tablero.getnGhost()+1);
+
 }
-         
+private void addFruta(){
+    Random random = new Random();
+    int i = random.nextInt(22);
+    int j = random.nextInt(22);
+    while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
+        i = random.nextInt(22);
+        j = random.nextInt(22);
+    }
+     tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
+     tablero.getiMatrizObj()[i][j] = 6;
+}
+
+
+private void addPastilla(){
+    Random random = new Random();
+    int i = random.nextInt(22);
+    int j = random.nextInt(22);
+    while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
+        i = random.nextInt(22);
+        j = random.nextInt(22);
+    }
+     tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
+     tablero.getiMatrizObj()[i][j] = 6;
+}
 }

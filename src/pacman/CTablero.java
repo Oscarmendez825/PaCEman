@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class CTablero implements InterfaceGame{
  
-    
  private Cliente client;
 private Thread thread;
  public  CPacman   Pacman; 
@@ -350,6 +349,40 @@ public ArrayList <CFruta>     frutas;
     public void setnCoins(int nCoins) {
         this.nCoins = nCoins;
     }
+
+    public ArrayList<CPastilla> getPastillas() {
+        return pastillas;
+    }
+
+    public void setPastillas(ArrayList<CPastilla> pastillas) {
+        this.pastillas = pastillas;
+    }
+
+    public ArrayList<CFruta> getFrutas() {
+        return frutas;
+    }
+
+    public void setFrutas(ArrayList<CFruta> frutas) {
+        this.frutas = frutas;
+    }
+
+    public int getnPills() {
+        return nPills;
+    }
+
+    public void setnPills(int nPills) {
+        this.nPills = nPills;
+    }
+
+    public int getnFruits() {
+        return nFruits;
+    }
+
+    public void setnFruits(int nFruits) {
+        this.nFruits = nFruits;
+    }
+    
+    
     
     private void enviarDatos(String data){
     String mensaje ="";
