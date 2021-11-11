@@ -2,7 +2,6 @@
 package com.Client;
 
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 /**
  * This class is based on the graphical interface that the user will have to chat, as well as some functions related to reading messages
  * @author Oscar Méndez Granados

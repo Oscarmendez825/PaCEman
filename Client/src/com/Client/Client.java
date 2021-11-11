@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import javax.swing.JEditorPane;
-import javax.swing.JOptionPane;
 
 /**
  * This class is responsible for connecting to the server, it is also responsible for sending and receiving messages to display them on the screen
@@ -48,7 +47,7 @@ public class Client implements Runnable {//clase
                 System.out.println(message);
                 window.setText(message);//show the message in screen
             }
-        }catch(Exception e){
+        }catch(IOException e){
             e.printStackTrace();
         }
         
