@@ -55,16 +55,7 @@ public class Cliente implements Runnable {
                          case "Shadow":
                              System.out.println("Crear Shadow");
                              //AGREGAR FANTASMA (ERROR A VECES)
-                            Random random = new Random();
-                            int i = random.nextInt(22);
-                            int j = random.nextInt(22);
-                            while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3){
-                                i = random.nextInt(22);
-                                j = random.nextInt(22);
-                            }
-                             tablero.fantasmitas.add(tablero.getnGhost(),new CFantasma( tablero.getRandomColor(), i*25, j*25));
-                             tablero.getiMatrizObj()[i][j] = 2;
-                             tablero.setnGhost(tablero.getnGhost()+1);
+                             addFantasma();
                              break;
                          case "Speedy":
                              System.out.println("Crear Speedy");
@@ -96,6 +87,17 @@ public class Cliente implements Runnable {
              }
          }
         
-
+private void addFantasma(){
+        Random random = new Random();
+        int i = random.nextInt(22);
+        int j = random.nextInt(22);
+        while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3){
+            i = random.nextInt(22);
+            j = random.nextInt(22);
+        }
+         tablero.fantasmitas.add(tablero.getnGhost(),new CFantasma( tablero.getRandomColor(), i*25, j*25));
+         tablero.getiMatrizObj()[i][j] = 2;
+         tablero.setnGhost(tablero.getnGhost()+1);
+}
          
 }
