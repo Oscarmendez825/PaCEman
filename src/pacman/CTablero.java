@@ -8,14 +8,15 @@ import java.util.Random;
 
 public class CTablero implements InterfaceGame{
  
+    
+ private Cliente client;
+private Thread thread;
  public  CPacman   Pacman; 
  public  ArrayList <CMuro>     cuadritos;
  public  ArrayList <CBomba>    bombas; 
  public  ArrayList <CMoneda>   coins; 
  public  ArrayList <CFantasma> fantasmitas;
  public  boolean isBomba = false;
-private Cliente client;
-private Thread thread;
 private int nMuros = 0;
 private int nGhost = 0;
 private int nCoins = 0;
@@ -44,35 +45,13 @@ private int nCoins = 0;
                                  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
                                };
 
-    public int getnMuros() {
-        return nMuros;
-    }
-
-    public void setnMuros(int nMuros) {
-        this.nMuros = nMuros;
-    }
-
-    public int getnGhost() {
-        return nGhost;
-    }
-
-    public void setnGhost(int nGhost) {
-        this.nGhost = nGhost;
-    }
-
-    public int getnCoins() {
-        return nCoins;
-    }
-
-    public void setnCoins(int nCoins) {
-        this.nCoins = nCoins;
-    }
+    
  
  public CTablero()
  {
-     client = new Cliente(this);
-     thread = new Thread(client);
-     thread.start();
+    client = new Cliente(this);
+    thread = new Thread(client);
+    thread.start();
     Pacman      = new CPacman();
     cuadritos   = new ArrayList<>();
     bombas      = new ArrayList<>();
@@ -137,8 +116,6 @@ private int nCoins = 0;
             case 4:
                  c = Color.RED;
                 break;
-            
-                  
         }
         
         return c;
@@ -162,12 +139,6 @@ private int nCoins = 0;
       String posiciones = "JugadorPosicion;"+Pacman.getX()+";"+Pacman.getY();
       enviarDatos(posiciones);
       
-    }
-        private void enviarDatos(String data){
-       
-            String mensaje ="";
-            mensaje = data.trim();
-            client.mandarMensaje(mensaje);
     }
     
     private void moverGhost(int iPos)
@@ -254,9 +225,7 @@ private int nCoins = 0;
      public boolean isPlaying()
      {
           boolean bFinish = false;
-          
-          
-          
+
             for(int i=0;i < fantasmitas.size() ;i++)
             {
                   if( fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY())
@@ -265,9 +234,7 @@ private int nCoins = 0;
                   }
              
             }
-            
-          
-          
+
           return bFinish;
      }
      
@@ -317,6 +284,34 @@ private int nCoins = 0;
         this.iMatrizObj = iMatrizObj;
     }
 
+    public int getnMuros() {
+        return nMuros;
+    }
 
+    public void setnMuros(int nMuros) {
+        this.nMuros = nMuros;
+    }
+
+    public int getnGhost() {
+        return nGhost;
+    }
+
+    public void setnGhost(int nGhost) {
+        this.nGhost = nGhost;
+    }
+
+    public int getnCoins() {
+        return nCoins;
+    }
+
+    public void setnCoins(int nCoins) {
+        this.nCoins = nCoins;
+    }
+    
+    private void enviarDatos(String data){
+    String mensaje ="";
+    mensaje = data.trim();
+    client.mandarMensaje(mensaje);
+    }
 
     }
