@@ -11,14 +11,14 @@ public class CFruta extends CGameObjects{
     
     private Color  cColor;
     
-    CFruta(Color cFondo,int X, int Y){
+   public CFruta(Color cFondo,int X, int Y){
         cColor = cFondo;
         super.iPosX = X;
         super.iPosY = Y;
  
     }
  
-    CFruta(){
+    public CFruta(){
         
     }
     

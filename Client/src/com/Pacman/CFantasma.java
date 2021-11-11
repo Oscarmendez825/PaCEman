@@ -12,14 +12,14 @@ public class CFantasma extends CGameObjects implements InterfaceGame{
     private Color cColor;
     private int iDireccion;
     
-    CFantasma(Color cFondo, int posX, int posY)
+   public CFantasma(Color cFondo, int posX, int posY)
     {
         cColor = cFondo;
         super.iPosX = posX;
         super.iPosY = posY;
     }
     
-    CFantasma()
+   public CFantasma()
     {
         
     }

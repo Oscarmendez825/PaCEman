@@ -9,13 +9,13 @@ import java.awt.Graphics;
  */
 public class CMoneda extends CGameObjects{
 
-    CMoneda(int X, int Y)
+    public CMoneda(int X, int Y)
     {
         super.iPosX = X;
         super.iPosY = Y;
     }
     
-    CMoneda()
+    public CMoneda()
     {
   
     }

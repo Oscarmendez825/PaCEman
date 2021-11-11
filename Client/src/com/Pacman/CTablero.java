@@ -161,6 +161,8 @@ public ArrayList <CFruta>     frutas;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
+       String posiciones = "FantasmaPosicion;"+fantasmitas.get(iPos).getX()+";"+fantasmitas.get(iPos).getY();
+      enviarDatos(posiciones);
     }
     
     
@@ -381,9 +383,7 @@ public ArrayList <CFruta>     frutas;
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
-    
-    
-    
+
     private void enviarDatos(String data){
     String mensaje ="";
     mensaje = data.trim();

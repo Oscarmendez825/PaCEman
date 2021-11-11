@@ -11,14 +11,14 @@ public class CPacman extends CGameObjects implements InterfaceGame {
     private int     iDireccion;
     private boolean isOpen=true;
     
-    CPacman(int iX,int iY,int iDir)
+    public CPacman(int iX,int iY,int iDir)
     {
         super.iPosX=iX;
         super.iPosY=iY;
         iDireccion=iDir;
     }
     
-    CPacman()
+    public CPacman()
     {
         super.iPosX=0;
         super.iPosY=0;

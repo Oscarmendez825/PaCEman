@@ -9,13 +9,13 @@ import java.awt.Graphics;
  */
 public class CPastilla extends CGameObjects{
     
-    CPastilla(int X, int Y){
+    public CPastilla(int X, int Y){
         
         super.iPosX = X;
         super.iPosY = Y;
     }
     
-    CPastilla(){
+    public CPastilla(){
         
     }
     

@@ -10,7 +10,7 @@ import java.awt.Graphics;
 public class CMuro extends CGameObjects{
 
     
-    CMuro(int iX, int iY)
+   public CMuro(int iX, int iY)
     {
         super.iPosX = iX;
         super.iPosY = iY;
