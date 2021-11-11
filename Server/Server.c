@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 int main() {
 
@@ -19,10 +20,20 @@ int main() {
     server_address.sin_addr.s_addr = INADDR_ANY;
 
     // Se hace un bind del server al port y la IP
-    bind(server_socket, (struct sockadrr*) &server_address, sizeof(server_address));
+    bind(server_socket, (struct sockaddr*) &server_address, sizeof(server_address));
         
     // Esperar (listen) nuevas conexiones
     listen(server_socket, 4);
+
+    // Aceptar conexiones
+    int client_socket;
+    client_socket = accept(server_socket, NULL, NULL);
+
+    // Enviar mensaje inicial
+    send(client_socket, server_message, sizeof(server_message), 0);
+
+    // Cerrar socket servidor
+    close(server_socket);
 
     return 0;
 }
