@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Cliente implements Runnable {
 
@@ -97,10 +99,9 @@ private void addFantasma(){
             i = random.nextInt(22);
             j = random.nextInt(22);
         }
-         tablero.fantasmitas.add(tablero.getnGhost(),new CFantasma( tablero.getRandomColor(), i*25, j*25));
+        CFantasma fantasma = new CFantasma(tablero.getRandomColor(), i*25, j*25);
+         CPanelPrincipal.tablero.fantasmitas.add(fantasma);
          tablero.getiMatrizObj()[i][j] = 2;
-         tablero.setnGhost(tablero.getnGhost()+1);
-
 }
 private void addFruta(){
     Random random = new Random();

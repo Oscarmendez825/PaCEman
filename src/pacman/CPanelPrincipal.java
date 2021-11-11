@@ -15,10 +15,10 @@ import javax.swing.JPanel;
  */
 public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,InterfaceGame
 {
-    public  CTablero  tablero = new CTablero();
+    static  CTablero  tablero = new CTablero();
     public boolean    isPause = false;
     private Thread    hilo;
-    private int       iCont;
+    static int       iCont;
     
      public CPanelPrincipal()
      {
@@ -117,9 +117,9 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
          g.fillRect(0, 0, getWidth(), getHeight());
          
 //         Se pintan los elementos
-        for(CFantasma fantasmita : tablero.fantasmitas) 
+        for(int i = 0; i < tablero.fantasmitas.size(); i++) 
         {
-            fantasmita.paintElements(g);
+            tablero.fantasmitas.get(i).paintElements(g);
         }
          
         for(CMuro cuadrito : tablero.cuadritos) 
