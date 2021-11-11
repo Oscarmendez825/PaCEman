@@ -100,6 +100,7 @@ private void addFantasma(){
             j = random.nextInt(22);
         }
         CFantasma fantasma = new CFantasma(tablero.getRandomColor(), i*25, j*25);
+        fantasma.setDireccion(1);
          tablero.fantasmitas.add(fantasma);
          tablero.getiMatrizObj()[i][j] = 2;
 }
