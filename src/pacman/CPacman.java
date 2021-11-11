@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 /**
  *
- * @author ARMANDO
+ * @author Gabriel
  */
 public class CPacman extends CGameObjects implements InterfaceGame {
     

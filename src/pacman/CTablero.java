@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-
 public class CTablero implements InterfaceGame{
  
     
@@ -20,28 +18,34 @@ private Thread thread;
 private int nMuros = 0;
 private int nGhost = 0;
 private int nCoins = 0;
+private int nPills = 0;
+private int nFruits = 0;
+public ArrayList <CPastilla>  pastillas;
+public ArrayList <CFruta>     frutas;
+
+ 
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                                 {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 4, 4, 1},
-                                 {1, 0, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 1},
-                                 {1, 0, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0, 0, 0, 0, 0, 0, 4, 4, 4, 1},
-                                 {1, 2, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
-                                 {1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 2, 1, 4, 4, 2, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 2, 0, 1, 4, 1, 4, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 1, 4, 4, 1, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 4, 4, 4, 4, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1, 4, 4, 1},
-                                 {1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 4, 1, 4, 4, 4, 1, 4, 4, 1},
-                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 2, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1},
+                                 {1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 2, 1, 4, 4, 2, 4, 4, 0, 0, 4, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 2, 0, 1, 4, 1, 4, 4, 4, 4, 4, 1, 1, 1, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1, 0, 0, 1},
+                                 {1, 5, 1, 2, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 4, 1, 4, 4, 0, 1, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 1},
                                  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
                                };
 
@@ -57,8 +61,10 @@ private int nCoins = 0;
     bombas      = new ArrayList<>();
     coins       = new ArrayList<>();   
     fantasmitas = new ArrayList<>();
+    pastillas = new ArrayList<>();
+    frutas = new ArrayList<>();
     
-     
+
     
     for(int i=0; i < 23; i++)
     {
@@ -86,6 +92,18 @@ private int nCoins = 0;
 //                   Es moneda
                      coins.add(nCoins,new CMoneda(j*25,i*25));
                      nCoins++;
+                   break;
+                   
+               case 5:
+//                  Es pastilla
+                   pastillas.add(nPills, new CPastilla(j*25,i*25));
+                   nPills++;
+                   break;
+                   
+                case 6:
+//                  Es Fruta
+                   frutas.add(nFruits, new CFruta(Color.RED,j*25,i*25));
+                   nFruits++;
                    break;
            }
         }
@@ -117,8 +135,7 @@ private int nCoins = 0;
                  c = Color.RED;
                 break;
         }
-        
-        return c;
+         return c;
     }
     
     public int getObject(int iFila, int iCol)
@@ -138,7 +155,6 @@ private int nCoins = 0;
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
       String posiciones = "JugadorPosicion;"+Pacman.getX()+";"+Pacman.getY();
       enviarDatos(posiciones);
-      
     }
     
     private void moverGhost(int iPos)
@@ -250,6 +266,9 @@ private int nCoins = 0;
     {  
 //        si se acaban las monedas ganas
         checkCoins();
+        checkPastillas();
+        checkFrutas();
+        
         return coins.isEmpty();
     } 
 
@@ -260,10 +279,35 @@ private int nCoins = 0;
        {
             if( Pacman.getX() == coins.get(i).getX() && Pacman.getY() == coins.get(i).getY())
             {
-                coins.remove(i);//libera la memoria y elimina el objeto
+                coins.remove(i); 
+                
             }
        } 
     }
+    public void checkPastillas()
+    {
+       for(int i=0; i < pastillas.size() ;i++)
+       {
+            if( Pacman.getX() == pastillas.get(i).getX() && Pacman.getY() == pastillas.get(i).getY())
+            {
+                pastillas.remove(i); 
+                
+            }
+       } 
+    }
+    
+   public void checkFrutas()
+    {
+       for(int i=0; i < frutas.size() ;i++)
+       {
+            if( Pacman.getX() == frutas.get(i).getX() && Pacman.getY() == frutas.get(i).getY())
+            {
+                frutas.remove(i); 
+                
+            }
+       } 
+    }
+    
     
     public int getRandomDirection()
     {
@@ -273,7 +317,6 @@ private int nCoins = 0;
 
     @Override
     public void moverElemento(int iEstado) {
-//        No se utiliza 
     }
 
     public int[][] getiMatrizObj() {

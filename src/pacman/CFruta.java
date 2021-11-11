@@ -7,17 +7,19 @@ import java.awt.Graphics;
  *
  * @author Gabriel
  */
-public class CMoneda extends CGameObjects{
-
-    CMoneda(int X, int Y)
-    {
+public class CFruta extends CGameObjects{
+    
+    private Color  cColor;
+    
+    CFruta(Color cFondo,int X, int Y){
+        cColor = cFondo;
         super.iPosX = X;
         super.iPosY = Y;
+ 
     }
-    
-    CMoneda()
-    {
-  
+ 
+    CFruta(){
+        
     }
     
     public void setX(int PosX)
@@ -38,14 +40,15 @@ public class CMoneda extends CGameObjects{
     {
         return (iPosY/25);
     }
-    
+
     @Override
     public void paintElements(Graphics g) {
-       
-//      Un circulo color naranja dentro de uno amarillo
+        g.setColor(cColor);
         
-        g.setColor(Color.white);
-        g.fillOval(iPosX+3, iPosY+3, 6, 6);
+        g.fillOval(iPosX, iPosY, 15, 15);
+        g.fillOval(iPosX+12, iPosY, 15, 15);
+        
+        
     }
     
 }

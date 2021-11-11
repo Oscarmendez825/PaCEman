@@ -130,17 +130,23 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
         for(int i=0; i < tablero.coins.size();i++) {
            tablero.coins.get(i).paintElements(g);
         }
-         
+        
+        for(int i=0; i < tablero.pastillas.size();i++) {
+           tablero.pastillas.get(i).paintElements(g);
+        }
+        
+         for(int i=0; i < tablero.frutas.size();i++) {
+           tablero.frutas.get(i).paintElements(g);
+        }
         
         for(int s=0; s<tablero.bombas.size();s++)
         {
                 
-               tablero.bombas.get(s).paintElements(g);   
+            tablero.bombas.get(s).paintElements(g);   
         }
            
            
-        
-         
+    
           tablero.Pacman.paintElements(g);
      }
 
