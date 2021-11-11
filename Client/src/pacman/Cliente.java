@@ -92,12 +92,11 @@ public class Cliente implements Runnable {
          }
         
 private void addFantasma(){
-        Random random = new Random();
-        int i = random.nextInt(22);
-        int j = random.nextInt(22);
+        int i = getRandom(22);
+        int j = getRandom(22);
         while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-            i = random.nextInt(22);
-            j = random.nextInt(22);
+            i = getRandom(22);
+            j = getRandom(22);
         }
         CFantasma fantasma = new CFantasma(tablero.getRandomColor(), i*25, j*25);
         fantasma.setDireccion(1);
@@ -105,12 +104,11 @@ private void addFantasma(){
          tablero.getiMatrizObj()[i][j] = 2;
 }
 private void addFruta(){
-    Random random = new Random();
-    int i = random.nextInt(22);
-    int j = random.nextInt(22);
+    int i = getRandom(22);
+    int j = getRandom(22);
     while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-        i = random.nextInt(22);
-        j = random.nextInt(22);
+        i = getRandom(22);
+        j = getRandom(22);
     }
      tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
      tablero.getiMatrizObj()[i][j] = 6;
@@ -118,14 +116,19 @@ private void addFruta(){
 
 
 private void addPastilla(){
-    Random random = new Random();
-    int i = random.nextInt(22);
-    int j = random.nextInt(22);
+    int i = getRandom(22);
+    int j = getRandom(22);
     while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-        i = random.nextInt(22);
-        j = random.nextInt(22);
+        i = getRandom(22);
+        j = getRandom(22);
     }
      tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
      tablero.getiMatrizObj()[i][j] = 6;
+}
+
+private int getRandom(int num){
+    Random random = new Random();
+    int numX = random.nextInt(num);
+    return numX;
 }
 }
