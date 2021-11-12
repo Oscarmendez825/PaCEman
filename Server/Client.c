@@ -3,37 +3,50 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netdb.h>
 #include <unistd.h>
+#include <arpa/inet.h>
+#include <string.h>
 
-int main() {
+int main()
+{
 
-    //Crea el socket 
-    int network_socket;
-    network_socket = socket(AF_INET, SOCK_STREAM, 0);
+    // Se crea el servidor
+    int server_socket;
+    server_socket = socket(AF_INET, SOCK_STREAM, 0);
 
-    //Direccion a la que conectarse
+    // Se define la direccion del servidor
     struct sockaddr_in server_address;
+
+    bzero(&server_address, sizeof(server_address));
+
     server_address.sin_family = AF_INET;
     server_address.sin_port = htons(1201);
-    server_address.sin_addr.s_addr = INADDR_ANY;
+    // server_address.sin_addr.s_addr = htons(INADDR_ANY);
 
-    int connect_status = connect(network_socket, (struct sockaddr *) &server_address, sizeof(server_address));
+    inet_pton(AF_INET, "127.0.0.1", &(server_address.sin_addr));
 
-    //Errores en conexion
-    if (connect_status == -1) {
-        printf("There was an error during the connection process \n");
+    // Conectarse al servidor
+    connect(server_socket, (struct sockaddr *)&server_address, sizeof(server_address));
+
+    // Mensaje
+    char message[256];
+    char send_line[256];
+
+    while (!strstr(message, "endgame"))
+    {
+        bzero(message, 256);
+
+        fgets(send_line, sizeof(send_line), stdin);
+        write(server_socket, send_line, sizeof(send_line));
+
+        printf("%s", message); // Mostrar mensaje del cliente
     }
 
-    //Recibir mensajes del servidor
-    char server_message[256];
-    recv(network_socket, &server_message, sizeof(server_message), 0);
+    // Enviar mensaje
+    // send(client_socket, server_message, sizeof(server_message), 0);
 
-    //Imprimir mensaje recibido
-    printf("El server dice: %s \n", server_message);
-
-    //Cerrar socket
-    close(network_socket);
-
-
+    close(server_socket);
     return 0;
 }
