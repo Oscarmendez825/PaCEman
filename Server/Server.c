@@ -37,20 +37,22 @@ int main() {
     client_socket = accept(server_socket, (struct sockaddr*) NULL, NULL);
 
     // Mensaje cliente
-    char message[256];
+    char input[256];
+    char output[256];
 
-    while (!strstr(message, "endgame"))
+    while (1)
     {
-        bzero(message, 256);
+        bzero(input, 256);
+        bzero(output, 256);
 
-        read(client_socket, message, 256);
+        read(client_socket, input, 256);
+        printf("%s", input); // Mostrar mensaje del cliente
 
-        printf("%s", message); // Mostrar mensaje del cliente
+        fgets(output, sizeof(output), stdin);
+        send(client_socket, output, sizeof(output), 0);
+
     }
     
-    // Enviar mensaje
-    //send(client_socket, server_message, sizeof(server_message), 0);
-
     close(server_socket);
     return 0;
 }

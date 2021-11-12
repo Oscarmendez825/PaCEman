@@ -43,11 +43,13 @@ public class Client implements Runnable {//clase
      public void run() {//metodo
         try{
             while(true){
-                message += datain.readUTF();//read message and save it in a string variable
+          
+                message = datain.readLine();//cambio de += a = para que en la pantalla no se acumulen los msjs
                 System.out.println(message);
                 window.setText(message);//show the message in screen
             }
-        }catch(IOException e){
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
         
@@ -58,9 +60,9 @@ public class Client implements Runnable {//clase
       */
      public void sendmessage(String message){//metodo
         try {
-            dataout.writeUTF(message);//send messages
+            dataout.write(message.getBytes());//send messages
         } catch (IOException e) {
             e.printStackTrace();
         }
-}
+    }
 }

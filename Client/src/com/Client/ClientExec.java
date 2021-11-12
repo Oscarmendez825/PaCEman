@@ -156,7 +156,7 @@ public class ClientExec extends javax.swing.JFrame {//herencia--clase
                  
             
 
-                
+              
                 
             }
         
