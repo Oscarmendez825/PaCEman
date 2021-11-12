@@ -30,7 +30,7 @@ public class Cliente implements Runnable {
         }
         public void mandarMensaje(String message){
             try {
-                dataout.writeUTF(message);
+                dataout.write(message.getBytes());
             } catch (IOException e) {
             }
     }
@@ -38,7 +38,7 @@ public class Cliente implements Runnable {
          public void run() {
             try{
                 while(true){
-                    message = datain.readUTF();
+                    message = datain.readLine();
                     String[] separacion = message.split(";");
                     System.out.println(Arrays.asList(separacion));
                     accion(separacion);
