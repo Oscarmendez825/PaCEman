@@ -30,7 +30,7 @@ public class Cliente implements Runnable {
         }
         public void mandarMensaje(String message){
             try {
-                dataout.write(message.getBytes());
+                dataout.writeUTF(message);
             } catch (IOException e) {
             }
     }
@@ -38,7 +38,7 @@ public class Cliente implements Runnable {
          public void run() {
             try{
                 while(true){
-                    message = datain.readLine();
+                    message = datain.readUTF();
                     String[] separacion = message.split(";");
                     System.out.println(Arrays.asList(separacion));
                     accion(separacion);
@@ -89,44 +89,50 @@ public class Cliente implements Runnable {
              }
          }
         
-private void addFantasma(){
+    private void addFantasma(){
+            int i = getRandom(22);
+            int j = getRandom(22);
+            while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
+                i = getRandom(22);
+                j = getRandom(22);
+            }
+            CFantasma fantasma = new CFantasma(tablero.getRandomColor(), i*25, j*25);
+            fantasma.setDireccion(1);
+             tablero.fantasmitas.add(fantasma);
+             tablero.getiMatrizObj()[i][j] = 2;
+    }
+    private void addFruta(){
         int i = getRandom(22);
         int j = getRandom(22);
         while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
             i = getRandom(22);
             j = getRandom(22);
         }
-        CFantasma fantasma = new CFantasma(tablero.getRandomColor(), i*25, j*25);
-        fantasma.setDireccion(1);
-         tablero.fantasmitas.add(fantasma);
-         tablero.getiMatrizObj()[i][j] = 2;
-}
-private void addFruta(){
-    int i = getRandom(22);
-    int j = getRandom(22);
-    while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-        i = getRandom(22);
-        j = getRandom(22);
+         tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
+         tablero.getiMatrizObj()[i][j] = 6;
     }
-     tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
-     tablero.getiMatrizObj()[i][j] = 6;
-}
-
-
-private void addPastilla(){
-    int i = getRandom(22);
-    int j = getRandom(22);
-    while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-        i = getRandom(22);
-        j = getRandom(22);
+    private void addPastilla(){
+        int i = getRandom(22);
+        int j = getRandom(22);
+        while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
+            i = getRandom(22);
+            j = getRandom(22);
+        }
+         tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
+         tablero.getiMatrizObj()[i][j] = 6;
     }
-     tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
-     tablero.getiMatrizObj()[i][j] = 6;
-}
 
-private int getRandom(int num){
-    Random random = new Random();
-    int numX = random.nextInt(num);
-    return numX;
-}
+    private int getRandom(int num){
+        Random random = new Random();
+        int numX = random.nextInt(num);
+        return numX;
+    }
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Ventana w1 = new Ventana();
+        w1.PintarElementos();
+        w1.setVisible(true);
+        
+    }
 }
