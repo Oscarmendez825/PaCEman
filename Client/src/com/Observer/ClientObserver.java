@@ -38,12 +38,6 @@ public class ClientObserver implements Runnable{
 
         }
     }
-    public void mandarMensaje(String message){
-        try {
-            dataout.writeUTF(message);
-        } catch (IOException e) {
-        }
-}
     @Override
      public void run() {
         try{
@@ -60,23 +54,8 @@ public class ClientObserver implements Runnable{
          
     private void accion(String[] cadena){
         switch(cadena[0]){
-            case "Enemigo":
-                switch(cadena[1]){
-                    case "Shadow":
-                        System.out.println("Crear Shadow");
-                        //AGREGAR FANTASMA (ERROR A VECES)
-                        //addFantasma();
-                        break;
-                    case "Speedy":
-                        System.out.println("Crear Speedy");
-                        break;
-                    case "Bashful":
-                        System.out.println("Crear Bashful");
-                        break;   
-                    case "Pokey":
-                        System.out.println("Crear Pokey");
-                        break;
-                }
+            case "Fantasma":
+                nuevoFantasma(cadena);
                 break;
             case "Fruta":
                 switch(cadena[1]){
@@ -116,9 +95,63 @@ public class ClientObserver implements Runnable{
                         tablero.Pacman.setDireccion(4);
                         break;   
                 }
+            case "FantasmaDireccion":
+                moverFantasma(cadena);
+                break;
         }
     }
-        
+    private void nuevoFantasma(String[] caracteristicas){
+        int i = Integer.parseInt(caracteristicas[3]);
+        int j = Integer.parseInt(caracteristicas[4]);
+        switch(caracteristicas[1]){
+                    case "rojo":
+                        CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
+                        fantasma.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        break;
+                    case "rosado":
+                        CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
+                        fantasma2.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma2);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        break;
+                    case "celeste":
+                        CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
+                        fantasma3.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma3);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        break;
+                    case "naranja":
+                        CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
+                        fantasma4.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma4);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        break;
+                }
+    }
+    private void moverFantasma(String[] datos){
+        int iPos = Integer.parseInt(datos[1]);
+        switch(datos[2]){
+            case "1":
+                System.out.println("1");
+                tablero.fantasmitas.get(iPos).setDireccion(1);
+                break;
+            case "2":
+                System.out.println("2");
+                tablero.fantasmitas.get(iPos).setDireccion(2);
+                break;
+            case "3":
+                System.out.println("3");
+                tablero.fantasmitas.get(iPos).setDireccion(3);
+                break;   
+            case "4":
+                System.out.println("4");
+                tablero.fantasmitas.get(iPos).setDireccion(4);
+                break;   
+        }
+    
+    }
 //    private void addFantasma(){
 //            int i = getRandom(22);
 //            int j = getRandom(22);

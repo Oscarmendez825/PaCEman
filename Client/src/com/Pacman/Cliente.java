@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Cliente implements Runnable {
 
@@ -55,16 +57,19 @@ public class Cliente implements Runnable {
                          case "Shadow":
                              System.out.println("Crear Shadow");
                              //AGREGAR FANTASMA (ERROR A VECES)
-                             addFantasma();
+                             addFantasma("rojo");
                              break;
                          case "Speedy":
                              System.out.println("Crear Speedy");
+                             addFantasma("rosado");
                              break;
                          case "Bashful":
                              System.out.println("Crear Bashful");
+                             addFantasma("celeste");
                              break;   
                          case "Pokey":
                              System.out.println("Crear Pokey");
+                             addFantasma("naranja");
                              break;
                      }
                      break;
@@ -89,17 +94,48 @@ public class Cliente implements Runnable {
              }
          }
         
-    private void addFantasma(){
-            int i = getRandom(22);
-            int j = getRandom(22);
-            while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-                i = getRandom(22);
-                j = getRandom(22);
+    private void addFantasma(String color){
+            try {
+                int i = getRandom(22);
+                int j = getRandom(22);
+                while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
+                    i = getRandom(22);
+                    j = getRandom(22);
+                }
+                switch(color){
+                    case "rojo":
+                        CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
+                        fantasma.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        dataout.writeUTF("Fantasma;rojo;"+i+";"+j);
+                        break;
+                    case "rosado":
+                        CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
+                        fantasma2.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma2);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        dataout.writeUTF("Fantasma;rosado;"+i+";"+j);
+                        break;
+                    case "celeste":
+                        CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
+                        fantasma3.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma3);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        dataout.writeUTF("Fantasma;celeste;"+i+";"+j);
+                        break;
+                    case "naranja":
+                        CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
+                        fantasma4.setDireccion(1);
+                        tablero.fantasmitas.add(fantasma4);
+                        tablero.getiMatrizObj()[i][j] = 2;
+                        dataout.writeUTF("Fantasma;naranja;"+i+";"+j);
+                        break;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-            CFantasma fantasma = new CFantasma(tablero.getRandomColor(), i*25, j*25);
-            fantasma.setDireccion(1);
-             tablero.fantasmitas.add(fantasma);
-             tablero.getiMatrizObj()[i][j] = 2;
+
     }
     private void addFruta(){
         int i = getRandom(22);

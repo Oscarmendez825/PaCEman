@@ -161,8 +161,8 @@ public ArrayList <CFruta>     frutas;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-      String posiciones = "FantasmaPosicion;"+fantasmitas.get(iPos).getX()+";"+fantasmitas.get(iPos).getY();
-      enviarDatos(posiciones);
+      String direccionFantasma = "FantasmaDireccion;"+iPos+";"+fantasmitas.get(iPos).getDireccion();
+      enviarDatos(direccionFantasma);
     }
     
     
