@@ -203,8 +203,14 @@ public class Cliente implements Runnable {
             i = getRandom(22);
             j = getRandom(22);
         }
-         tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
-         tablero.getiMatrizObj()[i][j] = 6;
+        tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
+        tablero.getiMatrizObj()[i][j] = 6;
+         {
+        try {
+            dataout.writeUTF("GenPastilla;"+i+";"+j);
+        }catch (IOException ex) {
+        }
+    }
     }
 
     private int getRandom(int num){

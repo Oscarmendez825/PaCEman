@@ -13,9 +13,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 /**
  *
  * @author Oscar
@@ -27,7 +24,6 @@ public class ClientObserver implements Runnable{
     private DataOutputStream dataout;
     private String message = "";
     private TableroObservador tablero;
-    private int posicion = 0;
         
     public ClientObserver(TableroObservador juego){
         this.tablero = juego;
@@ -70,9 +66,8 @@ public class ClientObserver implements Runnable{
                         break;   
                 }
                 break;
-            case "Pastilla":
-                System.out.println("Crear Pastilla");
-                //addPastilla();
+            case "GenPastilla":
+                agregarPastila(cadena);
                 break;
                 
             case "PacmanDireccion":
@@ -95,11 +90,10 @@ public class ClientObserver implements Runnable{
                         break;   
                 }
             case "FantasmaDireccion":
-               // moverFantasma(cadena);
-                //posicion++;
+                moverFantasma(cadena);
                 break;
             case "Fantasma":
-                //agregarFantasma(cadena);
+                agregarFantasma(cadena);
                 break;
             case "FObservador":
                 genFrutas(cadena);
@@ -152,27 +146,22 @@ public class ClientObserver implements Runnable{
     }
 
     private void moverFantasma(String[] valores) {
-        if (posicion == tablero.fantasmitas.size()-1){
-            posicion = 0;
-        }else {
-            switch(valores[1]){
-            case "1":
-                tablero.fantasmitas.get(posicion).setDireccion(1);
-                break;
-            case "2":
-                tablero.fantasmitas.get(posicion).setDireccion(2);
-                break;
-            case "3":
-                tablero.fantasmitas.get(posicion).setDireccion(3);
-                break;
-            case "4":
-                tablero.fantasmitas.get(posicion).setDireccion(4);
-                break;
+        int posicion = Integer.parseInt(valores[2]);
+        switch(valores[1]){
+        case "1":
+            tablero.fantasmitas.get(posicion).setDireccion(1);
+            break;
+        case "2":
+            tablero.fantasmitas.get(posicion).setDireccion(2);
+            break;
+        case "3":
+            tablero.fantasmitas.get(posicion).setDireccion(3);
+            break;
+        case "4":
+            tablero.fantasmitas.get(posicion).setDireccion(4);
+            break;
             
-        }
-        }
-
-        
+    }
     }
 
     private void agregarFantasma(String[] propiedades) {
@@ -224,6 +213,13 @@ public class ClientObserver implements Runnable{
                 break;   
          }
         
+    }
+
+    private void agregarPastila(String[] cadena) {
+       int i = Integer.parseInt(cadena[1]);
+       int j = Integer.parseInt(cadena[2]);
+       tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
+       tablero.getiMatrizObj()[i][j] = 6;
     }
 }
 

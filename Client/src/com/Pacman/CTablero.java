@@ -21,6 +21,9 @@ private int nPills = 0;
 private int nFruits = 0;
 public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
+private static int puntaje = 0;
+private static boolean isPower = false;
+private static int  vidas = 3;
 
  
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -161,7 +164,7 @@ public ArrayList <CFruta>     frutas;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-      String direccionFantasma = ("FantasmaDireccion;" + fantasmitas.get(iPos).getDireccion());
+      String direccionFantasma = ("FantasmaDireccion;" + fantasmitas.get(iPos).getDireccion()) + ";" + iPos;
       enviarDatos(direccionFantasma);
     }
     
@@ -239,17 +242,31 @@ public ArrayList <CFruta>     frutas;
             }    
     }
     
-     public boolean isPlaying()
+    public boolean isPlaying()
      {
           boolean bFinish = false;
 
             for(int i=0;i < fantasmitas.size() ;i++)
             {
-                  if( fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY())
+                  if( fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas == 1)
                   {
                      bFinish = true;
                   }
-             
+
+                  if(fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas != 1){
+
+                      if(isPower == true){
+                          fantasmitas.remove(i);
+                      }
+                      else{
+
+                          vidas --;
+
+                      }
+
+                  }
+
+
             }
 
           return bFinish;
@@ -280,8 +297,9 @@ public ArrayList <CFruta>     frutas;
        {
             if( Pacman.getX() == coins.get(i).getX() && Pacman.getY() == coins.get(i).getY())
             {
-                coins.remove(i); 
-                
+                coins.remove(i);
+                setPuntaje(10);
+                enviarDatos(""+getPuntaje());                
             }
        } 
     }
@@ -292,7 +310,7 @@ public ArrayList <CFruta>     frutas;
             if( Pacman.getX() == pastillas.get(i).getX() && Pacman.getY() == pastillas.get(i).getY())
             {
                 pastillas.remove(i); 
-                
+                isPower = true;
             }
        } 
     }
@@ -304,7 +322,8 @@ public ArrayList <CFruta>     frutas;
             if( Pacman.getX() == frutas.get(i).getX() && Pacman.getY() == frutas.get(i).getY())
             {
                 frutas.remove(i); 
-                
+                setPuntaje(1000);
+                enviarDatos(""+getPuntaje());  
             }
        } 
     }
@@ -383,11 +402,19 @@ public ArrayList <CFruta>     frutas;
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
-
+    public void setPuntaje(int puntos){
+       puntaje += puntos; 
+   
+   }
+    
+    public int getPuntaje(){
+        return puntaje;
+    }
+    
     private void enviarDatos(String data){
-    String mensaje ="";
-    mensaje = data.trim();
-    client.mandarMensaje(mensaje);
+        String mensaje ="";
+        mensaje = data.trim();
+        client.mandarMensaje(mensaje);
     }
 
     }
