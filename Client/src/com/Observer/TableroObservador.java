@@ -1,12 +1,27 @@
-package com.Pacman;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.Observer;
 
+import com.Pacman.CBomba;
+import com.Pacman.CFantasma;
+import com.Pacman.CFruta;
+import com.Pacman.CMoneda;
+import com.Pacman.CMuro;
+import com.Pacman.CPacman;
+import com.Pacman.CPastilla;
+import com.Pacman.InterfaceGame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CTablero implements InterfaceGame{
- 
-private Cliente client;
+/**
+ *
+ * @author Oscar
+ */
+public class TableroObservador implements InterfaceGame{
+private ClientObserver client;
 private Thread thread;
 public  CPacman   Pacman; 
 public  ArrayList <CMuro>     cuadritos;
@@ -15,51 +30,44 @@ public  ArrayList <CMoneda>   coins;
 public  ArrayList <CFantasma> fantasmitas;
 public  boolean isBomba = false;
 private int nMuros = 0;
-private int nGhost = 0; 
+private int nGhost = 0;
 private int nCoins = 0;
 private int nPills = 0;
 private int nFruits = 0;
 public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
 
-static int puntaje = 0;
-static boolean isPower = false;
-static int  vidas = 3;
-
-static int contadorEnemigos = 0; 
-
-
  
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                 {1, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1},
                                  {1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 4, 4, 0, 4, 4, 0, 0, 4, 1, 0, 0, 0, 1},
-                                 {1, 0, 0, 2, 0, 0, 0, 1, 4, 1, 4, 4, 4, 4, 4, 1, 1, 1, 1, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 4, 4, 4, 1, 1, 1, 1, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
-                                 {1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
+                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1, 0, 0, 1},
-                                 {1, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 0, 4, 1, 4, 4, 0, 1, 0, 0, 1},
+                                 {1, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 4, 1, 4, 4, 0, 1, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 1},
                                  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
                                };
 
     
  
- public CTablero()
+ public TableroObservador()
  {
-    client = new Cliente(this);
+    client = new ClientObserver(this);
     thread = new Thread(client);
     thread.start();
     Pacman      = new CPacman();
@@ -159,8 +167,7 @@ static int contadorEnemigos = 0;
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
-      String posiciones = "JugadorPosicion;"+Pacman.getX()+";"+Pacman.getY();
-      enviarDatos(posiciones);
+
     }
     
     private void moverGhost(int iPos)
@@ -168,8 +175,7 @@ static int contadorEnemigos = 0;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-       String posiciones = "FantasmaPosicion;"+fantasmitas.get(iPos).getX()+";"+fantasmitas.get(iPos).getY();
-      enviarDatos(posiciones);
+
     }
     
     
@@ -252,25 +258,10 @@ static int contadorEnemigos = 0;
 
             for(int i=0;i < fantasmitas.size() ;i++)
             {
-                  if( fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas == 1)
+                  if( fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY())
                   {
                      bFinish = true;
                   }
-                  
-                  if(fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas != 1){
-                      
-                      if(isPower == true){
-                          fantasmitas.remove(i);
-                          contadorEnemigos ++;
-                      }
-                      else{
-                          
-                          vidas --;
-                          
-                      }
-                      
-                  }
-                  
              
             }
 
@@ -303,7 +294,7 @@ static int contadorEnemigos = 0;
             if( Pacman.getX() == coins.get(i).getX() && Pacman.getY() == coins.get(i).getY())
             {
                 coins.remove(i); 
-                setPuntaje(10);
+                
             }
        } 
     }
@@ -314,7 +305,6 @@ static int contadorEnemigos = 0;
             if( Pacman.getX() == pastillas.get(i).getX() && Pacman.getY() == pastillas.get(i).getY())
             {
                 pastillas.remove(i); 
-                isPower = true;
                 
             }
        } 
@@ -327,7 +317,7 @@ static int contadorEnemigos = 0;
             if( Pacman.getX() == frutas.get(i).getX() && Pacman.getY() == frutas.get(i).getY())
             {
                 frutas.remove(i); 
-                setPuntaje(1000);
+                
             }
        } 
     }
@@ -407,31 +397,4 @@ static int contadorEnemigos = 0;
         this.nFruits = nFruits;
     }
     
-    public void setPuntaje(int puntos){
-       puntaje += puntos; 
-   
-   }
-    
-public int getPuntaje(){
-        return puntaje;
-    }
-
-public int getVidas(){
-    return vidas;
 }
-
-
-public boolean getPoder(){
-    return isPower;
-}
-
-
-     
-
-    private void enviarDatos(String data){
-    String mensaje ="";
-    mensaje = data.trim();
-    client.mandarMensaje(mensaje);
-    }
-
-    }

@@ -59,7 +59,7 @@ public class Cliente implements Runnable {
                          case "Shadow":
                              System.out.println("Crear Shadow");
                              //AGREGAR FANTASMA (ERROR A VECES)
-                             addFantasma();
+                             //addFantasma();
                              break;
                          case "Speedy":
                              System.out.println("Crear Speedy");
@@ -79,7 +79,7 @@ public class Cliente implements Runnable {
                              break;
                          case "Fresa":
                              System.out.println("Crear Fresa");
-                             addFruta();
+                             //addFruta();
                              System.out.println(tablero.getPuntaje());
                              System.out.println(tablero.getVidas());
                              System.out.println(tablero.getPoder());

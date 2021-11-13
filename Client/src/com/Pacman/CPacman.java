@@ -62,11 +62,11 @@ public class CPacman extends CGameObjects implements InterfaceGame {
          case DER: 
              if(isOpen)
              {
-                g.setColor(Color.ORANGE); g.fillArc(iPosX, iPosY, 25, 25, 45, 275); isOpen=false;
+                g.setColor(Color.yellow); g.fillArc(iPosX, iPosY, 25, 25, 45, 275); isOpen=false;
              }
              else
              {
-                g.setColor(Color.ORANGE); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
+                g.setColor(Color.yellow); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
              }
                 g.setColor(Color.black); g.fillOval(iPosX+8, iPosY+4, 4, 4);
              break;
@@ -74,28 +74,28 @@ public class CPacman extends CGameObjects implements InterfaceGame {
          case IZQ:
              if(isOpen)
              {
-                  g.setColor(Color.ORANGE);  g.fillArc(iPosX, iPosY, 25, 25, 225, 275); isOpen=false;
+                  g.setColor(Color.yellow);  g.fillArc(iPosX, iPosY, 25, 25, 225, 275); isOpen=false;
              }
              else
              {
-                  g.setColor(Color.ORANGE); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
+                  g.setColor(Color.yellow); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
              }
              g.setColor(Color.black); g.fillOval(iPosX+8, iPosY+4, 4, 4);
              break;
          case PAR:
              if(isOpen){
-                g.setColor(Color.ORANGE);  g.fillArc(iPosX, iPosY, 25, 25, 135, 270); isOpen=false;  
+                g.setColor(Color.yellow);  g.fillArc(iPosX, iPosY, 25, 25, 135, 270); isOpen=false;  
              }else{
-                  g.setColor(Color.ORANGE); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
+                  g.setColor(Color.yellow); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
              }
               g.setColor(Color.black); g.fillOval(iPosX+4, iPosY+8, 4, 4);
              break;
       
          case PAB: 
              if(isOpen){
-                g.setColor(Color.ORANGE);  g.fillArc(iPosX, iPosY, 25, 25, 315, 270); isOpen=false;  
+                g.setColor(Color.yellow);  g.fillArc(iPosX, iPosY, 25, 25, 315, 270); isOpen=false;  
              }else{
-                  g.setColor(Color.ORANGE); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
+                  g.setColor(Color.yellow); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
              }
               g.setColor(Color.black); g.fillOval(iPosX+4, iPosY+8, 4, 4);
              break;
