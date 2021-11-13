@@ -74,18 +74,7 @@ public class Cliente implements Runnable {
                      }
                      break;
                  case "Fruta":
-                     switch(cadena[1]){
-                         case "Cereza":
-                             System.out.println("Crear Cereza");
-                             break;
-                         case "Fresa":
-                             System.out.println("Crear Fresa");
-                             addFruta();
-                             break;
-                         case "Naranja":
-                             System.out.println("Crear Naranja");
-                             break;   
-                     }
+                     addFruta(cadena);
                      break;
                  case "Pastilla":
                      System.out.println("Crear Pastilla");
@@ -95,57 +84,117 @@ public class Cliente implements Runnable {
          }
         
     private void addFantasma(String color){
-            try {
-                int i = getRandom(22);
-                int j = getRandom(22);
-                while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-                    i = getRandom(22);
-                    j = getRandom(22);
-                }
-                switch(color){
-                    case "rojo":
-                        CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
-                        fantasma.setDireccion(1);
-                        tablero.fantasmitas.add(fantasma);
-                        tablero.getiMatrizObj()[i][j] = 2;
-                        dataout.writeUTF("Fantasma;rojo;"+i+";"+j);
-                        break;
-                    case "rosado":
-                        CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
-                        fantasma2.setDireccion(1);
-                        tablero.fantasmitas.add(fantasma2);
-                        tablero.getiMatrizObj()[i][j] = 2;
-                        dataout.writeUTF("Fantasma;rosado;"+i+";"+j);
-                        break;
-                    case "celeste":
-                        CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
-                        fantasma3.setDireccion(1);
-                        tablero.fantasmitas.add(fantasma3);
-                        tablero.getiMatrizObj()[i][j] = 2;
-                        dataout.writeUTF("Fantasma;celeste;"+i+";"+j);
-                        break;
-                    case "naranja":
-                        CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
-                        fantasma4.setDireccion(1);
-                        tablero.fantasmitas.add(fantasma4);
-                        tablero.getiMatrizObj()[i][j] = 2;
-                        dataout.writeUTF("Fantasma;naranja;"+i+";"+j);
-                        break;
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-    }
-    private void addFruta(){
         int i = getRandom(22);
         int j = getRandom(22);
         while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
             i = getRandom(22);
             j = getRandom(22);
         }
-         tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
-         tablero.getiMatrizObj()[i][j] = 6;
+        switch(color){
+            case "rojo":
+                CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
+                fantasma.setDireccion(1);
+            {
+                try {
+                    dataout.writeUTF("Fantasma;rojo;"+i+";"+j);
+                } catch (IOException ex) {
+          
+                }
+            }
+                tablero.fantasmitas.add(fantasma);
+                tablero.getiMatrizObj()[i][j] = 2;
+                break;
+
+            case "rosado":
+                CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
+                fantasma2.setDireccion(1);
+            {
+                try {
+                    dataout.writeUTF("Fantasma;rosado;"+i+";"+j);
+                } catch (IOException ex) {
+                
+                }
+            }
+                tablero.fantasmitas.add(fantasma2);
+                tablero.getiMatrizObj()[i][j] = 2;
+
+                break;
+
+            case "celeste":
+                CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
+                fantasma3.setDireccion(1);
+            {
+                try {
+                    dataout.writeUTF("Fantasma;celeste;"+i+";"+j);
+                } catch (IOException ex) {
+                 
+                }
+            }
+                tablero.fantasmitas.add(fantasma3);
+                tablero.getiMatrizObj()[i][j] = 2;
+
+                break;
+
+            case "naranja":
+                CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
+                fantasma4.setDireccion(1);
+            {
+                try {
+                    dataout.writeUTF("Fantasma;naranja;"+i+";"+j);
+                } catch (IOException ex) {
+         
+                }
+            }
+                tablero.fantasmitas.add(fantasma4);
+                tablero.getiMatrizObj()[i][j] = 2;
+
+                break;
+
+        }
+    }
+
+    
+    private void addFruta(String[] cadena){
+        int i = getRandom(22);
+        int j = getRandom(22);
+        while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
+            i = getRandom(22);
+            j = getRandom(22);
+        }
+        switch(cadena[1]){
+            case "Cereza":
+                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
+                tablero.getiMatrizObj()[i][j] = 6;
+            {
+                try {
+                    dataout.writeUTF("FObservador;Cereza;"+i+";"+j);
+                } catch (IOException ex) {
+                }
+            }
+                break;
+
+            case "Limon":
+                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.GREEN,j*25,i*25));
+                tablero.getiMatrizObj()[i][j] = 6;
+                {
+                try {
+                    dataout.writeUTF("FObservador;Limon;"+i+";"+j);
+                } catch (IOException ex) {
+                }
+            }
+                break;
+            case "Naranja":
+                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.ORANGE,j*25,i*25));
+                tablero.getiMatrizObj()[i][j] = 6;
+                {
+                try {
+                    dataout.writeUTF("FObservador;Naranja;"+i+";"+j);
+                } catch (IOException ex) {
+                }
+            }
+                break;   
+         }
+         
     }
     private void addPastilla(){
         int i = getRandom(22);

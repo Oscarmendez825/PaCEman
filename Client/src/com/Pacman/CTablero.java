@@ -55,10 +55,10 @@ public ArrayList <CFruta>     frutas;
     client = new Cliente(this);
     thread = new Thread(client);
     thread.start();
-    Pacman      = new CPacman();
-    cuadritos   = new ArrayList<>();
-    bombas      = new ArrayList<>();
-    coins       = new ArrayList<>();   
+    Pacman = new CPacman();
+    cuadritos = new ArrayList<>();
+    bombas = new ArrayList<>();
+    coins = new ArrayList<>();   
     fantasmitas = new ArrayList<>();
     pastillas = new ArrayList<>();
     frutas = new ArrayList<>();
@@ -161,7 +161,7 @@ public ArrayList <CFruta>     frutas;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-      String direccionFantasma = "FantasmaDireccion;"+iPos+";"+fantasmitas.get(iPos).getDireccion();
+      String direccionFantasma = ("FantasmaDireccion;" + fantasmitas.get(iPos).getDireccion());
       enviarDatos(direccionFantasma);
     }
     
