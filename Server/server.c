@@ -15,6 +15,8 @@ int PORT = 8000;
 int BACKLOG = 6;
 
 void * handle_connection(void* pointer_client);
+void* send_message(void* pointer_client);
+
 
 int main() {
 
@@ -48,10 +50,12 @@ int main() {
 
         // Thread para manejar el socket cliente
         pthread_t t;
-        int *pointer_client = malloc(sizeof(int));  //Para que no afecte a los demas threads
+        int *pointer_client = malloc(sizeof(int));  // Para que no afecte a los demas threads
         *pointer_client = client_socket;
 
-        pthread_create(&t, NULL, handle_connection, pointer_client);
+        pthread_create(&t, NULL, handle_connection, pointer_client); // Thread para leer mensajes
+        pthread_create(&t, NULL, send_message, pointer_client); // Thread para leer mensajes
+
     }
     
     close(server_socket);
@@ -72,14 +76,30 @@ void* handle_connection(void* pointer_client) {
         read(client_socket, input, 40);
 
         if (input != NULL) {
-            printf("%s\n", input);  // Mostrar mensaje del cliente
+            //printf("%s\n", input);  // Mostrar mensaje del cliente
             //send(client_socket, input, sizeof(input), 0);
         }
     }
     
+    return NULL;
+}
 
-    //fgets(output, sizeof(output), stdin);
-    //send(client_socket, input, sizeof(input), 0);
+// Funcion para enviar mensajes desde el servidor
+void* send_message(void* pointer_client) {
+    int client_socket = *((int*) pointer_client);
+    free(pointer_client);   //Ya no se necesita el puntero
 
+    char console_in[256];
+
+    while (true) {
+        bzero(console_in, 40);
+
+        fgets(console_in, sizeof(console_in), stdin);
+
+        // Enviar mensaje
+        if (console_in != "") {
+            send(client_socket, console_in, sizeof(console_in), 0);
+        }
+    }
     return NULL;
 }

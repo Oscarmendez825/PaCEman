@@ -17,7 +17,6 @@ public class Cliente implements Runnable {
         private String message = "";
         private CTablero tablero;
         
-
         
         public Cliente(CTablero juego){
             this.tablero = juego;
@@ -41,13 +40,9 @@ public class Cliente implements Runnable {
             try{
                 while(true){
                     message = datain.readLine();
-                    if (message != null) {
-                        System.out.println(message);
-
-                    }
-                    //String[] separacion = message.split(";");
-                    //System.out.println(Arrays.asList(separacion));
-                    //accion(separacion);
+                    String[] separacion = message.split(";");
+                    System.out.println(Arrays.asList(separacion));
+                    accion(separacion);
                        
                 }
             }catch(IOException e){
