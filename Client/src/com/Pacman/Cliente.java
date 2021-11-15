@@ -55,20 +55,20 @@ public class Cliente implements Runnable {
                  case "Enemigo":
                      switch(cadena[1]){
                          case "Shadow":
-                             System.out.println("Crear Shadow");
+                             //System.out.println("Crear Shadow");
                              //AGREGAR FANTASMA (ERROR A VECES)
                              addFantasma("rojo");
                              break;
                          case "Speedy":
-                             System.out.println("Crear Speedy");
+                             //System.out.println("Crear Speedy");
                              addFantasma("rosado");
                              break;
                          case "Bashful":
-                             System.out.println("Crear Bashful");
+                             //System.out.println("Crear Bashful");
                              addFantasma("celeste");
                              break;   
                          case "Pokey":
-                             System.out.println("Crear Pokey");
+                             //System.out.println("Crear Pokey");
                              addFantasma("naranja");
                              break;
                      }
@@ -77,7 +77,6 @@ public class Cliente implements Runnable {
                      addFruta(cadena);
                      break;
                  case "Pastilla":
-                     System.out.println("Crear Pastilla");
                      addPastilla();
                      break;
              }
@@ -90,61 +89,66 @@ public class Cliente implements Runnable {
             i = getRandom(22);
             j = getRandom(22);
         }
-        switch(color){
+        String datos = "";
+        switch(color){    
             case "rojo":
-                CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
-                fantasma.setDireccion(1);
             {
                 try {
-                    dataout.writeUTF("Fantasma;rojo;"+i+";"+j);
+                     datos = "Fantasma;rojo;"+i+";"+j;
+                    dataout.writeUTF(datos.trim());
                 } catch (IOException ex) {
           
                 }
             }
+                CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
+                fantasma.setDireccion(1);
                 tablero.fantasmitas.add(fantasma);
                 tablero.getiMatrizObj()[i][j] = 2;
                 break;
 
             case "rosado":
-                CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
-                fantasma2.setDireccion(1);
             {
                 try {
-                    dataout.writeUTF("Fantasma;rosado;"+i+";"+j);
+                    datos = "Fantasma;rosado;"+i+";"+j;
+                    dataout.writeUTF(datos.trim());
                 } catch (IOException ex) {
                 
                 }
             }
+                CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
+                fantasma2.setDireccion(1);
                 tablero.fantasmitas.add(fantasma2);
                 tablero.getiMatrizObj()[i][j] = 2;
 
                 break;
 
             case "celeste":
-                CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
-                fantasma3.setDireccion(1);
             {
                 try {
-                    dataout.writeUTF("Fantasma;celeste;"+i+";"+j);
+                    datos = "Fantasma;celeste;"+i+";"+j;
+                    dataout.writeUTF(datos.trim());
                 } catch (IOException ex) {
                  
                 }
             }
+                CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
+                fantasma3.setDireccion(1);
                 tablero.fantasmitas.add(fantasma3);
                 tablero.getiMatrizObj()[i][j] = 2;
 
                 break;
 
             case "naranja":
-                CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
-                fantasma4.setDireccion(1);
             {
                 try {
-                    dataout.writeUTF("Fantasma;naranja;"+i+";"+j);
+                    datos = "Fantasma;naranja;"+i+";"+j;
+                    dataout.writeUTF(datos.trim());
                 } catch (IOException ex) {
          
                 }
             }
+                CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
+                fantasma4.setDireccion(1);
                 tablero.fantasmitas.add(fantasma4);
                 tablero.getiMatrizObj()[i][j] = 2;
 

@@ -9,7 +9,6 @@ import com.Pacman.CFruta;
 import com.Pacman.CPastilla;
 import java.awt.Color;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
@@ -21,7 +20,6 @@ public class ClientObserver implements Runnable{
     private Socket port;
     private int genport = 1201;
     private DataInputStream datain;
-    private DataOutputStream dataout;
     private String message = "";
     private TableroObservador tablero;
         
@@ -31,7 +29,6 @@ public class ClientObserver implements Runnable{
         try {
             port = new Socket("127.0.0.1",genport);
             datain = new DataInputStream(port.getInputStream());
-            dataout = new DataOutputStream(port.getOutputStream());
         } catch (IOException e) {
 
         }
@@ -42,7 +39,6 @@ public class ClientObserver implements Runnable{
             while(true){
                 message = datain.readUTF();
                 String[] separacion = message.split(";");
-                System.out.println(Arrays.asList(separacion));
                 accion(separacion);
             }
         }catch(IOException e){
@@ -52,47 +48,31 @@ public class ClientObserver implements Runnable{
          
     private void accion(String[] cadena){
         switch(cadena[0]){
-            case "Fruta":
-                switch(cadena[1]){
-                    case "Cereza":
-                        System.out.println("Crear Cereza");
-                        break;
-                    case "Fresa":
-                        System.out.println("Crear Fresa");
-                        //addFruta();
-                        break;
-                    case "Naranja":
-                        System.out.println("Crear Naranja");
-                        break;   
-                }
-                break;
             case "GenPastilla":
                 agregarPastila(cadena);
-                break;
-                
+                break;               
             case "PacmanDireccion":
                 switch(cadena[1]){
                     case "1":
-                        System.out.println("1");
                         tablero.Pacman.setDireccion(1);
                         break;
                     case "2":
-                        System.out.println("2");
                         tablero.Pacman.setDireccion(2);
                         break;
                     case "3":
-                        System.out.println("3");
                         tablero.Pacman.setDireccion(3);
                         break;   
                     case "4":
-                        System.out.println("4");
                         tablero.Pacman.setDireccion(4);
                         break;   
                 }
-            case "FantasmaDireccion":
+                break;
+            case "FDireccion":
+                System.out.println(Arrays.asList(cadena));
                 moverFantasma(cadena);
                 break;
             case "Fantasma":
+                System.out.println(Arrays.asList(cadena));
                 agregarFantasma(cadena);
                 break;
             case "FObservador":
@@ -102,40 +82,6 @@ public class ClientObserver implements Runnable{
     }
 
     }
-
-//    private void addFantasma(){
-//            int i = getRandom(22);
-//            int j = getRandom(22);
-//            while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-//                i = getRandom(22);
-//                j = getRandom(22);
-//            }
-//            CFantasma fantasma = new CFantasma(tablero.getRandomColor(), i*25, j*25);
-//            fantasma.setDireccion(1);
-//             tablero.fantasmitas.add(fantasma);
-//             tablero.getiMatrizObj()[i][j] = 2;
-//    }
-//    private void addFruta(){
-//        int i = getRandom(22);
-//        int j = getRandom(22);
-//        while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-//            i = getRandom(22);
-//            j = getRandom(22);
-//        }
-//         tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
-//         tablero.getiMatrizObj()[i][j] = 6;
-//    }
-//    private void addPastilla(){
-//        int i = getRandom(22);
-//        int j = getRandom(22);
-//        while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
-//            i = getRandom(22);
-//            j = getRandom(22);
-//        }
-//         tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
-//         tablero.getiMatrizObj()[i][j] = 6;
-//    }
-
 
     public static void main(String[] args) {
         // TODO code application logic here

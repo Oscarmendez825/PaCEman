@@ -164,7 +164,7 @@ private static int  vidas = 3;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-      String direccionFantasma = ("FantasmaDireccion;" + fantasmitas.get(iPos).getDireccion()) + ";" + iPos;
+      String direccionFantasma = ("FDireccion;" + fantasmitas.get(iPos).getDireccion()) + ";" + iPos;
       enviarDatos(direccionFantasma);
     }
     
