@@ -11,7 +11,7 @@ import java.util.Random;
 public class Cliente implements Runnable {
 
         private Socket port;
-        private int genport = 1201;
+        private int genport = 8000;
         private DataInputStream datain;
         private DataOutputStream dataout;
         private String message = "";
@@ -32,7 +32,7 @@ public class Cliente implements Runnable {
         }
         public void mandarMensaje(String message){
             try {
-                dataout.writeUTF(message);
+                dataout.write(message.getBytes());
             } catch (IOException e) {
             }
     }
@@ -40,10 +40,14 @@ public class Cliente implements Runnable {
          public void run() {
             try{
                 while(true){
-                    message = datain.readUTF();
-                    String[] separacion = message.split(";");
-                    System.out.println(Arrays.asList(separacion));
-                    accion(separacion);
+                    message = datain.readLine();
+                    if (message != null) {
+                        System.out.println(message);
+
+                    }
+                    //String[] separacion = message.split(";");
+                    //System.out.println(Arrays.asList(separacion));
+                    //accion(separacion);
                        
                 }
             }catch(IOException e){
