@@ -14,21 +14,25 @@ import java.util.Random;
 public class Cliente implements Runnable {
 
         private Socket port;
-        private int genport = 7000;
+        private int genport = 8080;
         private DataInputStream datain;
-        private BufferedReader input;
         private DataOutputStream dataout;
         private String message = "";
         private CTablero tablero;
+        
+        private InputStreamReader inputStreamReader;
+        private BufferedReader bufferedReader;
+
         
         public Cliente(CTablero juego){
             this.tablero = juego;
 
             try {
                 port = new Socket("127.0.0.1",genport);
-                datain = new DataInputStream(port.getInputStream());
+                //datain = new DataInputStream(port.getInputStream());
                 dataout = new DataOutputStream(port.getOutputStream());
-                input = new BufferedReader(new InputStreamReader(in));
+                inputStreamReader = new InputStreamReader(port.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
 
             } catch (IOException e) {
 
@@ -36,7 +40,7 @@ public class Cliente implements Runnable {
         }
         public void mandarMensaje(String message){
             try {
-                dataout.write(("Cliente1;"+message).getBytes());
+                dataout.write(("Cliente1,"+message).getBytes());
             } catch (IOException e) {
             }
     }
@@ -44,7 +48,7 @@ public class Cliente implements Runnable {
          public void run() {
             try{
                 while(true){
-                    message = input.readLine();
+                    message = bufferedReader.readLine();
                     String[] separacion = message.split(",");
                     System.out.println(Arrays.asList(separacion));
                     accion(separacion);

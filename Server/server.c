@@ -1,105 +1,115 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netinet/ip.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <string.h>
-#include <stdbool.h>
-#include <pthread.h>
+#include "server.h"
 
-int PORT = 7000;
-int BACKLOG = 4;
+void init_server()
+{
+    memset(clients_arr, 0, 4);
+    current_client = 0;
+   // matrix_length = 168;
 
-void * handle_connection(void* pointer_client);
-void* send_message(void* pointer_client);
+    socket_desc = socket(AF_INET , SOCK_STREAM , 0);
 
-
-int main() {
-
-    // Se crea el servidor
-    int server_socket;
-    server_socket = socket(AF_INET, SOCK_STREAM, 0);
-
-    if (server_socket < 0) {
-        perror("Client Error: Socket not created succesfully");
-        return 0;
-    }
-
-    // Se define la direccion del servidor
-    struct sockaddr_in server_address;
-    server_address.sin_family = AF_INET;
-    server_address.sin_port = htons(PORT);
-    server_address.sin_addr.s_addr = htons(INADDR_ANY);
-
-    // Se hace un bind del server al port y la IP
-    bind(server_socket, (struct sockaddr*) &server_address, sizeof(server_address));
-
-    // Esperar (listen) nuevas conexiones
-    listen(server_socket, BACKLOG);
-
-    while (true)
+    if (socket_desc == -1)
     {
-        // Socket cliente
-        int client_socket;
-        client_socket = accept(server_socket, (struct sockaddr*) NULL, NULL);
-        printf("Nuevo cliente\n");
-
-        // Thread para manejar el socket cliente
-        pthread_t t;
-        int *pointer_client = malloc(sizeof(int));  // Para que no afecte a los demas threads
-        *pointer_client = client_socket;
-
-        pthread_create(&t, NULL, handle_connection, pointer_client); // Thread para leer mensajes
-        pthread_create(&t, NULL, send_message, pointer_client); // Thread para leer mensajes
-
+        printf("No se pudo crear el socket");
     }
-    
-    close(server_socket);
-    return 0;
+    puts("Socket creado");
+
+    server.sin_family = AF_INET;
+    server.sin_addr.s_addr = INADDR_ANY;
+    server.sin_port = htons( 8080 );
+
+
+    if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
+    {
+        perror("enlace fallido. Error");
+        return;
+    }
+    puts("Enlace hecho");
+
+    listen(socket_desc , 3);
+
+    c = sizeof(struct sockaddr_in);
+
+    puts("Esperando conexiones entrantes...");
+    c = sizeof(struct sockaddr_in);
 }
 
 
-// Funcion para manejar los reads de los sockets clientes
-void* handle_connection(void* pointer_client) {
-    int client_socket = *((int*) pointer_client);
-    free(pointer_client);   //Ya no se necesita el puntero
 
-    char input[256];
+void run()
+{
+    pthread_t thread_id;
 
-    while (true) {
-        bzero(input, 256);
+    while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
+    {
+        puts("Conexion aceptada");
 
-        read(client_socket, input, 256);
-
-        if (input != NULL) {
-            //printf("%s\n", input);  // Mostrar mensaje del cliente
-            //send(client_socket, input, sizeof(input), 0);
+        if( pthread_create( &thread_id , NULL ,  connection_handler , (void*) &client_sock) < 0)
+        {
+            perror("No se pudo crear el thread ");
+            return;
         }
+
+        puts("Controlador asignado");
+        current_client++;
     }
-    
-    return NULL;
+
+    if (client_sock < 0)
+    {
+        perror("Aceptacion fallida");
+        return;
+    }
 }
 
-// Funcion para enviar mensajes desde el servidor
-void* send_message(void* pointer_client) {
-    int client_socket = *((int*) pointer_client);
-    free(pointer_client);   //Ya no se necesita el puntero
 
-    char console_in[2000];
+void *connection_handler(void *socket_desc)
+{
+    int sock = *(int *) socket_desc;
+    int read_size;
+    char message[50], client_message[256];
 
-    while (true) {
-        bzero(console_in, 2000);
+    set_client(&sock);
+    sprintf(message, "Eres el cliente numero %d \n", current_client);
+    write(sock, message, strlen(message));
 
-        fgets(console_in, strlen(console_in), stdin);
 
-        // Enviar mensaje
-        if (console_in != "") {
-            send(client_socket, console_in, strlen(console_in), 0);
-        }
+    while ((read_size = recv(sock, client_message, 256, 0)) > 0)
+    {
+        printf("%s \n", client_message);
+        
+        bzero(client_message, 256);
     }
-    return NULL;
+
+    if (read_size == 0)
+    {
+        puts("Cliente desconectado");
+        fflush(stdout);
+    }
+    else if (read_size == -1)
+    {
+        perror("recv failed");
+    }
 }
+
+void send_to_all(char* message)
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        if (clients_arr[i] != 0)
+            write(*clients_arr[i]->sock , message, strlen(message));
+    }
+}
+
+void set_client(int* sock)
+{
+    pthread_mutex_lock(&locker);
+
+    struct client *ptr_one;
+    ptr_one = (struct client *)malloc(sizeof(struct client));
+    ptr_one->sock = sock;
+
+    clients_arr[current_client] = ptr_one;
+
+    pthread_mutex_unlock(&locker);
+}
+
