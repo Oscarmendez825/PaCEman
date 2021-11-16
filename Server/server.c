@@ -12,7 +12,7 @@
 #include <pthread.h>
 
 int PORT = 8000;
-int BACKLOG = 6;
+int BACKLOG = 4;
 
 void * handle_connection(void* pointer_client);
 void* send_message(void* pointer_client);
@@ -71,12 +71,12 @@ void* handle_connection(void* pointer_client) {
     char input[256];
 
     while (true) {
-        bzero(input, 40);
+        bzero(input, 256);
 
-        read(client_socket, input, 40);
+        read(client_socket, input, 256);
 
         if (input != NULL) {
-            //printf("%s\n", input);  // Mostrar mensaje del cliente
+            printf("%s\n", input);  // Mostrar mensaje del cliente
             //send(client_socket, input, sizeof(input), 0);
         }
     }
@@ -92,7 +92,7 @@ void* send_message(void* pointer_client) {
     char console_in[256];
 
     while (true) {
-        bzero(console_in, 40);
+        bzero(console_in, 256);
 
         fgets(console_in, sizeof(console_in), stdin);
 
