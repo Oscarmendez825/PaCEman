@@ -8,9 +8,10 @@ import com.Pacman.CFantasma;
 import com.Pacman.CFruta;
 import com.Pacman.CPastilla;
 import java.awt.Color;
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
@@ -23,25 +24,28 @@ public class Cliente2 implements Runnable{
     
     private Socket port;
     private int genport = 1201;
-    private DataInputStream datain;
     private DataOutputStream dataout;
     private String message = "";
     private CTablero2 tablero;
+    private InputStreamReader inputStreamReader;
+    private BufferedReader bufferedReader;
+    
         
     public Cliente2(CTablero2 juego){
         this.tablero = juego;
 
         try {
             port = new Socket("127.0.0.1",genport);
-            datain = new DataInputStream(port.getInputStream());
             dataout = new DataOutputStream(port.getOutputStream());
+            inputStreamReader = new InputStreamReader(port.getInputStream());
+            bufferedReader = new BufferedReader(inputStreamReader);
         } catch (IOException e) {
 
         }
     }
     public void mandarMensaje(String message){
         try {
-            dataout.writeUTF("Cliente2;"+message);
+            dataout.write(("Cliente2,"+message).getBytes());
         } catch (IOException e) {
         }
 }
@@ -49,8 +53,8 @@ public class Cliente2 implements Runnable{
      public void run() {
         try{
             while(true){
-                message = datain.readUTF();
-                String[] separacion = message.split(";");
+                message = bufferedReader.readLine();
+                String[] separacion = message.split(",");
                 if(separacion[0].equals("Cliente2")){
                     accion(eliminar(separacion));System.out.println(Arrays.asList(eliminar(separacion)));
                     accion(eliminar(separacion));

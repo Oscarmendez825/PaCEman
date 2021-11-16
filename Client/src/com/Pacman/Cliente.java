@@ -1,9 +1,11 @@
 package com.Pacman;
 
 import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
@@ -12,25 +14,28 @@ public class Cliente implements Runnable {
 
         private Socket port;
         private int genport = 1201;
-        private DataInputStream datain;
-        private DataOutputStream dataout;
+        private InputStreamReader inputStreamReader;
+        private BufferedReader bufferedReader;
         private String message = "";
         private CTablero tablero;
+        private DataOutputStream dataout;
         
         public Cliente(CTablero juego){
             this.tablero = juego;
 
             try {
                 port = new Socket("127.0.0.1",genport);
-                datain = new DataInputStream(port.getInputStream());
                 dataout = new DataOutputStream(port.getOutputStream());
+                inputStreamReader = new InputStreamReader(port.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+
             } catch (IOException e) {
 
             }
         }
         public void mandarMensaje(String message){
             try {
-                dataout.writeUTF("Cliente1;"+message);
+                dataout.write(("Cliente1,"+message).getBytes());
             } catch (IOException e) {
             }
     }
@@ -38,8 +43,8 @@ public class Cliente implements Runnable {
          public void run() {
             try{
                 while(true){
-                    message = datain.readUTF();
-                    String[] separacion = message.split(";");
+                    message = bufferedReader.readLine();
+                    String[] separacion = message.split(",");
                     if(separacion[0].equals("Cliente1")){
                         System.out.println(Arrays.asList(eliminar(separacion)));
                         accion(eliminar(separacion));
@@ -56,20 +61,15 @@ public class Cliente implements Runnable {
                  case "Enemigo":
                      switch(cadena[1]){
                          case "Shadow":
-                             //System.out.println("Crear Shadow");
-                             //AGREGAR FANTASMA (ERROR A VECES)
                              addFantasma("rojo");
                              break;
                          case "Speedy":
-                             //System.out.println("Crear Speedy");
                              addFantasma("rosado");
                              break;
                          case "Bashful":
-                             //System.out.println("Crear Bashful");
                              addFantasma("celeste");
                              break;   
                          case "Pokey":
-                             //System.out.println("Crear Pokey");
                              addFantasma("naranja");
                              break;
                      }

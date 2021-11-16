@@ -169,7 +169,7 @@ public class CTablero2 implements InterfaceGame{
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
-      String direccionPacman = "PacmanDireccion;"+Pacman.getDireccion();
+      String direccionPacman = "PacmanDireccion,"+Pacman.getDireccion();
       enviarDatos(direccionPacman);
     }
     
@@ -178,7 +178,7 @@ public class CTablero2 implements InterfaceGame{
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-      String direccionFantasma = ("FDireccion;" + fantasmitas.get(iPos).getDireccion()) + ";" + iPos;
+      String direccionFantasma = ("FDireccion," + fantasmitas.get(iPos).getDireccion()) + "," + iPos;
       enviarDatos(direccionFantasma);
     }
     
