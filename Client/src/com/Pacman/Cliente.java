@@ -1,9 +1,12 @@
 package com.Pacman;
 
 import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import static java.lang.System.in;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
@@ -13,6 +16,7 @@ public class Cliente implements Runnable {
         private Socket port;
         private int genport = 7000;
         private DataInputStream datain;
+        private BufferedReader input;
         private DataOutputStream dataout;
         private String message = "";
         private CTablero tablero;
@@ -24,6 +28,8 @@ public class Cliente implements Runnable {
                 port = new Socket("127.0.0.1",genport);
                 datain = new DataInputStream(port.getInputStream());
                 dataout = new DataOutputStream(port.getOutputStream());
+                input = new BufferedReader(new InputStreamReader(in));
+
             } catch (IOException e) {
 
             }
@@ -38,7 +44,7 @@ public class Cliente implements Runnable {
          public void run() {
             try{
                 while(true){
-                    message = datain.readLine();
+                    message = input.readLine();
                     String[] separacion = message.split(",");
                     System.out.println(Arrays.asList(separacion));
                     accion(separacion);
@@ -51,40 +57,48 @@ public class Cliente implements Runnable {
          private void accion(String[] cadena){
              switch(cadena[0]){
                  case "Enemigo":
+                     System.out.println("Crear enemigo");
+
                      switch(cadena[1]){
                          case "Shadow":
-                             //System.out.println("Crear Shadow");
+                             System.out.println("Crear Shadow");
                              //AGREGAR FANTASMA (ERROR A VECES)
                              addFantasma("rojo");
                              break;
                          case "Speedy":
-                             //System.out.println("Crear Speedy");
+                             System.out.println("Crear Speedy");
                              addFantasma("rosado");
                              break;
                          case "Bashful":
-                             //System.out.println("Crear Bashful");
+                             System.out.println("Crear Bashful");
                              addFantasma("celeste");
                              break;   
                          case "Pokey":
-                             //System.out.println("Crear Pokey");
+                             System.out.println("Crear Pokey");
                              addFantasma("naranja");
                              break;
                      }
                      break;
                  case "Fruta":
+                     System.out.println("CRear fruta");
                      addFruta(cadena);
                      break;
                  case "Pastilla":
+                     System.out.println("CRear pastilla");
+
                      addPastilla();
                      break;
                 case "Puntuacion":
                      int puntaje = Integer.parseInt(cadena[1]);
                      tablero.setPuntaje(puntaje);
                      break;
-                 case "Vida":
+                case "Vida":
                      int vidas = Integer.parseInt(cadena[1]);
                      CTablero.setVidas(vidas);
                      break;
+                default:
+                    int a = 5;
+                    break;
              }
          }
         
@@ -196,6 +210,5 @@ public class Cliente implements Runnable {
         Ventana w1 = new Ventana();
         w1.PintarElementos();
         w1.setVisible(true);
-        
     }
 }
