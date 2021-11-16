@@ -2,7 +2,6 @@ package com.Pacman;
 
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +14,6 @@ public class Cliente implements Runnable {
 
         private Socket port;
         private int genport = 8080;
-        private DataInputStream datain;
         private DataOutputStream dataout;
         private String message = "";
         private CTablero tablero;
@@ -29,7 +27,6 @@ public class Cliente implements Runnable {
 
             try {
                 port = new Socket("127.0.0.1",genport);
-                //datain = new DataInputStream(port.getInputStream());
                 dataout = new DataOutputStream(port.getOutputStream());
                 inputStreamReader = new InputStreamReader(port.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
@@ -61,12 +58,10 @@ public class Cliente implements Runnable {
          private void accion(String[] cadena){
              switch(cadena[0]){
                  case "Enemigo":
-                     System.out.println("Crear enemigo");
 
                      switch(cadena[1]){
                          case "Shadow":
                              System.out.println("Crear Shadow");
-                             //AGREGAR FANTASMA (ERROR A VECES)
                              addFantasma("rojo");
                              break;
                          case "Speedy":
@@ -84,24 +79,24 @@ public class Cliente implements Runnable {
                      }
                      break;
                  case "Fruta":
-                     System.out.println("CRear fruta");
+                     System.out.println("Crear fruta");
                      addFruta(cadena);
                      break;
                  case "Pastilla":
-                     System.out.println("CRear pastilla");
-
+                     System.out.println("Crear pastilla");
                      addPastilla();
                      break;
                 case "Puntuacion":
+                     System.out.println("Setear Puntuacion");
                      int puntaje = Integer.parseInt(cadena[1]);
                      tablero.setPuntaje(puntaje);
                      break;
                 case "Vida":
+                     System.out.println("Setear Vidas");
                      int vidas = Integer.parseInt(cadena[1]);
                      CTablero.setVidas(vidas);
                      break;
                 default:
-                    int a = 5;
                     break;
              }
          }

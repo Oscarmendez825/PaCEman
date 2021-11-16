@@ -44,7 +44,7 @@ void run()
     {
         puts("Conexion aceptada");
 
-        if( pthread_create( &thread_id , NULL ,  connection_handler , (void*) &client_sock) < 0)
+        if( pthread_create(&thread_id, NULL,  connection_handler, (void*) &client_sock) < 0)
         {
             perror("No se pudo crear el thread ");
             return;
@@ -75,8 +75,7 @@ void *connection_handler(void *socket_desc)
 
     while ((read_size = recv(sock, client_message, 256, 0)) > 0)
     {
-        printf("%s \n", client_message);
-        
+        send_to_all(strcat(client_message, "\n"));
         bzero(client_message, 256);
     }
 
