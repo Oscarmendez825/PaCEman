@@ -59,7 +59,7 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
       try
       {
           tablero.setRandomDirectionGhosts();
-          
+          tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
          {
           Thread.sleep(250);
@@ -92,6 +92,7 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
                            tablero.moverPacman();
                          }
                      break;
+                 
              }
            
              repaint();

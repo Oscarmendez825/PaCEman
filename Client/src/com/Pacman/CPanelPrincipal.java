@@ -53,7 +53,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
       try
       {
           tablero.setRandomDirectionGhosts();
-          
+          tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
          {
           Thread.sleep(250);

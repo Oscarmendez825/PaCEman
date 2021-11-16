@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Cliente implements Runnable {
 
@@ -32,7 +30,7 @@ public class Cliente implements Runnable {
         }
         public void mandarMensaje(String message){
             try {
-                dataout.writeUTF(message);
+                dataout.writeUTF("Cliente1;"+message);
             } catch (IOException e) {
             }
     }
@@ -79,6 +77,14 @@ public class Cliente implements Runnable {
                  case "Pastilla":
                      addPastilla();
                      break;
+                case "Puntuacion":
+                     int puntaje = Integer.parseInt(cadena[1]);
+                     tablero.setPuntaje(puntaje);
+                     break;
+                 case "Vida":
+                     int vidas = Integer.parseInt(cadena[1]);
+                     CTablero.setVidas(vidas);
+                     break;
              }
          }
         
@@ -92,14 +98,8 @@ public class Cliente implements Runnable {
         String datos = "";
         switch(color){    
             case "rojo":
-            {
-                try {
-                     datos = "Fantasma;rojo;"+i+";"+j;
-                    dataout.writeUTF(datos.trim());
-                } catch (IOException ex) {
-          
-                }
-            }
+                datos = "Fantasma;rojo;"+i+";"+j;
+                mandarMensaje(datos);
                 CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
                 fantasma.setDireccion(1);
                 tablero.fantasmitas.add(fantasma);
@@ -107,14 +107,8 @@ public class Cliente implements Runnable {
                 break;
 
             case "rosado":
-            {
-                try {
-                    datos = "Fantasma;rosado;"+i+";"+j;
-                    dataout.writeUTF(datos.trim());
-                } catch (IOException ex) {
-                
-                }
-            }
+                datos = "Fantasma;rosado;"+i+";"+j;
+                mandarMensaje(datos);           
                 CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
                 fantasma2.setDireccion(1);
                 tablero.fantasmitas.add(fantasma2);
@@ -123,14 +117,8 @@ public class Cliente implements Runnable {
                 break;
 
             case "celeste":
-            {
-                try {
-                    datos = "Fantasma;celeste;"+i+";"+j;
-                    dataout.writeUTF(datos.trim());
-                } catch (IOException ex) {
-                 
-                }
-            }
+                datos = "Fantasma;celeste;"+i+";"+j;
+                mandarMensaje(datos);           
                 CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
                 fantasma3.setDireccion(1);
                 tablero.fantasmitas.add(fantasma3);
@@ -139,19 +127,12 @@ public class Cliente implements Runnable {
                 break;
 
             case "naranja":
-            {
-                try {
-                    datos = "Fantasma;naranja;"+i+";"+j;
-                    dataout.writeUTF(datos.trim());
-                } catch (IOException ex) {
-         
-                }
-            }
+                datos = "Fantasma;naranja;"+i+";"+j;
+                mandarMensaje(datos);
                 CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
                 fantasma4.setDireccion(1);
                 tablero.fantasmitas.add(fantasma4);
                 tablero.getiMatrizObj()[i][j] = 2;
-
                 break;
 
         }
@@ -165,37 +146,26 @@ public class Cliente implements Runnable {
             i = getRandom(22);
             j = getRandom(22);
         }
+        String datos = "";
         switch(cadena[1]){
             case "Cereza":
-                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
+               tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
                 tablero.getiMatrizObj()[i][j] = 6;
-            {
-                try {
-                    dataout.writeUTF("FObservador;Cereza;"+i+";"+j);
-                } catch (IOException ex) {
-                }
-            }
+                datos = "FObservador;Cereza;"+i+";"+j;
+                mandarMensaje(datos);
                 break;
 
             case "Limon":
                 tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.GREEN,j*25,i*25));
                 tablero.getiMatrizObj()[i][j] = 6;
-                {
-                try {
-                    dataout.writeUTF("FObservador;Limon;"+i+";"+j);
-                } catch (IOException ex) {
-                }
-            }
+                datos = "FObservador;Limon;"+i+";"+j;
+                mandarMensaje(datos);
                 break;
             case "Naranja":
                 tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.ORANGE,j*25,i*25));
                 tablero.getiMatrizObj()[i][j] = 6;
-                {
-                try {
-                    dataout.writeUTF("FObservador;Naranja;"+i+";"+j);
-                } catch (IOException ex) {
-                }
-            }
+                datos = "FObservador;Naranja;"+i+";"+j;
+                mandarMensaje(datos);
                 break;   
          }
          
@@ -209,12 +179,10 @@ public class Cliente implements Runnable {
         }
         tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
         tablero.getiMatrizObj()[i][j] = 6;
-         {
-        try {
-            dataout.writeUTF("GenPastilla;"+i+";"+j);
-        }catch (IOException ex) {
-        }
-    }
+        String datos = "";
+        datos = "GenPastilla;"+i+";"+j;
+        mandarMensaje(datos);
+    
     }
 
     private int getRandom(int num){

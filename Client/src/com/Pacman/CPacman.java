@@ -99,6 +99,10 @@ public class CPacman extends CGameObjects implements InterfaceGame {
              }
               g.setColor(Color.black); g.fillOval(iPosX+4, iPosY+8, 4, 4);
              break;
+         case Quiet:
+             g.setColor(Color.ORANGE); g.fillArc(iPosX, iPosY, 25, 25, 0, 360); isOpen=true;
+             g.setColor(Color.black); g.fillOval(iPosX+4, iPosY+8, 4, 4);
+             break;
      }   
     }
 

@@ -298,8 +298,7 @@ private static int  vidas = 3;
             if( Pacman.getX() == coins.get(i).getX() && Pacman.getY() == coins.get(i).getY())
             {
                 coins.remove(i);
-                setPuntaje(10);
-                enviarDatos(""+getPuntaje());                
+                enviarDatos("ComeMoneda");                 
             }
        } 
     }
@@ -322,8 +321,14 @@ private static int  vidas = 3;
             if( Pacman.getX() == frutas.get(i).getX() && Pacman.getY() == frutas.get(i).getY())
             {
                 frutas.remove(i); 
-                setPuntaje(1000);
-                enviarDatos(""+getPuntaje());  
+                Color fruta = frutas.get(i).getcColor();
+                if (fruta == Color.RED){
+                    enviarDatos("ComeFruta;Cereza");
+                }else if (fruta == Color.ORANGE){
+                    enviarDatos("ComeFruta;Naranja");
+                }else{
+                    enviarDatos("ComeFruta;Limon");
+                } 
             }
        } 
     }
@@ -410,7 +415,13 @@ private static int  vidas = 3;
     public int getPuntaje(){
         return puntaje;
     }
-    
+    public static int getVidas() {
+        return vidas;
+    }
+
+    public static void setVidas(int vidas) {
+        CTablero.vidas = vidas;
+    }
     private void enviarDatos(String data){
         String mensaje ="";
         mensaje = data.trim();
