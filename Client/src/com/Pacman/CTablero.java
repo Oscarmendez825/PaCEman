@@ -15,19 +15,15 @@ public  ArrayList <CMoneda>   coins;
 public  ArrayList <CFantasma> fantasmitas;
 public  boolean isBomba = false;
 private int nMuros = 0;
-private int nGhost = 0; 
+private int nGhost = 0;
 private int nCoins = 0;
 private int nPills = 0;
 private int nFruits = 0;
 public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
-
-static int puntaje = 0;
-static boolean isPower = false;
-static int  vidas = 3;
-
-static int contadorEnemigos = 0; 
-
+private static int puntaje = 0;
+private static boolean isPower = false;
+private static int  vidas = 3;
 
  
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -50,7 +46,7 @@ static int contadorEnemigos = 0;
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1, 0, 0, 1},
-                                 {1, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 0, 4, 1, 4, 4, 0, 1, 0, 0, 1},
+                                 {1, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 4, 1, 4, 4, 0, 1, 0, 0, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 1},
                                  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
                                };
@@ -62,10 +58,10 @@ static int contadorEnemigos = 0;
     client = new Cliente(this);
     thread = new Thread(client);
     thread.start();
-    Pacman      = new CPacman();
-    cuadritos   = new ArrayList<>();
-    bombas      = new ArrayList<>();
-    coins       = new ArrayList<>();   
+    Pacman = new CPacman();
+    cuadritos = new ArrayList<>();
+    bombas = new ArrayList<>();
+    coins = new ArrayList<>();   
     fantasmitas = new ArrayList<>();
     pastillas = new ArrayList<>();
     frutas = new ArrayList<>();
@@ -159,8 +155,8 @@ static int contadorEnemigos = 0;
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
-      String posiciones = "JugadorPosicion;"+Pacman.getX()+";"+Pacman.getY();
-      enviarDatos(posiciones);
+      String direccionPacman = "PacmanDireccion;"+Pacman.getDireccion();
+      enviarDatos(direccionPacman);
     }
     
     private void moverGhost(int iPos)
@@ -168,8 +164,8 @@ static int contadorEnemigos = 0;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-       String posiciones = "FantasmaPosicion;"+fantasmitas.get(iPos).getX()+";"+fantasmitas.get(iPos).getY();
-      enviarDatos(posiciones);
+      String direccionFantasma = ("FDireccion;" + fantasmitas.get(iPos).getDireccion()) + ";" + iPos;
+      enviarDatos(direccionFantasma);
     }
     
     
@@ -246,32 +242,31 @@ static int contadorEnemigos = 0;
             }    
     }
     
-     public boolean isPlaying()
+    public boolean isPlaying()
      {
           boolean bFinish = false;
 
             for(int i=0;i < fantasmitas.size() ;i++)
             {
-                  if( fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas == 0)
+                  if( fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas == 1)
                   {
                      bFinish = true;
                   }
-                  
-                  if(fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas != 0){
-                      
+
+                  if(fantasmitas.get(i).getX() == Pacman.getX() &&  fantasmitas.get(i).getY() == Pacman.getY() && vidas != 1){
+
                       if(isPower == true){
                           fantasmitas.remove(i);
-                          contadorEnemigos ++;
                       }
                       else{
-                          
+
                           vidas --;
-                          
+
                       }
-                      
+
                   }
-                  
-             
+
+
             }
 
           return bFinish;
@@ -302,8 +297,8 @@ static int contadorEnemigos = 0;
        {
             if( Pacman.getX() == coins.get(i).getX() && Pacman.getY() == coins.get(i).getY())
             {
-                coins.remove(i); 
-                setPuntaje(10);
+                coins.remove(i);
+                enviarDatos("ComeMoneda");                 
             }
        } 
     }
@@ -315,7 +310,6 @@ static int contadorEnemigos = 0;
             {
                 pastillas.remove(i); 
                 isPower = true;
-                
             }
        } 
     }
@@ -326,8 +320,17 @@ static int contadorEnemigos = 0;
        {
             if( Pacman.getX() == frutas.get(i).getX() && Pacman.getY() == frutas.get(i).getY())
             {
+                
+                int fruta = frutas.get(i).getcColor();
+                System.out.println(fruta);
+//                if (fruta == Color.RED){
+//                    enviarDatos("ComeFruta;Cereza");
+//                }else if (fruta == Color.ORANGE){
+//                    enviarDatos("ComeFruta;Naranja");
+//                }else{
+//                    enviarDatos("ComeFruta;Limon");
+//                } 
                 frutas.remove(i); 
-                setPuntaje(1000);
             }
        } 
     }
@@ -406,32 +409,25 @@ static int contadorEnemigos = 0;
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
-    
     public void setPuntaje(int puntos){
        puntaje += puntos; 
    
    }
     
-public int getPuntaje(){
+    public int getPuntaje(){
         return puntaje;
     }
+    public static int getVidas() {
+        return vidas;
+    }
 
-public int getVidas(){
-    return vidas;
-}
-
-
-public boolean getPoder(){
-    return isPower;
-}
-
-
-     
-
+    public static void setVidas(int vidas) {
+        CTablero.vidas = vidas;
+    }
     private void enviarDatos(String data){
-    String mensaje ="";
-    mensaje = data.trim();
-    client.mandarMensaje(mensaje);
+        String mensaje ="";
+        mensaje = data.trim();
+        client.mandarMensaje(mensaje);
     }
 
     }

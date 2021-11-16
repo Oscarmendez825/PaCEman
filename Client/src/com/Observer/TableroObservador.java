@@ -1,19 +1,34 @@
-package pacman;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.Observer;
 
+import com.Pacman.CBomba;
+import com.Pacman.CFantasma;
+import com.Pacman.CFruta;
+import com.Pacman.CMoneda;
+import com.Pacman.CMuro;
+import com.Pacman.CPacman;
+import com.Pacman.CPastilla;
+import com.Pacman.InterfaceGame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CTablero implements InterfaceGame{
- 
- private Cliente client;
+/**
+ *
+ * @author Oscar
+ */
+public class TableroObservador implements InterfaceGame{
+private ClientObserver client;
 private Thread thread;
- public  CPacman   Pacman; 
- public  ArrayList <CMuro>     cuadritos;
- public  ArrayList <CBomba>    bombas; 
- public  ArrayList <CMoneda>   coins; 
- public  ArrayList <CFantasma> fantasmitas;
- public  boolean isBomba = false;
+public  CPacman   Pacman; 
+public  ArrayList <CMuro>     cuadritos;
+public  ArrayList <CBomba>    bombas; 
+public  ArrayList <CMoneda>   coins; 
+public  ArrayList <CFantasma> fantasmitas;
+public  boolean isBomba = false;
 private int nMuros = 0;
 private int nGhost = 0;
 private int nCoins = 0;
@@ -50,9 +65,9 @@ public ArrayList <CFruta>     frutas;
 
     
  
- public CTablero()
+ public TableroObservador()
  {
-    client = new Cliente(this);
+    client = new ClientObserver(this);
     thread = new Thread(client);
     thread.start();
     Pacman      = new CPacman();
@@ -152,8 +167,7 @@ public ArrayList <CFruta>     frutas;
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
-      String posiciones = "JugadorPosicion;"+Pacman.getX()+";"+Pacman.getY();
-      enviarDatos(posiciones);
+
     }
     
     private void moverGhost(int iPos)
@@ -161,6 +175,7 @@ public ArrayList <CFruta>     frutas;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
+
     }
     
     
@@ -382,12 +397,4 @@ public ArrayList <CFruta>     frutas;
         this.nFruits = nFruits;
     }
     
-    
-    
-    private void enviarDatos(String data){
-    String mensaje ="";
-    mensaje = data.trim();
-    client.mandarMensaje(mensaje);
-    }
-
-    }
+}

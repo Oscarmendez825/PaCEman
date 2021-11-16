@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -13,7 +12,6 @@ import javax.swing.JPanel;
  *
  * @author Gabriel
  */
-
 public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,InterfaceGame
 {
     private CTablero  tablero = new CTablero();
@@ -52,12 +50,10 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     @Override
     public void run() 
     {
-        
-
       try
       {
           tablero.setRandomDirectionGhosts();
-          
+          tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
          {
           Thread.sleep(250);
@@ -211,13 +207,4 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     public void moverElemento(int iEstado) {
     }
     
-    public int getPuntos(){
-        
-            return tablero.getPuntaje();
-   }
-    
-    public int getVidas(){
-        
-            return tablero.getVidas();
-   }
 }

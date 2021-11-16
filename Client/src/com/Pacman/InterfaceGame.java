@@ -10,6 +10,6 @@ public interface InterfaceGame {
     int PAR=2;
     int IZQ=3;
     int DER=4;
-    
+    int Quiet=0;
     void moverElemento(int iEstado);
 }

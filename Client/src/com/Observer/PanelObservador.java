@@ -1,26 +1,31 @@
-package pacman;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.Observer;
 
+import com.Pacman.CMuro;
+import com.Pacman.InterfaceGame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+
 /**
  *
- * @author Gabriel
+ * @author Oscar
  */
-public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,InterfaceGame
-{
-    private CTablero  tablero = new CTablero();
+public class PanelObservador extends JPanel implements Runnable,KeyListener,InterfaceGame{
+    private TableroObservador  tablero = new TableroObservador();
     public boolean    isPause = false;
     private Thread    hilo;
     static int       iCont;
     
-     public CPanelPrincipal()
+     public PanelObservador()
      {
     //    this.addKeyListener(this); //escuchador de las teclas
         hilo = new Thread(this);
@@ -54,7 +59,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
       try
       {
           tablero.setRandomDirectionGhosts();
-          
+          tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
          {
           Thread.sleep(250);
@@ -87,6 +92,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
                            tablero.moverPacman();
                          }
                      break;
+                 
              }
            
              repaint();
@@ -159,45 +165,45 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     @Override
     public void keyPressed(KeyEvent arg0) 
     {
-        int key = arg0.getKeyCode();
-        
-        switch(key)
-        {
-            case KeyEvent.VK_LEFT:  tablero.Pacman.setDireccion(IZQ); break;
-            case KeyEvent.VK_RIGHT: tablero.Pacman.setDireccion(DER); break;  
-            case KeyEvent.VK_UP:    tablero.Pacman.setDireccion(PAR);  break;
-            case KeyEvent.VK_DOWN:  tablero.Pacman.setDireccion(PAB);  break;
-            case KeyEvent.VK_SPACE: 
-                       
-                     if(isPause == false)
-                       { 
-                           pausar(); 
-                           isPause = true; 
-                       }
-                       else
-                       { 
-                           continuar(); 
-                           isPause = false;
-                       } 
-                       break;
-            case KeyEvent.VK_ESCAPE: 
-                             detener(); 
-                             System.exit(1); 
-                             break;  
-            case KeyEvent.VK_X: 
-                // Aqui le cambie
-           
-                   if( tablero.bombas.size()<3)
-                   {
-                     
-                           tablero.setObject(5, tablero.Pacman.getY(), tablero.Pacman.getX());
-                           tablero.bombas.add(new CBomba(tablero.Pacman.getX()*25 , tablero.Pacman.getY()*25));
-                          
-                   }
-             
-          
-             break;    
-        }
+//        int key = arg0.getKeyCode();
+//        
+//        switch(key)
+//        {
+//            case KeyEvent.VK_LEFT:  tablero.Pacman.setDireccion(IZQ); break;
+//            case KeyEvent.VK_RIGHT: tablero.Pacman.setDireccion(DER); break;  
+//            case KeyEvent.VK_UP:    tablero.Pacman.setDireccion(PAR);  break;
+//            case KeyEvent.VK_DOWN:  tablero.Pacman.setDireccion(PAB);  break;
+//            case KeyEvent.VK_SPACE: 
+//                       
+//                     if(isPause == false)
+//                       { 
+//                           pausar(); 
+//                           isPause = true; 
+//                       }
+//                       else
+//                       { 
+//                           continuar(); 
+//                           isPause = false;
+//                       } 
+//                       break;
+//            case KeyEvent.VK_ESCAPE: 
+//                             detener(); 
+//                             System.exit(1); 
+//                             break;  
+//            case KeyEvent.VK_X: 
+//                // Aqui le cambie
+//           
+//                   if( tablero.bombas.size()<3)
+//                   {
+//                     
+//                           tablero.setObject(5, tablero.Pacman.getY(), tablero.Pacman.getX());
+//                           tablero.bombas.add(new CBomba(tablero.Pacman.getX()*25 , tablero.Pacman.getY()*25));
+//                          
+//                   }
+//             
+//          
+//             break;    
+//        }
     }
 
     @Override

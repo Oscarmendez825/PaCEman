@@ -1,7 +1,6 @@
 package com.Pacman;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +8,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 
 
 public class Ventana extends JFrame{
@@ -22,11 +18,7 @@ public class Ventana extends JFrame{
     private JButton JBInicio;
     private boolean b_Iniciado = false ;
     
-    JPanel scorePanel = new JPanel();
     
-
-    
-   
     public Ventana()
     { 
         super("Pacman");
@@ -38,21 +30,20 @@ public class Ventana extends JFrame{
         panel     = new JPanel();
         
         JBInicio = new JButton("Iniciar");
-        
-        
        
-        //lblVidas.setText(Integer.toString(PanelMain.getPuntos()));
-        
+       
         panel.add(JBInicio);
         PanelMain.addKeyListener(PanelMain);
         PanelMain.addFocusListener(new FocusListener() {
 
             @Override
             public void focusGained(FocusEvent arg0) {
+//                JOptionPane.showMessageDialog(null, "Gane el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
 
             @Override
             public void focusLost(FocusEvent arg0) {
+ //JOptionPane.showMessageDialog(null, "perdi el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         
@@ -74,6 +65,7 @@ public class Ventana extends JFrame{
                   JBInicio.setText("Pausar");
                   PanelMain.iniciar();
                   JBInicio.setEnabled(false);
+                 // JBInicio.setEnabled(false);
                  
                   b_Iniciado = true;
                }

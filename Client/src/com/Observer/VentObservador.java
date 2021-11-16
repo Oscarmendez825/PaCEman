@@ -1,7 +1,10 @@
-package pacman;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.Observer;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,26 +12,27 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
-public class Ventana extends JFrame{
-    
-    public CPanelPrincipal PanelMain; 
+/**
+ *
+ * @author Oscar
+ */
+public class VentObservador extends JFrame{
+    public PanelObservador PanelMain; 
     private JPanel panel;
     private JButton JBInicio;
-    private boolean b_Iniciado = false ;
+    private boolean b_Iniciado = true ;
     
     
-    public Ventana()
+    public VentObservador()
     { 
         super("Pacman");
         setSize(600,660);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         
-        PanelMain = new CPanelPrincipal();
+        PanelMain = new PanelObservador();
         panel     = new JPanel();
         
         JBInicio = new JButton("Iniciar");
@@ -86,4 +90,5 @@ public class Ventana extends JFrame{
        Content.add(panel,BorderLayout.SOUTH);
        
     }
+    
 }
