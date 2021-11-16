@@ -51,8 +51,8 @@ public class CFruta extends CGameObjects{
         
     }
 
-    public Color getcColor() {
-        return cColor;
+    public int getcColor() {
+        return cColor.getRGB();
     }
     
     

@@ -320,15 +320,17 @@ private static int  vidas = 3;
        {
             if( Pacman.getX() == frutas.get(i).getX() && Pacman.getY() == frutas.get(i).getY())
             {
+                
+                int fruta = frutas.get(i).getcColor();
+                System.out.println(fruta);
+//                if (fruta == Color.RED){
+//                    enviarDatos("ComeFruta;Cereza");
+//                }else if (fruta == Color.ORANGE){
+//                    enviarDatos("ComeFruta;Naranja");
+//                }else{
+//                    enviarDatos("ComeFruta;Limon");
+//                } 
                 frutas.remove(i); 
-                Color fruta = frutas.get(i).getcColor();
-                if (fruta == Color.RED){
-                    enviarDatos("ComeFruta;Cereza");
-                }else if (fruta == Color.ORANGE){
-                    enviarDatos("ComeFruta;Naranja");
-                }else{
-                    enviarDatos("ComeFruta;Limon");
-                } 
             }
        } 
     }
