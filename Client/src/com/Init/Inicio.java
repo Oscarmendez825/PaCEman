@@ -4,6 +4,8 @@
  */
 package com.Init;
 
+import com.Observer.ClientObserver;
+import com.Observer.VentObservador;
 import com.Pacman.Ventana;
 import com.Pacman2.Ventana2;
 
@@ -93,6 +95,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         ObserverButton.setText("OK");
+        ObserverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ObserverButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -175,7 +182,7 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectorActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_SelectorActionPerformed
 
     private void P1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P1ButtonActionPerformed
@@ -185,10 +192,26 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_P1ButtonActionPerformed
 
     private void P2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P2ButtonActionPerformed
-        Ventana2 w1 = new Ventana2();
-        w1.PintarElementos();
-        w1.setVisible(true);
+        Ventana2 w2 = new Ventana2();
+        w2.PintarElementos();
+        w2.setVisible(true);
     }//GEN-LAST:event_P2ButtonActionPerformed
+
+    private void ObserverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ObserverButtonActionPerformed
+        switch(Selector.getSelectedItem().toString()){
+            case "Player1":
+                ClientObserver.setJugObs("Cliente1");
+                break;
+            case "Player2":
+                ClientObserver.setJugObs("Cliente2");
+                break;
+
+        }
+        VentObservador w0 = new VentObservador();
+        w0.PintarElementos();
+        w0.setVisible(true);
+        
+    }//GEN-LAST:event_ObserverButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -229,6 +229,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="OK"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ObserverButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

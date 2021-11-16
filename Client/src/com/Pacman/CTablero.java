@@ -104,7 +104,7 @@ private static int  vidas = 3;
                    
                 case 6:
 //                  Es Fruta
-                   frutas.add(nFruits, new CFruta(Color.RED,j*25,i*25));
+                   frutas.add(nFruits, new CFruta(Color.GREEN,j*25,i*25));
                    nFruits++;
                    break;
            }
@@ -323,13 +323,17 @@ private static int  vidas = 3;
                 
                 int fruta = frutas.get(i).getcColor();
                 System.out.println(fruta);
-//                if (fruta == Color.RED){
-//                    enviarDatos("ComeFruta;Cereza");
-//                }else if (fruta == Color.ORANGE){
-//                    enviarDatos("ComeFruta;Naranja");
-//                }else{
-//                    enviarDatos("ComeFruta;Limon");
-//                } 
+                switch (fruta) {
+                    case -65536:
+                        enviarDatos("ComeFruta,Cereza");
+                        break;
+                    case -16711936:
+                        enviarDatos("ComeFruta,Limon");
+                        break;
+                    default:
+                        enviarDatos("ComeFruta,Naranja");
+                        break;
+                }
                 frutas.remove(i); 
             }
        } 
