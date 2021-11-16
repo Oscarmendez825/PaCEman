@@ -1,9 +1,11 @@
 package com.Pacman;
 
 import java.awt.Color;
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import static java.lang.System.in;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
@@ -11,26 +13,31 @@ import java.util.Random;
 public class Cliente implements Runnable {
 
         private Socket port;
-        private int genport = 1201;
-        private DataInputStream datain;
+        private int genport = 8080;
         private DataOutputStream dataout;
         private String message = "";
         private CTablero tablero;
+        
+        private InputStreamReader inputStreamReader;
+        private BufferedReader bufferedReader;
+
         
         public Cliente(CTablero juego){
             this.tablero = juego;
 
             try {
                 port = new Socket("127.0.0.1",genport);
-                datain = new DataInputStream(port.getInputStream());
                 dataout = new DataOutputStream(port.getOutputStream());
+                inputStreamReader = new InputStreamReader(port.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+
             } catch (IOException e) {
 
             }
         }
         public void mandarMensaje(String message){
             try {
-                dataout.writeUTF("Cliente1;"+message);
+                dataout.write(("Cliente1,"+message).getBytes());
             } catch (IOException e) {
             }
     }
@@ -38,8 +45,8 @@ public class Cliente implements Runnable {
          public void run() {
             try{
                 while(true){
-                    message = datain.readUTF();
-                    String[] separacion = message.split(";");
+                    message = bufferedReader.readLine();
+                    String[] separacion = message.split(",");
                     System.out.println(Arrays.asList(separacion));
                     accion(separacion);
                 }
@@ -51,40 +58,46 @@ public class Cliente implements Runnable {
          private void accion(String[] cadena){
              switch(cadena[0]){
                  case "Enemigo":
+
                      switch(cadena[1]){
                          case "Shadow":
-                             //System.out.println("Crear Shadow");
-                             //AGREGAR FANTASMA (ERROR A VECES)
+                             System.out.println("Crear Shadow");
                              addFantasma("rojo");
                              break;
                          case "Speedy":
-                             //System.out.println("Crear Speedy");
+                             System.out.println("Crear Speedy");
                              addFantasma("rosado");
                              break;
                          case "Bashful":
-                             //System.out.println("Crear Bashful");
+                             System.out.println("Crear Bashful");
                              addFantasma("celeste");
                              break;   
                          case "Pokey":
-                             //System.out.println("Crear Pokey");
+                             System.out.println("Crear Pokey");
                              addFantasma("naranja");
                              break;
                      }
                      break;
                  case "Fruta":
+                     System.out.println("Crear fruta");
                      addFruta(cadena);
                      break;
                  case "Pastilla":
+                     System.out.println("Crear pastilla");
                      addPastilla();
                      break;
                 case "Puntuacion":
+                     System.out.println("Setear Puntuacion");
                      int puntaje = Integer.parseInt(cadena[1]);
                      tablero.setPuntaje(puntaje);
                      break;
-                 case "Vida":
+                case "Vida":
+                     System.out.println("Setear Vidas");
                      int vidas = Integer.parseInt(cadena[1]);
                      CTablero.setVidas(vidas);
                      break;
+                default:
+                    break;
              }
          }
         
@@ -196,6 +209,5 @@ public class Cliente implements Runnable {
         Ventana w1 = new Ventana();
         w1.PintarElementos();
         w1.setVisible(true);
-        
     }
 }
