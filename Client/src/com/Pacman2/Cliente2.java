@@ -1,8 +1,14 @@
-package com.Pacman;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.Pacman2;
 
+import com.Pacman.CFantasma;
+import com.Pacman.CFruta;
+import com.Pacman.CPastilla;
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,86 +16,94 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Cliente implements Runnable {
-
-        private Socket port;
-        private int genport = 1201;
-        private InputStreamReader inputStreamReader;
-        private BufferedReader bufferedReader;
-        private String message = "";
-        private CTablero tablero;
-        private DataOutputStream dataout;
+/**
+ *
+ * @author Oscar
+ */
+public class Cliente2 implements Runnable{
+    
+    private Socket port;
+    private int genport = 1201;
+    private DataOutputStream dataout;
+    private String message = "";
+    private CTablero2 tablero;
+    private InputStreamReader inputStreamReader;
+    private BufferedReader bufferedReader;
+    
         
-        public Cliente(CTablero juego){
-            this.tablero = juego;
+    public Cliente2(CTablero2 juego){
+        this.tablero = juego;
 
-            try {
-                port = new Socket("127.0.0.1",genport);
-                dataout = new DataOutputStream(port.getOutputStream());
-                inputStreamReader = new InputStreamReader(port.getInputStream());
-                bufferedReader = new BufferedReader(inputStreamReader);
+        try {
+            port = new Socket("127.0.0.1",genport);
+            dataout = new DataOutputStream(port.getOutputStream());
+            inputStreamReader = new InputStreamReader(port.getInputStream());
+            bufferedReader = new BufferedReader(inputStreamReader);
+        } catch (IOException e) {
 
-            } catch (IOException e) {
-
-            }
         }
-        public void mandarMensaje(String message){
-            try {
-                dataout.write(("Cliente1,"+message).getBytes());
-            } catch (IOException e) {
-            }
     }
-        @Override
-         public void run() {
-            try{
-                while(true){
-                    message = bufferedReader.readLine();
-                    String[] separacion = message.split(",");
-                    if(separacion[0].equals("Cliente1")){
-                        System.out.println(Arrays.asList(eliminar(separacion)));
-                        accion(eliminar(separacion));
-                    }
-                    
-                }
-            }catch(IOException e){
-            }
-
+    public void mandarMensaje(String message){
+        try {
+            dataout.write(("Cliente2,"+message).getBytes());
+        } catch (IOException e) {
         }
+}
+    @Override
+     public void run() {
+        try{
+            while(true){
+                message = bufferedReader.readLine();
+                String[] separacion = message.split(",");
+                if(separacion[0].equals("Cliente2")){
+                    accion(eliminar(separacion));System.out.println(Arrays.asList(eliminar(separacion)));
+                    accion(eliminar(separacion));
+                    }
+            }
+        }catch(IOException e){
+        }
+
+    }
          
-         private void accion(String[] cadena){
-             switch(cadena[0]){
-                 case "Enemigo":
-                     switch(cadena[1]){
-                         case "Shadow":
-                             addFantasma("rojo");
-                             break;
-                         case "Speedy":
-                             addFantasma("rosado");
-                             break;
-                         case "Bashful":
-                             addFantasma("celeste");
-                             break;   
-                         case "Pokey":
-                             addFantasma("naranja");
-                             break;
-                     }
-                     break;
-                 case "Fruta":
-                     addFruta(cadena);
-                     break;
-                 case "Pastilla":
-                     addPastilla();
-                     break;
-                case "Puntuacion":
-                     int puntaje = Integer.parseInt(cadena[1]);
-                     tablero.setPuntaje(puntaje);
-                     break;
-                 case "Vida":
-                     int vidas = Integer.parseInt(cadena[1]);
-                     CTablero.setVidas(vidas);
-                     break;
-             }
+     private void accion(String[] cadena){
+         switch(cadena[0]){
+             case "Enemigo":
+                 switch(cadena[1]){
+                     case "Shadow":
+                         //System.out.println("Crear Shadow");
+                         //AGREGAR FANTASMA (ERROR A VECES)
+                         addFantasma("rojo");
+                         break;
+                     case "Speedy":
+                         //System.out.println("Crear Speedy");
+                         addFantasma("rosado");
+                         break;
+                     case "Bashful":
+                         //System.out.println("Crear Bashful");
+                         addFantasma("celeste");
+                         break;   
+                     case "Pokey":
+                         //System.out.println("Crear Pokey");
+                         addFantasma("naranja");
+                         break;
+                 }
+                 break;
+             case "Fruta":
+                 addFruta(cadena);
+                 break;
+             case "Pastilla":
+                 addPastilla();
+                 break;
+            case "Puntuacion":
+                 int puntaje = Integer.parseInt(cadena[1]);
+                 tablero.setPuntaje(puntaje);
+                 break;
+             case "Vida":
+                 int vidas = Integer.parseInt(cadena[1]);
+                 CTablero2.setVidas(vidas);
+                 break;
          }
+     }
         
     private void addFantasma(String color){
         int i = getRandom(22);
@@ -187,18 +201,12 @@ public class Cliente implements Runnable {
         mandarMensaje(datos);
     
     }
-
-    private int getRandom(int num){
-        Random random = new Random();
-        int numX = random.nextInt(num);
-        return numX;
-    }
     
     private String[] eliminar(String[] arr){
-        String[] newArr = null;
+    String[] newArr = null;
         
         for (int i = 0; i < arr.length-1; i++) {
-            if(arr[i].equals("Cliente1")){
+            if(arr[i].equals("Cliente2")){
                 newArr = new String[arr.length - 1];
                 for(int index = 0; index < i; index++){
                     newArr[index] = arr[index];
@@ -211,12 +219,14 @@ public class Cliente implements Runnable {
         }
         return newArr;
     }
-
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Ventana w1 = new Ventana();
-        w1.PintarElementos();
-        w1.setVisible(true);
-        
+    
+    private int getRandom(int num){
+        Random random = new Random();
+        int numX = random.nextInt(num);
+        return numX;
     }
+
 }
+
+    
+
