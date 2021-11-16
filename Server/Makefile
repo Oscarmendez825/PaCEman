@@ -1,2 +1,2 @@
 server: server.c
-	gcc -pthread -o server server.c
+	gcc server.c main.c -o main -pthread
