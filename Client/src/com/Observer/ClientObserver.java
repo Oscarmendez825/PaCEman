@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Observer;
 
 import com.Pacman.CFantasma;
@@ -9,7 +5,6 @@ import com.Pacman.CFruta;
 import com.Pacman.CPastilla;
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +16,7 @@ import java.util.Arrays;
  */
 public class ClientObserver implements Runnable{
     private Socket port;
-    private int genport = 1201;
+    private int genport = 8080;
     private InputStreamReader inputStreamReader;
     private DataOutputStream dataout;
     private BufferedReader bufferedReader;

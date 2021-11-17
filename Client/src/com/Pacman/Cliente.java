@@ -13,7 +13,7 @@ import java.util.Random;
 public class Cliente implements Runnable {
 
         private Socket port;
-        private int genport = 1201;
+        private int genport = 8080;
         private InputStreamReader inputStreamReader;
         private BufferedReader bufferedReader;
         private String message = "";
