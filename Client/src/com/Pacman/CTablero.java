@@ -155,7 +155,7 @@ private static int  vidas = 3;
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
       Pacman.moverElemento( Pacman.getDireccion() );
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
-      String direccionPacman = "PacmanDireccion;"+Pacman.getDireccion();
+      String direccionPacman = "PacmanDireccion,"+Pacman.getDireccion();
       enviarDatos(direccionPacman);
     }
     
@@ -164,7 +164,7 @@ private static int  vidas = 3;
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
       fantasmitas.get(iPos).moverElemento( fantasmitas.get(iPos).getDireccion() );
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 2;
-      String direccionFantasma = ("FDireccion;" + fantasmitas.get(iPos).getDireccion()) + ";" + iPos;
+      String direccionFantasma = ("FDireccion," + fantasmitas.get(iPos).getDireccion()) + "," + iPos;
       enviarDatos(direccionFantasma);
     }
     
