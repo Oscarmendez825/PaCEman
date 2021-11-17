@@ -1,15 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Observer;
 
 import com.Pacman.CFantasma;
 import com.Pacman.CFruta;
 import com.Pacman.CPastilla;
 import java.awt.Color;
-import java.io.DataInputStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Arrays;
 /**
@@ -18,17 +16,23 @@ import java.util.Arrays;
  */
 public class ClientObserver implements Runnable{
     private Socket port;
-    private int genport = 1201;
-    private DataInputStream datain;
+    private int genport = 8080;
+    private InputStreamReader inputStreamReader;
+    private DataOutputStream dataout;
+    private BufferedReader bufferedReader;
     private String message = "";
     private TableroObservador tablero;
-        
+    private static String jugObs = ""; 
+    
+    
     public ClientObserver(TableroObservador juego){
         this.tablero = juego;
 
         try {
             port = new Socket("127.0.0.1",genport);
-            datain = new DataInputStream(port.getInputStream());
+            dataout = new DataOutputStream(port.getOutputStream());
+            inputStreamReader = new InputStreamReader(port.getInputStream());
+            bufferedReader = new BufferedReader(inputStreamReader);
         } catch (IOException e) {
 
         }
@@ -37,9 +41,12 @@ public class ClientObserver implements Runnable{
      public void run() {
         try{
             while(true){
-                message = datain.readUTF();
-                String[] separacion = message.split(";");
-                accion(separacion);
+                message = bufferedReader.readLine();
+                String[] separacion = message.split(",");
+                if(separacion[0].equals(jugObs)){
+                    System.out.println(Arrays.asList(eliminar(separacion)));
+                    accion(eliminar(separacion));
+                }
             }
         }catch(IOException e){
         }
@@ -166,6 +173,28 @@ public class ClientObserver implements Runnable{
        int j = Integer.parseInt(cadena[2]);
        tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
        tablero.getiMatrizObj()[i][j] = 6;
+    }
+
+    public static void setJugObs(String jugObs) {
+        ClientObserver.jugObs = jugObs;
+    }
+    
+        private String[] eliminar(String[] arr){
+        String[] newArr = null;
+        
+        for (int i = 0; i < arr.length-1; i++) {
+            if(arr[i].equals(jugObs)){
+                newArr = new String[arr.length - 1];
+                for(int index = 0; index < i; index++){
+                    newArr[index] = arr[index];
+                }
+                for(int j = i; j < arr.length - 1; j++){
+                    newArr[j] = arr[j+1];
+                }
+                break;
+            }
+        }
+        return newArr;
     }
 }
 
