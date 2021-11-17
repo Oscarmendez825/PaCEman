@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/omend/Documents/GitHub/PaCEman/Client/src/com/Init/Inicio.java</file>
-            <file>file:/C:/Users/omend/Documents/GitHub/PaCEman/Client/src/com/Pacman2/Main.java</file>
-            <file>file:/C:/Users/omend/Documents/GitHub/PaCEman/Client/src/com/Pacman/Cliente.java</file>
+            <file>file:/home/dani/Documents/GitHub/PaCEman/Client/src/com/Pacman/CTablero.java</file>
+            <file>file:/home/dani/Documents/GitHub/PaCEman/Client/src/com/Observer/ClientObserver.java</file>
+            <file>file:/home/dani/Documents/GitHub/PaCEman/Client/src/com/Observer/TableroObservador.java</file>
+            <file>file:/home/dani/Documents/GitHub/PaCEman/Client/src/com/Pacman2/Cliente2.java</file>
+            <file>file:/home/dani/Documents/GitHub/PaCEman/Client/src/com/Pacman/Cliente.java</file>
         </group>
     </open-files>
 </project-private>
