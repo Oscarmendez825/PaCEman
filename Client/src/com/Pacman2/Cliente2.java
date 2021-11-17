@@ -115,7 +115,7 @@ public class Cliente2 implements Runnable{
         String datos = "";
         switch(color){    
             case "rojo":
-                datos = "Fantasma;rojo;"+i+";"+j;
+                datos = "Fantasma,rojo,"+i+","+j;
                 mandarMensaje(datos);
                 CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
                 fantasma.setDireccion(1);
@@ -124,7 +124,7 @@ public class Cliente2 implements Runnable{
                 break;
 
             case "rosado":
-                datos = "Fantasma;rosado;"+i+";"+j;
+                datos = "Fantasma,rosado,"+i+","+j;
                 mandarMensaje(datos);           
                 CFantasma fantasma2 = new CFantasma(Color.PINK, i*25, j*25);
                 fantasma2.setDireccion(1);
@@ -134,7 +134,7 @@ public class Cliente2 implements Runnable{
                 break;
 
             case "celeste":
-                datos = "Fantasma;celeste;"+i+";"+j;
+                datos = "Fantasma,celeste,"+i+","+j;
                 mandarMensaje(datos);           
                 CFantasma fantasma3 = new CFantasma(Color.cyan,i*25, j*25);
                 fantasma3.setDireccion(1);
@@ -144,7 +144,7 @@ public class Cliente2 implements Runnable{
                 break;
 
             case "naranja":
-                datos = "Fantasma;naranja;"+i+";"+j;
+                datos = "Fantasma,naranja,"+i+","+j;
                 mandarMensaje(datos);
                 CFantasma fantasma4 = new CFantasma(Color.ORANGE, i*25, j*25);
                 fantasma4.setDireccion(1);
@@ -168,20 +168,20 @@ public class Cliente2 implements Runnable{
             case "Cereza":
                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
                 tablero.getiMatrizObj()[i][j] = 6;
-                datos = "FObservador;Cereza;"+i+";"+j;
+                datos = "FObservador,Cereza,"+i+","+j;
                 mandarMensaje(datos);
                 break;
 
             case "Limon":
                 tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.GREEN,j*25,i*25));
                 tablero.getiMatrizObj()[i][j] = 6;
-                datos = "FObservador;Limon;"+i+";"+j;
+                datos = "FObservador,Limon,"+i+","+j;
                 mandarMensaje(datos);
                 break;
             case "Naranja":
                 tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.ORANGE,j*25,i*25));
                 tablero.getiMatrizObj()[i][j] = 6;
-                datos = "FObservador;Naranja;"+i+";"+j;
+                datos = "FObservador,Naranja,"+i+","+j;
                 mandarMensaje(datos);
                 break;   
          }
@@ -197,7 +197,7 @@ public class Cliente2 implements Runnable{
         tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
         tablero.getiMatrizObj()[i][j] = 6;
         String datos = "";
-        datos = "GenPastilla;"+i+";"+j;
+        datos = "GenPastilla,"+i+","+j;
         mandarMensaje(datos);
     
     }
