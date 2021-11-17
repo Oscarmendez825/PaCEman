@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Observer;
 
 import com.Pacman.CBomba;
@@ -17,8 +13,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Oscar
+ * 
+ * @author Oscar Mendez
+ * @author Gabriel Gonzalez
+ * @author Daniela Brenes
+ * Clase CTablero del clienteObservador
+ * 
  */
 public class TableroObservador implements InterfaceGame{
 private ClientObserver client;
@@ -340,27 +340,45 @@ public ArrayList <CFruta>     frutas;
     public void setiMatrizObj(int[][] iMatrizObj) {
         this.iMatrizObj = iMatrizObj;
     }
-
+    /**
+     * Brinda el numero total de muros
+     * @return Integer 
+     */
     public int getnMuros() {
         return nMuros;
     }
-
+    /**
+     * Establece el numero total de muros
+     * @param nMuros:Integer
+     */
     public void setnMuros(int nMuros) {
         this.nMuros = nMuros;
     }
-
+    /**
+     * Brinda el numero total de fantasmas
+     * @return Integer 
+     */
     public int getnGhost() {
         return nGhost;
     }
-
+    /**
+     * Establece el numero total de fantasmas
+     * @param nGhost:Integer
+     */
     public void setnGhost(int nGhost) {
         this.nGhost = nGhost;
     }
-
+    /**
+     * Brinda el numero total de pastillas
+     * @return Integer 
+     */
     public int getnCoins() {
         return nCoins;
     }
-
+    /**
+     * Establece el numero total de monedas
+     * @param nCoins:Integer
+     */
     public void setnCoins(int nCoins) {
         this.nCoins = nCoins;
     }
@@ -380,19 +398,31 @@ public ArrayList <CFruta>     frutas;
     public void setFrutas(ArrayList<CFruta> frutas) {
         this.frutas = frutas;
     }
-
+    /**
+     * Brinda el numero total de pastillas
+     * @return Integer 
+     */
     public int getnPills() {
         return nPills;
     }
-
+    /**
+     * Establece el numero total de pastilas
+     * @param nPills:Integer
+     */
     public void setnPills(int nPills) {
         this.nPills = nPills;
     }
-
+    /**
+     * Brinda el numero total de frutas
+     * @return Integer 
+     */
     public int getnFruits() {
         return nFruits;
     }
-
+    /**
+     * Establece el numero total de frutas
+     * @param nFruits:Integer
+     */
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }

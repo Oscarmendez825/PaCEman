@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Pacman2;
 
 import com.Pacman.CBomba;
@@ -17,8 +13,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Oscar
+ * 
+ * @author Oscar Mendez
+ * @author Gabriel Gonzalez
+ * @author Daniela Brenes
+ * Clase CTablero del cliente2
+ * 
  */
 public class CTablero2 implements InterfaceGame{
     private Cliente2 client;
@@ -370,27 +370,45 @@ public class CTablero2 implements InterfaceGame{
     public void setiMatrizObj(int[][] iMatrizObj) {
         this.iMatrizObj = iMatrizObj;
     }
-
+    /**
+     * Brinda el numero total de muros
+     * @return Integer 
+     */
     public int getnMuros() {
         return nMuros;
     }
-
+    /**
+     * Establece el numero total de muros
+     * @param nMuros:Integer
+     */
     public void setnMuros(int nMuros) {
         this.nMuros = nMuros;
     }
-
+    /**
+     * Brinda el numero total de muros
+     * @return Integer 
+     */
     public int getnGhost() {
         return nGhost;
     }
-
+    /**
+     * Establece el numero total de fantasmas
+     * @param nGhost:Integer
+     */
     public void setnGhost(int nGhost) {
         this.nGhost = nGhost;
     }
-
+    /**
+     * Brinda el numero total de pastillas
+     * @return Integer 
+     */
     public int getnCoins() {
         return nCoins;
     }
-
+    /**
+     * Establece el numero total de monedas
+     * @param nCoins:Integer
+     */
     public void setnCoins(int nCoins) {
         this.nCoins = nCoins;
     }
@@ -410,37 +428,67 @@ public class CTablero2 implements InterfaceGame{
     public void setFrutas(ArrayList<CFruta> frutas) {
         this.frutas = frutas;
     }
-
+    /**
+     * Brinda el numero total de pastillas
+     * @return Integer 
+     */
     public int getnPills() {
         return nPills;
     }
-
+    /**
+     * Establece el numero total de pastilas
+     * @param nPills:Integer
+     */
     public void setnPills(int nPills) {
         this.nPills = nPills;
     }
-
+    /**
+     * Brinda el numero total de frutas
+     * @return Integer 
+     */
     public int getnFruits() {
         return nFruits;
     }
-
+    /**
+     * Establece el numero total de frutas
+     * @param nFruits:Integer
+     */
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
+    /**
+     * Establece el numero total de puntos
+     * @param puntos:Integer
+     */    
     public void setPuntaje(int puntos){
        puntaje += puntos; 
    
    }
-    
+    /**
+     * Brinda el numero total de puntos
+     * @return Integer
+     */    
     public int getPuntaje(){
         return puntaje;
     }
+    /**
+     * Brinda el numero total de vidas
+     * @return Integer
+     */    
     public static int getVidas() {
         return vidas;
     }
-
+    /**
+     * Establece el numero total de vidas
+     * @param vidas:Integer
+     */
     public static void setVidas(int vidas) {
         CTablero2.vidas = vidas;
     }
+     /**
+     * Encargado de enviar los datos a la clase cliente para enviarlos luego al server
+     * @param data:String
+     */
     private void enviarDatos(String data){
         String mensaje ="";
         mensaje = data.trim();

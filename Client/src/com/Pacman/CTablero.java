@@ -4,6 +4,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * 
+ * @author Oscar Mendez
+ * @author Gabriel Gonzalez
+ * @author Daniela Brenes
+ * Clase CTablero del cliente1
+ * 
+ */
 public class CTablero implements InterfaceGame{
  
 private Cliente client;
@@ -357,27 +365,45 @@ private static int  vidas = 3;
     public void setiMatrizObj(int[][] iMatrizObj) {
         this.iMatrizObj = iMatrizObj;
     }
-
+    /**
+     * Brinda el numero total de muros
+     * @return Integer 
+     */
     public int getnMuros() {
         return nMuros;
     }
-
+    /**
+     * Establece el numero total de muros
+     * @param nMuros:Integer
+     */
     public void setnMuros(int nMuros) {
         this.nMuros = nMuros;
     }
-
+    /**
+     * Brinda el numero total de muros
+     * @return Integer 
+     */
     public int getnGhost() {
         return nGhost;
     }
-
+    /**
+     * Establece el numero total de fantasmas
+     * @param nGhost:Integer
+     */
     public void setnGhost(int nGhost) {
         this.nGhost = nGhost;
     }
-
+    /**
+     * Brinda el numero total de pastillas
+     * @return Integer 
+     */
     public int getnCoins() {
         return nCoins;
     }
-
+    /**
+     * Establece el numero total de monedas
+     * @param nCoins:Integer
+     */
     public void setnCoins(int nCoins) {
         this.nCoins = nCoins;
     }
@@ -397,37 +423,67 @@ private static int  vidas = 3;
     public void setFrutas(ArrayList<CFruta> frutas) {
         this.frutas = frutas;
     }
-
+    /**
+     * Brinda el numero total de pastillas
+     * @return Integer 
+     */
     public int getnPills() {
         return nPills;
     }
-
+    /**
+     * Establece el numero total de pastilas
+     * @param nPills:Integer
+     */
     public void setnPills(int nPills) {
         this.nPills = nPills;
     }
-
+    /**
+     * Brinda el numero total de frutas
+     * @return Integer 
+     */
     public int getnFruits() {
         return nFruits;
     }
-
+    /**
+     * Establece el numero total de frutas
+     * @param nFruits:Integer
+     */
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
+    /**
+     * Establece el numero total de puntos
+     * @param puntos:Integer
+     */
     public void setPuntaje(int puntos){
        puntaje += puntos; 
    
    }
-    
+    /**
+     * Brinda el numero total de puntos
+     * @return Integer
+     */
     public int getPuntaje(){
         return puntaje;
     }
+    /**
+     * Brinda el numero total de vidas
+     * @return Integer
+     */
     public static int getVidas() {
         return vidas;
     }
-
+    /**
+     * Establece el numero total de vidas
+     * @param vidas:Integer
+     */
     public static void setVidas(int vidas) {
         CTablero.vidas = vidas;
     }
+    /**
+     * Encargado de enviar los datos a la clase cliente para enviarlos luego al server
+     * @param data:String
+     */
     private void enviarDatos(String data){
         String mensaje ="";
         mensaje = data.trim();

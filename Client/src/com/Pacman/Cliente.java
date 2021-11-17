@@ -2,7 +2,6 @@ package com.Pacman;
 
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,6 +9,15 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.Random;
 
+
+/**
+ * 
+ * @author Oscar Mendez
+ * @author Gabriel Gonzalez
+ * @author Daniela Brenes
+ * Clase cliente de comunicacion por sockets del jugador 1
+ * 
+ */
 public class Cliente implements Runnable {
 
         private Socket port;
@@ -20,6 +28,10 @@ public class Cliente implements Runnable {
         private CTablero tablero;
         private DataOutputStream dataout;
         
+        /**
+         * Constructor de la clase Cliente
+         * @param juego:CTablero
+         */
         public Cliente(CTablero juego){
             this.tablero = juego;
 
@@ -33,12 +45,21 @@ public class Cliente implements Runnable {
 
             }
         }
+        /**
+         * Envia mensaje del cliente al servidor
+         * @param message:String
+         */
         public void mandarMensaje(String message){
             try {
                 dataout.write(("Cliente1,"+message).getBytes());
             } catch (IOException e) {
             }
     }
+        /**
+         * 
+         * Responsable de la comunicacion continua entre el servidor y cliente
+         * 
+         */
         @Override
          public void run() {
             try{
@@ -55,7 +76,11 @@ public class Cliente implements Runnable {
             }
 
         }
-         
+         /**
+          * Decide que accion realizar segun lo que el servidor le indique
+          * @param cadena:String[]
+          * 
+          */
          private void accion(String[] cadena){
              switch(cadena[0]){
                  case "Enemigo":
@@ -90,7 +115,10 @@ public class Cliente implements Runnable {
                      break;
              }
          }
-        
+    /**
+     * Agrega un fantasma en la interfaz del jugador
+     * @param color:String
+     */    
     private void addFantasma(String color){
         int i = getRandom(22);
         int j = getRandom(22);
@@ -141,7 +169,10 @@ public class Cliente implements Runnable {
         }
     }
 
-    
+    /**
+     * Agrega una fruta en la interfaz del jugador
+     * @param cadena:String
+     */
     private void addFruta(String[] cadena){
         int i = getRandom(22);
         int j = getRandom(22);
@@ -173,6 +204,9 @@ public class Cliente implements Runnable {
          }
          
     }
+    /**
+     * Agrega una pastilla en la interfaz del jugador
+     */
     private void addPastilla(){
         int i = getRandom(22);
         int j = getRandom(22);
@@ -187,13 +221,22 @@ public class Cliente implements Runnable {
         mandarMensaje(datos);
     
     }
-
+    /**
+     * Brinda un numero random en un rango definido
+     * @param num:Integer
+     * @return Integer
+     */
     private int getRandom(int num){
         Random random = new Random();
         int numX = random.nextInt(num);
         return numX;
     }
     
+    /**
+     * Elimina elemento de un array
+     * @param arr:String[]
+     * @return String[]
+     */
     private String[] eliminar(String[] arr){
         String[] newArr = null;
         
@@ -211,7 +254,10 @@ public class Cliente implements Runnable {
         }
         return newArr;
     }
-
+    /**
+     * Main de la clase Cliente
+     * @param args 
+     */
     public static void main(String[] args) {
         // TODO code application logic here
         Ventana w1 = new Ventana();
