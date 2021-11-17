@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Observer;
 
 import java.awt.BorderLayout;
@@ -15,8 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Oscar
+ * Clase que crea la ventana del juego del observador
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
  */
 public class VentObservador extends JFrame{
     public PanelObservador PanelMain; 
@@ -24,17 +22,22 @@ public class VentObservador extends JFrame{
     private JButton JBInicio;
     private boolean b_Iniciado = true ;
     
-    
+    /**
+    * Constructor de la clase Ventana
+    */  
     public VentObservador()
     { 
         super("Pacman");
         setSize(600,660);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        
+
+        //Creacion del panel de la clase CPanelPrincipal
+
         PanelMain = new PanelObservador();
         panel     = new JPanel();
         
+        //Creacion del boton iniciar
         JBInicio = new JButton("Iniciar");
        
        
@@ -44,18 +47,18 @@ public class VentObservador extends JFrame{
 
             @Override
             public void focusGained(FocusEvent arg0) {
-//                JOptionPane.showMessageDialog(null, "Gane el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
 
             @Override
             public void focusLost(FocusEvent arg0) {
- //JOptionPane.showMessageDialog(null, "perdi el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         
     }
    
-    
+    /**
+    * Se pintan los elementos necesarios en la ventana
+    */     
      public void PintarElementos()
      {           
        Container Content = getContentPane();

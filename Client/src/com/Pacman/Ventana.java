@@ -1,7 +1,6 @@
 package com.Pacman;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,11 +8,14 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
+/**
+ * Clase que crea la ventana del juego del cliente 1
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
+ */
 
 public class Ventana extends JFrame{
     
@@ -22,11 +24,9 @@ public class Ventana extends JFrame{
     private JButton JBInicio;
     private boolean b_Iniciado = false ;
     
-    JPanel scorePanel = new JPanel();
-    
-
-    
-   
+   /**
+    * Constructor de la clase Ventana
+    */ 
     public Ventana()
     { 
         super("Pacman");
@@ -34,15 +34,14 @@ public class Ventana extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         
+        //Creacion del panel de la clase CPanelPrincipal
         PanelMain = new CPanelPrincipal();
         panel     = new JPanel();
         
+        //Creacion del boton iniciar
         JBInicio = new JButton("Iniciar");
-        
-        
        
-        //lblVidas.setText(Integer.toString(PanelMain.getPuntos()));
-        
+       
         panel.add(JBInicio);
         PanelMain.addKeyListener(PanelMain);
         PanelMain.addFocusListener(new FocusListener() {
@@ -58,7 +57,9 @@ public class Ventana extends JFrame{
         
     }
    
-    
+/**
+ * Se pintan los elementos necesarios en la ventana
+ */    
      public void PintarElementos()
      {           
        Container Content = getContentPane();

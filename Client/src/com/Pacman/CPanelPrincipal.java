@@ -5,13 +5,14 @@ import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Gabriel
+ * Clase que crea el panel principal del juego
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
  */
 
 public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,InterfaceGame
@@ -21,43 +22,62 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     private Thread    hilo;
     static int       iCont;
     
+    /**
+     * Constructor de la clase PanelPrincipal
+     * En este se crea el hilo necesario para el juego
+     */
      public CPanelPrincipal()
      {
-    //    this.addKeyListener(this); //escuchador de las teclas
         hilo = new Thread(this);
         setFocusable(true);
      }
-     
+     /**
+      * Inicia el hilo
+      */
      public void iniciar()
      {
         iCont = 0; 
         hilo.start();
      }
      
+     /**
+      * Pausa el hilo
+      */
+     
      public void pausar()
      {
         hilo.suspend();
      }
     
+     /**
+      * Continua con el hilo
+      */
+     
      public void continuar()
      {
         hilo.resume();
      }
     
+     /**
+      * Detiene el hilo
+      */
     public void detener()
     {
         hilo.stop();
     }
     
+    /**
+     * Metodo que corre los metodos del juego
+     */
+    
     @Override
     public void run() 
     {
-        
-
       try
-      {
+      { 
+        //Se definen las direcciones iniciales
           tablero.setRandomDirectionGhosts();
-          
+          tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
          {
           Thread.sleep(250);
@@ -67,7 +87,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
           {
             iCont = 0;
           }
-          
+          //Se cambian las direcciones del Pacman
            switch(tablero.Pacman.getDireccion())
            {
                  case IZQ: 
@@ -95,11 +115,12 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
              repaint();
              iCont++;
          }
-         
+         //Mensaje de ganador
           if( tablero.esGanador() && !tablero.isPlaying())
           {
                JOptionPane.showMessageDialog(this, "! Felicidades ganaste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
           }
+          //Mensaje de perdedor
           else{
                JOptionPane.showMessageDialog(this, "! Perdiste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
           }
@@ -111,15 +132,19 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
       }
       
     }
+    /**
+     * Metodo para pintar los elementos del juego
+     * @param g : Graphics
+     */
     
     @Override
      public void paintComponent(Graphics g)
      {
-//         fondo blanco
+        //fondo del juego
          g.setColor(Color.black);
          g.fillRect(0, 0, getWidth(), getHeight());
          
-//         Se pintan los elementos
+
         for(int i = 0; i < tablero.fantasmitas.size(); i++) 
         {
             tablero.fantasmitas.get(i).paintElements(g);
@@ -158,7 +183,10 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     {
         
     }
-
+/**
+ * Eventos de teclas presionadas
+ * @param arg0 : KeyEvent
+ */
     @Override
     public void keyPressed(KeyEvent arg0) 
     {
@@ -188,7 +216,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
                              System.exit(1); 
                              break;  
             case KeyEvent.VK_X: 
-                // Aqui le cambie
+
            
                    if( tablero.bombas.size()<3)
                    {
@@ -211,13 +239,4 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     public void moverElemento(int iEstado) {
     }
     
-    public int getPuntos(){
-        
-            return tablero.getPuntaje();
-   }
-    
-    public int getVidas(){
-        
-            return tablero.getVidas();
-   }
 }
