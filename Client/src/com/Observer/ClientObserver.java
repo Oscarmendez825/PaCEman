@@ -10,9 +10,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Arrays;
+
 /**
- *
- * @author Oscar
+ * 
+ * @author Oscar Mendez
+ * @author Gabriel Gonzalez
+ * @author Daniela Brenes
+ * Clase observador recibe datos del servidor referente a los clientes
+ * 
  */
 public class ClientObserver implements Runnable{
     private Socket port;
@@ -24,7 +29,10 @@ public class ClientObserver implements Runnable{
     private TableroObservador tablero;
     private static String jugObs = ""; 
     
-    
+   /**
+    * Constructor de la clase ClienteObserver
+    * @param juego:TableroObservador
+    */    
     public ClientObserver(TableroObservador juego){
         this.tablero = juego;
 
@@ -37,6 +45,11 @@ public class ClientObserver implements Runnable{
 
         }
     }
+    /**
+     * 
+     * Responsable de la comunicacion continua entre el servidor y cliente
+     * 
+     */
     @Override
      public void run() {
         try{
@@ -52,7 +65,11 @@ public class ClientObserver implements Runnable{
         }
 
     }
-         
+    /**
+      * Decide que accion realizar segun lo que el servidor le indique
+      * @param cadena:String[]
+      * 
+      */     
     private void accion(String[] cadena){
         switch(cadena[0]){
             case "GenPastilla":
@@ -89,7 +106,10 @@ public class ClientObserver implements Runnable{
     }
 
     }
-
+    /**
+     * Main de la clase ClienteObserver
+     * @param args 
+     */
     public static void main(String[] args) {
         // TODO code application logic here
         VentObservador w1 = new VentObservador();
@@ -97,7 +117,10 @@ public class ClientObserver implements Runnable{
         w1.setVisible(true);
         
     }
-
+    /**
+     * Se encarga de actualizar la interfaz segun el movimiemnto de los fantasmas
+     * @param valores:String[]
+     */
     private void moverFantasma(String[] valores) {
         int posicion = Integer.parseInt(valores[2]);
         switch(valores[1]){
@@ -116,7 +139,10 @@ public class ClientObserver implements Runnable{
             
     }
     }
-
+    /**
+     * Agrega un fantasma en la interfaz del observador
+     * @param propiedades:String[]
+     */
     private void agregarFantasma(String[] propiedades) {
         int i = Integer.parseInt(propiedades[2]);
         int j = Integer.parseInt(propiedades[3]);
@@ -147,7 +173,10 @@ public class ClientObserver implements Runnable{
                 break;
         }
     }
-
+    /**
+     * Agrega uns fruta en la interfaz del observador
+     * @param propiedades:String[]
+     */
     private void genFrutas(String[] cadena) {
         int i = Integer.parseInt(cadena[2]);
         int j = Integer.parseInt(cadena[3]);
@@ -167,14 +196,20 @@ public class ClientObserver implements Runnable{
          }
         
     }
-
+    /**
+     * Agrega una pastilla en la interfaz del observador
+     * @param propiedades:String[]
+     */
     private void agregarPastila(String[] cadena) {
        int i = Integer.parseInt(cadena[1]);
        int j = Integer.parseInt(cadena[2]);
        tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
        tablero.getiMatrizObj()[i][j] = 6;
     }
-
+    /**
+     * Establece el jugador que va a ser observado
+     * @param jugObs:String 
+     */
     public static void setJugObs(String jugObs) {
         ClientObserver.jugObs = jugObs;
     }
