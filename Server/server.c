@@ -136,32 +136,37 @@ void handleMessage(char* msg) {
     }
 
     // Se analiza el resto del mensaje (otros tokens)
+
+    // Se agregan 10 puntos al comer una moneda
     if (strcmp(array[1], "ComeMoneda\n") == 0)
     {
-        addScore(player, 10);
+        int new_score = addScore(player, 10);
     }
+
+    // Se disminuye una vida al jugador
     else if (strcmp(array[1], "PierdeVida") == 0)
     {
-        modifyLives(player, -1); 
+        printf("pierde vida\n");
+
+        int new_lives = modifyLives(player, -1); 
     }
+
+    // Se agregan miles de puntos al comer naranjas
     else if (strcmp(array[1], "ComeFruta") == 0)
     {
+        int new_score;
         if (strcmp(array[2], "Naranja"))
         {
-            addScore(player, 4000);
+            new_score = addScore(player, 4000);
         }
         else if (strcmp(array[2], "Limon"))
         {
-            addScore(player, 5000);
+            new_score = addScore(player, 5000);
         }
         else if (strcmp(array[2], "Cereza"))
         {
-            addScore(player, 6000);
+            new_score = addScore(player, 6000);
         }
-    }
-    else {
-        printf("basura \n");
-
     }
 }
 

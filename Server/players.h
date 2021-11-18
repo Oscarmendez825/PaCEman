@@ -8,9 +8,9 @@ struct Player {
 };
 
 // Definicion de funciones
-void modifyLives(int player, int modify);
+int modifyLives(int player, int modify);
 
-void addScore(int player, int add);
+int addScore(int player, int add);
 
 
 #endif
