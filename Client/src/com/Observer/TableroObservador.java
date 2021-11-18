@@ -28,12 +28,12 @@ public  ArrayList <CMuro>     cuadritos;
 public  ArrayList <CBomba>    bombas; 
 public  ArrayList <CMoneda>   coins; 
 public  ArrayList <CFantasma> fantasmitas;
-public  boolean isBomba = false;
-private int nMuros = 0;
-private int nGhost = 0;
-private int nCoins = 0;
-private int nPills = 0;
-private int nFruits = 0;
+public  java.lang.Boolean isBomba = false;
+private java.lang.Integer nMuros = 0;
+private java.lang.Integer nGhost = 0;
+private java.lang.Integer nCoins = 0;
+private java.lang.Integer nPills = 0;
+private java.lang.Integer nFruits = 0;
 public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
 private int mTemporal[][];
@@ -243,9 +243,9 @@ private int mTemporal[][];
      * Valida si el jugador no ha muerto
      * @return Boolean
      */
-     public boolean isPlaying()
+     public java.lang.Boolean isPlaying()
      {
-          boolean bFinish = false;
+          java.lang.Boolean bFinish = false;
 
             for(int i=0;i < fantasmitas.size() ;i++)
             {

@@ -10,7 +10,7 @@ import java.awt.Graphics;
  */
 public class CPacman extends CGameObjects implements InterfaceGame {
     
-    private int     iDireccion;
+    private java.lang.Integer     iDireccion;
     private boolean isOpen=true;
     
     /**

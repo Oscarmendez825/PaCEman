@@ -21,7 +21,7 @@ import java.util.Arrays;
  */
 public class ClientObserver implements Runnable{
     private Socket port;
-    private int genport = 8080;
+    private java.lang.Integer genport = 8080;
     private InputStreamReader inputStreamReader;
     private DataOutputStream dataout;
     private BufferedReader bufferedReader;
@@ -128,7 +128,7 @@ public class ClientObserver implements Runnable{
      * @param valores:String[]
      */
     private void moverFantasma(String[] valores) {
-        int posicion = Integer.parseInt(valores[2]);
+        java.lang.Integer posicion = Integer.parseInt(valores[2]);
         switch(valores[1]){
         case "1":
             tablero.fantasmitas.get(posicion).setDireccion(1);
@@ -150,8 +150,8 @@ public class ClientObserver implements Runnable{
      * @param propiedades:String[]
      */
     private void agregarFantasma(String[] propiedades) {
-        int i = Integer.parseInt(propiedades[2]);
-        int j = Integer.parseInt(propiedades[3]);
+        java.lang.Integer i = Integer.parseInt(propiedades[2]);
+        java.lang.Integer j = Integer.parseInt(propiedades[3]);
         switch(propiedades[1]){
             case "rojo":
                 CFantasma fantasma = new CFantasma(Color.RED, i*25, j*25);
@@ -180,12 +180,12 @@ public class ClientObserver implements Runnable{
         }
     }
     /**
-     * Agrega uns fruta en la interfaz del observador
+     * Agrega uns fruta en la java.lang.Integererfaz del observador
      * @param propiedades:String[]
      */
     private void genFrutas(String[] cadena) {
-        int i = Integer.parseInt(cadena[2]);
-        int j = Integer.parseInt(cadena[3]);
+        java.lang.Integer i = Integer.parseInt(cadena[2]);
+        java.lang.Integer j = Integer.parseInt(cadena[3]);
         switch(cadena[1]){
             case "Cereza":
                 CFruta cereza = new CFruta(Color.RED, j*25, i*25);
@@ -210,8 +210,8 @@ public class ClientObserver implements Runnable{
      * @param propiedades:String[]
      */
     private void agregarPastila(String[] cadena) {
-       int i = Integer.parseInt(cadena[1]);
-       int j = Integer.parseInt(cadena[2]);
+       java.lang.Integer i = Integer.parseInt(cadena[1]);
+       java.lang.Integer j = Integer.parseInt(cadena[2]);
        CPastilla pastilla = new CPastilla(j*25,i*25);
        tablero.pastillas.add(pastilla);
        tablero.getiMatrizObj()[i][j] = 6;
