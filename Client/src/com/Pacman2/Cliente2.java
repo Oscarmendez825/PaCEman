@@ -188,24 +188,27 @@ public class Cliente2 implements Runnable{
         String datos = "";
         switch(cadena[1]){
             case "Cereza":
-               tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
+                CFruta cereza = new CFruta(Color.RED, j*25, i*25);
+                tablero.frutas.add(cereza);
                 tablero.getiMatrizObj()[i][j] = 6;
                 datos = "FObservador,Cereza,"+i+","+j;
                 mandarMensaje(datos);
                 break;
 
             case "Limon":
-                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.GREEN,j*25,i*25));
+                CFruta limon = new CFruta(Color.GREEN,j*25,i*25);
+                tablero.frutas.add(limon);
                 tablero.getiMatrizObj()[i][j] = 6;
                 datos = "FObservador,Limon,"+i+","+j;
                 mandarMensaje(datos);
                 break;
             case "Naranja":
-                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.ORANGE,j*25,i*25));
+                CFruta naranja = new CFruta(Color.ORANGE,j*25,i*25);
+                tablero.frutas.add(naranja);
                 tablero.getiMatrizObj()[i][j] = 6;
                 datos = "FObservador,Naranja,"+i+","+j;
                 mandarMensaje(datos);
-                break;   
+                break;    
          }
          
     }
@@ -219,7 +222,8 @@ public class Cliente2 implements Runnable{
             i = getRandom(22);
             j = getRandom(22);
         }
-        tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
+        CPastilla pastilla = new CPastilla(j*25,i*25);
+        tablero.pastillas.add(pastilla);
         tablero.getiMatrizObj()[i][j] = 6;
         String datos = "";
         datos = "GenPastilla,"+i+","+j;

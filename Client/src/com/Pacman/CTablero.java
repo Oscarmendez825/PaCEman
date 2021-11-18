@@ -22,16 +22,16 @@ public  ArrayList <CBomba>    bombas;
 public  ArrayList <CMoneda>   coins; 
 public  ArrayList <CFantasma> fantasmitas;
 public  boolean isBomba = false;
-private int nMuros = 0;
-private int nGhost = 0;
-private int nCoins = 0;
-private int nPills = 0;
-private int nFruits = 0;
+private java.lang.Integer nMuros = 0;
+private java.lang.Integer nGhost = 0;
+private java.lang.Integer nCoins = 0;
+private java.lang.Integer nPills = 0;
+private java.lang.Integer nFruits = 0;
 public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
-private static int puntaje = 0;
-private static boolean isPower = false;
-private static int  vidas = 3;
+private static java.lang.Integer puntaje = 0;
+private static java.lang.Boolean isPower = false;
+private static java.lang.Integer  vidas = 3;
 private int mTemporal[][];
  
 //Creacion del tablero del juego
