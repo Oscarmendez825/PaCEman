@@ -264,7 +264,7 @@ public class CTablero2 implements InterfaceGame{
                       }
                       else{
 
-                          vidas --;
+                          enviarDatos("PierdeVida");
 
                       }
 

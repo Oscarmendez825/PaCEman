@@ -258,7 +258,7 @@ private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                       }
                       else{
 
-                          vidas --;
+                          enviarDatos("PierdeVida");
 
                       }
 
