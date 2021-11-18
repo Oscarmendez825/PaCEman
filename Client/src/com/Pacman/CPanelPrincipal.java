@@ -39,25 +39,20 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
         iCont = 0; 
         hilo.start();
      }
-     
      /**
       * Pausa el hilo
       */
-     
      public void pausar()
      {
         hilo.suspend();
      }
-    
      /**
       * Continua con el hilo
       */
-     
      public void continuar()
      {
         hilo.resume();
      }
-    
      /**
       * Detiene el hilo
       */
@@ -65,17 +60,15 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     {
         hilo.stop();
     }
-    
     /**
      * Metodo que corre los metodos del juego
      */
-    
     @Override
     public void run() 
     {
       try
-      { 
-        //Se definen las direcciones iniciales
+      {
+          //Se definen las direcciones iniciales
           tablero.setRandomDirectionGhosts();
           tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
@@ -115,10 +108,11 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
              repaint();
              iCont++;
          }
-         //Mensaje de ganador
+         //Mensaje de pasra de nivel
           if( tablero.esGanador() && !tablero.isPlaying())
           {
-               JOptionPane.showMessageDialog(this, "! Felicidades ganaste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(this, "Pasaste de Nivel!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               tablero.repintar();
           }
           //Mensaje de perdedor
           else{
@@ -136,15 +130,14 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
      * Metodo para pintar los elementos del juego
      * @param g : Graphics
      */
-    
     @Override
      public void paintComponent(Graphics g)
      {
-        //fondo del juego
+//         fondo del juego
          g.setColor(Color.black);
          g.fillRect(0, 0, getWidth(), getHeight());
          
-
+//         Se pintan los elementos
         for(int i = 0; i < tablero.fantasmitas.size(); i++) 
         {
             tablero.fantasmitas.get(i).paintElements(g);
@@ -216,7 +209,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
                              System.exit(1); 
                              break;  
             case KeyEvent.VK_X: 
-
+                // Aqui le cambie
            
                    if( tablero.bombas.size()<3)
                    {

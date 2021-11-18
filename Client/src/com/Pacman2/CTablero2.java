@@ -39,6 +39,7 @@ public class CTablero2 implements InterfaceGame{
     private static int puntaje = 0;
     private static boolean isPower = false;
     private static int  vidas = 3;
+    private int mTemporal[][];
     
     //Creacion del tablero del juego
     private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -71,7 +72,6 @@ public class CTablero2 implements InterfaceGame{
   * Constructor de la clase tablero2
   * Se definene los arrays de los elementos del juego
   */
-    
  public CTablero2()
  {
     client = new Cliente2(this);
@@ -84,55 +84,11 @@ public class CTablero2 implements InterfaceGame{
     fantasmitas = new ArrayList<>();
     pastillas = new ArrayList<>();
     frutas = new ArrayList<>();
+    mTemporal = iMatrizObj;
+    pintarMapa(iMatrizObj);
+
     
-
-     // Se agregan los elementos de acuerdo a las posiciones de la matriz
-   
-    for(int i=0; i < 23; i++)
-    {
-        for(int j=0; j < 23; j++)
-        {
-           switch(iMatrizObj[i][j])
-           {
-               case 1:
-            //Es un muro    
-                   cuadritos.add(nMuros,new CMuro(j*25,i*25) );
-                   nMuros++;
-                   break;
-               case 2:
-            //Es un fantasma    
-                    fantasmitas.add(nGhost,new CFantasma( this.getRandomColor(), j*25, i*25));
-                    nGhost++;
-                   break;
-               case 3:
-            //Es pacman
-                     Pacman.setX(j*25);
-                     Pacman.setY(i*25);
-                     Pacman.setDireccion( IZQ );
-                   break;
-               case 4:
-//                   Es moneda
-                     coins.add(nCoins,new CMoneda(j*25,i*25));
-                     nCoins++;
-                   break;
-                   
-               case 5:
-//                  Es pastilla
-                   pastillas.add(nPills, new CPastilla(j*25,i*25));
-                   nPills++;
-                   break;
-                   
-                case 6:
-//                  Es Fruta
-                   frutas.add(nFruits, new CFruta(Color.RED,j*25,i*25));
-                   nFruits++;
-                   break;
-           }
-        }
-    }
-
  }
-  
   /**
   * Brinda un color para los fantasmas
   * @return Color
@@ -163,18 +119,16 @@ public class CTablero2 implements InterfaceGame{
         }
          return c;
     }
-    
       /**
      * Brinda el valor de la posicion de la matriz
      * @param iFila: Integer
      * @param iCol: Integer
      * @return Integer
-     */  
+     */ 
     public int getObject(int iFila, int iCol)
     {
       return  iMatrizObj [iFila][iCol];   
     }
-   
     /**
     * Establece el objeto en la matriz
     * @param obj: Integer
@@ -186,7 +140,6 @@ public class CTablero2 implements InterfaceGame{
     {
         iMatrizObj [iFila][iCol] = obj; 
     }
- 
     /**
      * Metodo para mover al pacman en la matriz
      * Envia los datos de la direccion al servidor
@@ -199,7 +152,6 @@ public class CTablero2 implements InterfaceGame{
       String direccionPacman = "PacmanDireccion,"+Pacman.getDireccion();
       enviarDatos(direccionPacman);
     }
-    
     /**
      * Metodo para mover a los fantasmas en la matriz
      * @param iPos : Integer
@@ -217,7 +169,7 @@ public class CTablero2 implements InterfaceGame{
     /**
      *Metodo para mover fantasmas las posiciones necesarias y cambiar la posicion 
      * @param iTiempo : Integer
-     */ 
+     */
     public void moverFantasmas(int iTiempo)
     {
             for(int i = 0; i < fantasmitas.size(); i++)
@@ -290,7 +242,6 @@ public class CTablero2 implements InterfaceGame{
                     }  
             }    
     }
-    
     /**
      * Valida si el jugador no ha muerto
      * @return Boolean
@@ -324,7 +275,6 @@ public class CTablero2 implements InterfaceGame{
 
           return bFinish;
      }
-
     /**
      * Establece una direccion random para los fantasmas
      */
@@ -338,7 +288,7 @@ public class CTablero2 implements InterfaceGame{
       /**
      * Valida si el jugador es ganador
      * @return Boolean
-     */    
+     */        
     public boolean esGanador()
     {  
 //        si se acaban las monedas ganas
@@ -349,10 +299,9 @@ public class CTablero2 implements InterfaceGame{
         return coins.isEmpty();
     } 
 
-
      /**
      * Metodo para comer monedas
-     */   
+     */
     public void checkCoins()
     {
        for(int i=0; i < coins.size() ;i++)
@@ -364,8 +313,7 @@ public class CTablero2 implements InterfaceGame{
             }
        } 
     }
-    
-   /**
+     /**
      * Metodo para comer pastillas
      */
     public void checkPastillas()
@@ -379,8 +327,7 @@ public class CTablero2 implements InterfaceGame{
             }
        } 
     }
-
-        /**
+    /**
      * Metodo para comer frutas
      */
    public void checkFrutas()
@@ -410,13 +357,13 @@ public class CTablero2 implements InterfaceGame{
     /**
      * Brinda una direccion random
      * @return Integer
-     */ 
+     */
     public int getRandomDirection()
     {
          Random rnd = new Random();
          return (rnd.nextInt(4)+1);
     }
-
+    
     /**
  * Metodo para mover elemento
  * @param iEstado : Integer
@@ -424,7 +371,6 @@ public class CTablero2 implements InterfaceGame{
     @Override
     public void moverElemento(int iEstado) {
     }
-
     /**
      * Brinda la posicion de matriz
      * @return Integer
@@ -433,10 +379,6 @@ public class CTablero2 implements InterfaceGame{
         return iMatrizObj;
     }
 
-    /**
-     * Establece el dato en la matriz por posicion
-     * @param iMatrizObj : Integer
-     */
     public void setiMatrizObj(int[][] iMatrizObj) {
         this.iMatrizObj = iMatrizObj;
     }
@@ -564,7 +506,64 @@ public class CTablero2 implements InterfaceGame{
         mensaje = data.trim();
         client.mandarMensaje(mensaje);
     }
-
+    
+/**
+ * Metodo para pintar el mapa de acuerdo a la matriz creada
+ * @param iMatrizObj 
+ */
+        private void pintarMapa(int[][] iMatrizObj) {
+        for(int i=0; i < 23; i++)
+    {
+        for(int j=0; j < 23; j++)
+        {
+           switch(iMatrizObj[i][j])
+           {
+               case 1:
+//                   Es muro
+                   cuadritos.add(nMuros,new CMuro(j*25,i*25) );
+                   nMuros++;
+                   break;
+               case 2:
+//                   Es un ghost
+                    fantasmitas.add(nGhost,new CFantasma( this.getRandomColor(), j*25, i*25));
+                    nGhost++;
+                   break;
+               case 3:
+//                   Es pacman
+                     Pacman.setX(j*25);
+                     Pacman.setY(i*25);
+                     Pacman.setDireccion( IZQ );
+                   break;
+               case 4:
+//                   Es moneda
+                     coins.add(nCoins,new CMoneda(j*25,i*25));
+                     nCoins++;
+                   break;
+                   
+               case 5:
+//                  Es pastilla
+                   pastillas.add(nPills, new CPastilla(j*25,i*25));
+                   nPills++;
+                   break;
+                   
+                case 6:
+//                  Es Fruta
+                   frutas.add(nFruits, new CFruta(Color.GREEN,j*25,i*25));
+                   nFruits++;
+                   break;
+           }
+        }
     }
+    }
+        public void repintar(){
+           iMatrizObj = mTemporal;
+           pintarMapa(iMatrizObj);
+        }
+    
+    
+    
+    }
+
+
 
 

@@ -36,7 +36,8 @@ private int nPills = 0;
 private int nFruits = 0;
 public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
-
+private int mTemporal[][];
+ 
  //Creacion del tablero del juego
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -80,54 +81,12 @@ public ArrayList <CFruta>     frutas;
     fantasmitas = new ArrayList<>();
     pastillas = new ArrayList<>();
     frutas = new ArrayList<>();
-    
+    mTemporal = iMatrizObj;
+    pintarMapa(iMatrizObj);
 
-    // Se agregan los elementos de acuerdo a las posiciones de la matriz
-    for(int i=0; i < 23; i++)
-    {
-        for(int j=0; j < 23; j++)
-        {
-           switch(iMatrizObj[i][j])
-           {
-               case 1:
-//                   Es muro
-                   cuadritos.add(nMuros,new CMuro(j*25,i*25) );
-                   nMuros++;
-                   break;
-               case 2:
-//                   Es un ghost
-                    fantasmitas.add(nGhost,new CFantasma( this.getRandomColor(), j*25, i*25));
-                    nGhost++;
-                   break;
-               case 3:
-//                   Es pacman
-                     Pacman.setX(j*25);
-                     Pacman.setY(i*25);
-                     Pacman.setDireccion( IZQ );
-                   break;
-               case 4:
-//                   Es moneda
-                     coins.add(nCoins,new CMoneda(j*25,i*25));
-                     nCoins++;
-                   break;
-                   
-               case 5:
-//                  Es pastilla
-                   pastillas.add(nPills, new CPastilla(j*25,i*25));
-                   nPills++;
-                   break;
-                   
-                case 6:
-//                  Es Fruta
-                   frutas.add(nFruits, new CFruta(Color.RED,j*25,i*25));
-                   nFruits++;
-                   break;
-           }
-        }
-    }
 
  }
-  
+ 
    /**
   * Brinda un color para los fantasmas
   * @return Color
@@ -164,7 +123,7 @@ public ArrayList <CFruta>     frutas;
      * @param iFila: Integer
      * @param iCol: Integer
      * @return Integer
-     */ 
+     */
     public int getObject(int iFila, int iCol)
     {
       return  iMatrizObj [iFila][iCol];   
@@ -180,7 +139,6 @@ public ArrayList <CFruta>     frutas;
     {
         iMatrizObj [iFila][iCol] = obj; 
     }
-    
     /**
      * Metodo para mover al pacman en la matriz
      * Envia los datos de la direccion al servidor
@@ -281,7 +239,6 @@ public ArrayList <CFruta>     frutas;
                     }  
             }    
     }
-    
     /**
      * Valida si el jugador no ha muerto
      * @return Boolean
@@ -301,7 +258,6 @@ public ArrayList <CFruta>     frutas;
 
           return bFinish;
      }
-     
      /**
      * Establece una direccion random para los fantasmas
      */
@@ -315,7 +271,7 @@ public ArrayList <CFruta>     frutas;
      /**
      * Valida si el jugador es ganador
      * @return Boolean
-     */       
+     */        
     public boolean esGanador()
     {  
 //        si se acaban las monedas ganas
@@ -340,11 +296,9 @@ public ArrayList <CFruta>     frutas;
             }
        } 
     }
-    
-    /**
+     /**
      * Metodo para comer pastillas
      */
-    
     public void checkPastillas()
     {
        for(int i=0; i < pastillas.size() ;i++)
@@ -356,7 +310,6 @@ public ArrayList <CFruta>     frutas;
             }
        } 
     }
-    
     /**
      * Metodo para comer frutas
      */
@@ -381,22 +334,22 @@ public ArrayList <CFruta>     frutas;
          Random rnd = new Random();
          return (rnd.nextInt(4)+1);
     }
-
-     /**
+/**
  * Metodo para mover elemento
  * @param iEstado : Integer
  */
     @Override
     public void moverElemento(int iEstado) {
     }
-
+    
+/**
+ * 
+ * @return 
+ */
     public int[][] getiMatrizObj() {
         return iMatrizObj;
     }
-    /**
-     * Brinda la posicion de matriz
-     * @return Integer
-     */ 
+
     public void setiMatrizObj(int[][] iMatrizObj) {
         this.iMatrizObj = iMatrizObj;
     }
@@ -486,5 +439,57 @@ public ArrayList <CFruta>     frutas;
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
+    /**
+     * Metodo para pintar el mapa tras pasar de nivel
+     * @param iMatrizObj 
+     */
     
+        private void pintarMapa(int[][] iMatrizObj) {
+        for(int i=0; i < 23; i++)
+    {
+        for(int j=0; j < 23; j++)
+        {
+           switch(iMatrizObj[i][j])
+           {
+               case 1:
+//                   Es muro
+                   cuadritos.add(nMuros,new CMuro(j*25,i*25) );
+                   nMuros++;
+                   break;
+               case 2:
+//                   Es un ghost
+                    fantasmitas.add(nGhost,new CFantasma( this.getRandomColor(), j*25, i*25));
+                    nGhost++;
+                   break;
+               case 3:
+//                   Es pacman
+                     Pacman.setX(j*25);
+                     Pacman.setY(i*25);
+                     Pacman.setDireccion( IZQ );
+                   break;
+               case 4:
+//                   Es moneda
+                     coins.add(nCoins,new CMoneda(j*25,i*25));
+                     nCoins++;
+                   break;
+                   
+               case 5:
+//                  Es pastilla
+                   pastillas.add(nPills, new CPastilla(j*25,i*25));
+                   nPills++;
+                   break;
+                   
+                case 6:
+//                  Es Fruta
+                   frutas.add(nFruits, new CFruta(Color.GREEN,j*25,i*25));
+                   nFruits++;
+                   break;
+           }
+        }
+    }
+    }
+    public void repintar(){
+       iMatrizObj = mTemporal;
+       pintarMapa(iMatrizObj);
+    }
 }

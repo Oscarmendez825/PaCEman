@@ -109,10 +109,14 @@ public class Cliente2 implements Runnable{
             case "Puntuacion":
                  int puntaje = Integer.parseInt(cadena[1]);
                  tablero.setPuntaje(puntaje);
+                 Ventana2.getPuntos().setText(cadena[1]);
+                 mandarMensaje("JP,"+cadena[1]);
                  break;
              case "Vida":
                  int vidas = Integer.parseInt(cadena[1]);
                  CTablero2.setVidas(vidas);
+                 Ventana2.getVidas().setText(cadena[1]);
+                 mandarMensaje("JV,"+cadena[1]);
                  break;
          }
      }

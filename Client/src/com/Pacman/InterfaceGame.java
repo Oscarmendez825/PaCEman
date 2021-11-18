@@ -6,7 +6,6 @@ package com.Pacman;
  * @author  Daniela Brenes
  * @author  Oscar Mendez
  */
-
 public interface InterfaceGame {
     int PAB=1;
     int PAR=2;
