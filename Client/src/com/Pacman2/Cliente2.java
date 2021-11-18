@@ -23,7 +23,7 @@ import java.util.Random;
 public class Cliente2 implements Runnable{
     
     private Socket port;
-    private int genport = 8080;
+    private java.lang.Integer genport = 8080;
     private DataOutputStream dataout;
     private String message = "";
     private CTablero2 tablero;
@@ -107,13 +107,13 @@ public class Cliente2 implements Runnable{
                  addPastilla();
                  break;
             case "Puntuacion":
-                 int puntaje = Integer.parseInt(cadena[1]);
+                 java.lang.Integer puntaje = Integer.parseInt(cadena[1]);
                  tablero.setPuntaje(puntaje);
                  Ventana2.getPuntos().setText(cadena[1]);
                  mandarMensaje("JP,"+cadena[1]);
                  break;
              case "Vida":
-                 int vidas = Integer.parseInt(cadena[1]);
+                 java.lang.Integer vidas = Integer.parseInt(cadena[1]);
                  CTablero2.setVidas(vidas);
                  Ventana2.getVidas().setText(cadena[1]);
                  mandarMensaje("JV,"+cadena[1]);
@@ -125,8 +125,8 @@ public class Cliente2 implements Runnable{
      * @param color:String
      */         
     private void addFantasma(String color){
-        int i = getRandom(22);
-        int j = getRandom(22);
+        java.lang.Integer i = getRandom(22);
+        java.lang.Integer j = getRandom(22);
         while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
             i = getRandom(22);
             j = getRandom(22);
@@ -179,8 +179,8 @@ public class Cliente2 implements Runnable{
      * @param cadena:String
      */    
     private void addFruta(String[] cadena){
-        int i = getRandom(22);
-        int j = getRandom(22);
+        java.lang.Integer i = getRandom(22);
+        java.lang.Integer j = getRandom(22);
         while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
             i = getRandom(22);
             j = getRandom(22);
@@ -216,8 +216,8 @@ public class Cliente2 implements Runnable{
      * Agrega una pastilla en la interfaz del jugador
      */
     private void addPastilla(){
-        int i = getRandom(22);
-        int j = getRandom(22);
+        java.lang.Integer i = getRandom(22);
+        java.lang.Integer j = getRandom(22);
         while(tablero.getiMatrizObj()[i][j] == 1 || tablero.getiMatrizObj()[i][j] == 2 || tablero.getiMatrizObj()[i][j] == 3 || tablero.getiMatrizObj()[i][j] == 5 || tablero.getiMatrizObj()[i][j] == 6){
             i = getRandom(22);
             j = getRandom(22);

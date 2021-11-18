@@ -19,9 +19,9 @@ import javax.swing.JPanel;
  */
 public class PanelObservador extends JPanel implements Runnable,KeyListener,InterfaceGame{
     private TableroObservador  tablero = new TableroObservador();
-    public boolean    isPause = false;
+    public java.lang.Boolean    isPause = false;
     private Thread    hilo;
-    static int       iCont;
+    static java.lang.Integer       iCont;
     
      /**
      * Constructor de la clase PanelObsrvador

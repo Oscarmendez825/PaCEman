@@ -18,9 +18,9 @@ import javax.swing.JPanel;
  */
 public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,InterfaceGame{
     private CTablero2  tablero = new CTablero2();
-    public boolean    isPause = false;
+    public java.lang.Boolean    isPause = false;
     private Thread    hilo;
-    static int       iCont;
+    static java.lang.Integer       iCont;
     
     /**
      * Constructor de la clase PanelPrincipal

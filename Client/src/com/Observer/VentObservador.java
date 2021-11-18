@@ -24,7 +24,7 @@ public class VentObservador extends JFrame{
     public PanelObservador PanelMain; 
     private JPanel panel;
     private JButton JBInicio;
-    private boolean b_Iniciado = true ;
+    private java.lang.Boolean b_Iniciado = true ;
     private static JLabel puntos;
     private JLabel textP;
     private static JLabel vidas;
