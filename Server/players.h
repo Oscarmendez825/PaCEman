@@ -12,5 +12,7 @@ int modifyLives(int player, int modify);
 
 int addScore(int player, int add);
 
+int getLives(int player);
+
 
 #endif

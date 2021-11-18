@@ -137,21 +137,53 @@ void handleMessage(char* msg) {
 
     // Se analiza el resto del mensaje (otros tokens)
 
+    char* msgclient;
+
     // Se agregan 10 puntos al comer una moneda
     if (strcmp(array[1], "ComeMoneda\n") == 0)
     {
         int new_score = addScore(player, 10);
+
+        // Enviar mensaje de actualizacion para el cliente
+        char score_str[256];
+        sprintf(score_str, "%d", new_score);
+        msgclient = strcat(array[0], ",Puntuacion,");
+        msgclient = strcat(msgclient, score_str);
+        msgclient = strcat(msgclient, "\n");
+
+        send_to_all(msgclient);
+
+        // Enviar actualizacion de vidas
+        // Se obtienen las vidas por si el jugador alcanzo 10mil puntos
+        char* new_msgclient;
+        int lives_update = getLives(player);
+
+        char new_lives_str[256];
+        sprintf(new_lives_str, "%d", lives_update);
+        new_msgclient = strcat(array[0], ",Vida,");
+        new_msgclient = strcat(new_msgclient, new_lives_str);
+        new_msgclient = strcat(msgclient, "\n");
+
+        send_to_all(new_msgclient);
     }
 
-    // Se disminuye una vida al jugador
-    else if (strcmp(array[1], "PierdeVida") == 0)
+    // Se disminuye una vida al jugador al chocar con fantasmas
+    else if (strcmp(array[1], "PierdeVida\n") == 0)
     {
-        printf("pierde vida\n");
-
         int new_lives = modifyLives(player, -1); 
+
+        // Enviar mensaje de actualizacion para el cliente
+        char lives_str[256];
+        sprintf(lives_str, "%d", new_lives);
+        msgclient = strcat(array[0], ",Vida,");
+        msgclient = strcat(msgclient, lives_str);
+        msgclient = strcat(msgclient, "\n");
+
+        send_to_all(msgclient);
+
     }
 
-    // Se agregan miles de puntos al comer naranjas
+    // Se agregan miles de puntos al comer frutas
     else if (strcmp(array[1], "ComeFruta") == 0)
     {
         int new_score;
@@ -167,6 +199,39 @@ void handleMessage(char* msg) {
         {
             new_score = addScore(player, 6000);
         }
+
+        // Enviar mensaje de actualizacion para el cliente
+        char score_str[256];
+        sprintf(score_str, "%d", new_score);
+        msgclient = strcat(array[0], ",Puntuacion,");
+        msgclient = strcat(msgclient, score_str);
+        msgclient = strcat(msgclient, "\n");
+
+        send_to_all(msgclient);
+
+        // Enviar actualizacion de vidas
+        // Se obtienen las vidas por si el jugador alcanzo 10mil puntos
+        char* new_msgclient;
+        int lives_update = getLives(player);
+
+        char* array0_copy;
+        if (player == 1)
+        {
+            array0_copy = "Cliente1";
+        }
+        else {
+            array0_copy = "Cliente2";
+        }
+
+        /*char new_lives_str[256];
+        sprintf(new_lives_str, "%d", lives_update);
+        new_msgclient = strcat(array0_copy, ",Vida,");
+        new_msgclient = strcat(new_msgclient, new_lives_str);
+        new_msgclient = strcat(msgclient, "\n");*/
+
+        //printf("%s", new_msgclient);
+        //send_to_all(new_msgclient);
+
     }
 }
 

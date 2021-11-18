@@ -1,4 +1,5 @@
 #include "players.h"
+#include <stdio.h>
 
 // Creacion de jugadores
 struct Player p1 = {0, 3}; 
@@ -6,10 +7,11 @@ struct Player p2 = {0, 3};
 
 int addScore(int player, int add) {
     if (player == 1) {
-        if (p1.score < 10000 && p1.score + add >= 10000) {
+        if (p1.score < 10000 && (p1.score + add) >= 10000) {
             modifyLives(1, 1);
         }
         p1.score += add;
+
         return p1.score;
     }
     else {
@@ -34,3 +36,17 @@ int modifyLives(int player, int modify) {
     }
 }
 
+int getLives(int player) {
+    int lives;
+
+    if (player == 1)
+    {
+        lives = p1.lives;
+    }
+    else
+    {
+        lives = p2.lives;
+    }
+    
+    return lives;
+}
