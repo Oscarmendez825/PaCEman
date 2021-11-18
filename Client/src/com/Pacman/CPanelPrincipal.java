@@ -18,9 +18,9 @@ import javax.swing.JPanel;
 public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,InterfaceGame
 {
     private CTablero  tablero = new CTablero();
-    public boolean    isPause = false;
+    public java.lang.Boolean    isPause = false;
     private Thread    hilo;
-    static int       iCont;
+    static java.lang.Integer       iCont;
     
     /**
      * Constructor de la clase PanelPrincipal
@@ -183,7 +183,7 @@ public class CPanelPrincipal extends JPanel implements Runnable,KeyListener,Inte
     @Override
     public void keyPressed(KeyEvent arg0) 
     {
-        int key = arg0.getKeyCode();
+        java.lang.Integer key = arg0.getKeyCode();
         
         switch(key)
         {

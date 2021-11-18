@@ -10,8 +10,8 @@ import java.awt.Graphics;
  * @author  Oscar Mendez
  */
 public abstract class CGameObjects {
-    int iPosX;
-    int iPosY;
+    java.lang.Integer iPosX;
+    java.lang.Integer iPosY;
     
     /**
      * Metodo para formar los objetos

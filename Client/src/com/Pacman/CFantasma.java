@@ -13,7 +13,7 @@ import java.awt.Graphics;
 public class CFantasma extends CGameObjects implements InterfaceGame{
 
     private Color cColor;
-    private int iDireccion;
+    private java.lang.Integer iDireccion;
     
      /**
      * Constructor de la clase Fantasma

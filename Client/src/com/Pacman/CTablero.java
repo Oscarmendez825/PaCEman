@@ -21,7 +21,7 @@ public  ArrayList <CMuro>     cuadritos;
 public  ArrayList <CBomba>    bombas; 
 public  ArrayList <CMoneda>   coins; 
 public  ArrayList <CFantasma> fantasmitas;
-public  boolean isBomba = false;
+public  java.lang.Boolean isBomba = false;
 private java.lang.Integer nMuros = 0;
 private java.lang.Integer nGhost = 0;
 private java.lang.Integer nCoins = 0;
