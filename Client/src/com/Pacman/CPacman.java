@@ -37,31 +37,25 @@ public class CPacman extends CGameObjects implements InterfaceGame {
      * Establece la posicion en X de Pacman
      * @param PosX : Integer
      */
-    
     public void setX(int PosX)
     {
       super.iPosX = PosX;
     }
-    
     /**
      * Establece la posicion en Y de Pacman
      * @param PosY 
      */
-    
     public void setY(int PosY){
       super.iPosY = PosY;
     }
-    
     /**
      * Brinda la posicion en X de Pacman
      * @return  Integer
      */
-    
     public int getX()
     {
         return (iPosX/25);
     }
-    
     /**
      * Brinda la posicion en Y de Pacman
      * @return Integer
@@ -70,7 +64,6 @@ public class CPacman extends CGameObjects implements InterfaceGame {
     {
         return (iPosY/25);
     }
-    
     /**
      * Establece la direccion de Pacman
      * @param iDir : Integer
@@ -79,7 +72,6 @@ public class CPacman extends CGameObjects implements InterfaceGame {
     {
         iDireccion=iDir;
     }
-    
     /**
      * Brinda la direccion de Pacman
      * @return Integer
@@ -88,7 +80,6 @@ public class CPacman extends CGameObjects implements InterfaceGame {
     {
         return iDireccion;
     }
-    
     /**
      * Se pinta a Pacman a partir de figuras
      * @param g 
@@ -100,7 +91,7 @@ public class CPacman extends CGameObjects implements InterfaceGame {
      switch(iDireccion)
      {
          case DER: 
-             if(isOpen) //Se valida si tiene la boca abierta
+             if(isOpen)//Se valida si tiene la boca abierta
              {
                 g.setColor(Color.ORANGE); g.fillArc(iPosX, iPosY, 25, 25, 45, 275); isOpen=false;
              }

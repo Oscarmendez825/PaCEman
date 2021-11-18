@@ -1,4 +1,3 @@
-
 package com.Pacman2;
 
 import com.Pacman.CMuro;
@@ -23,64 +22,54 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
     private Thread    hilo;
     static int       iCont;
     
-     /**
+    /**
      * Constructor de la clase PanelPrincipal
      * En este se crea el hilo necesario para el juego
      */
-    
+       
     public CPanelPrincipal2()
      {
+    //    this.addKeyListener(this); //escuchador de las teclas
         hilo = new Thread(this);
         setFocusable(true);
      }
-    
     /**
       * Inicia el hilo
-      */ 
-    
+      */  
      public void iniciar()
      {
         iCont = 0; 
         hilo.start();
      }
-     
      /**
       * Pausa el hilo
-      */ 
-     
+      */
      public void pausar()
      {
         hilo.suspend();
      }
-     
       /**
       * Continua con el hilo
       */
-    
      public void continuar()
      {
         hilo.resume();
      }
-
       /**
       * Detiene el hilo
       */
-     
     public void detener()
     {
         hilo.stop();
     }
-    
     /**
      * Metodo que corre los metodos del juego
-     */  
-    
+     */ 
     @Override
     public void run() 
     {
       try
       {
-          //Se definen las direcciones iniciales
           tablero.setRandomDirectionGhosts();
           tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
@@ -120,12 +109,13 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
              repaint();
              iCont++;
          }
-         //Mensaje de ganador
+         //Mensaje de cambio de nivel
           if( tablero.esGanador() && !tablero.isPlaying())
           {
-               JOptionPane.showMessageDialog(this, "! Felicidades ganaste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(this, "Pasaste de Nivel!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               tablero.repintar();
           }
-         //Mensaje de perdedor
+          //Mensaje de perdedor
           else{
                JOptionPane.showMessageDialog(this, "! Perdiste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
           }
@@ -137,12 +127,10 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
       }
       
     }
-    
     /**
      * Metodo para pintar los elementos del juego
      * @param g : Graphics
-     */  
-    
+     */ 
     @Override
      public void paintComponent(Graphics g)
      {
@@ -189,12 +177,10 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
     {
         
     }
-
 /**
  * Eventos de teclas presionadas
  * @param arg0 : KeyEvent
  */
-    
     @Override
     public void keyPressed(KeyEvent arg0) 
     {

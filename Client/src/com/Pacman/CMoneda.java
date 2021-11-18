@@ -11,7 +11,7 @@ import java.awt.Graphics;
  */
 public class CMoneda extends CGameObjects{
 
-    /**
+     /**
      * Constructor de la clase Moneda
      * @param X: Integer
      * @param Y : Integer
@@ -31,12 +31,10 @@ public class CMoneda extends CGameObjects{
      * Establece la posicion en X de la moneda
      * @param PosX : Integer
      */
-    
     public void setX(int PosX)
     {
       super.iPosX = PosX;
     }
-    
     /**
      * Establece la posicion en Y de la moneda
      * @param PosY : Integer
@@ -44,7 +42,6 @@ public class CMoneda extends CGameObjects{
     public void setY(int PosY){
       super.iPosY = PosY;
     }
-    
     /**
      * Brinda la posicion en X de la moneda
      * @return Integer
@@ -53,25 +50,23 @@ public class CMoneda extends CGameObjects{
     {
         return (iPosX/25);
     }
-    
     /**
      * Brinda la posicion en Y de la moneda
      * @return Integer
      */
-    
     public int getY()
     {
         return (iPosY/25);
     }
-    
-    
-    /**
+     /**
      * Se pinta la moneda a partir de figuras
      * @param g 
      */
     @Override
     public void paintElements(Graphics g) {
-          
+       
+//      Un circulo color naranja dentro de uno amarillo
+        
         g.setColor(Color.white);
         g.fillOval(iPosX+3, iPosY+3, 6, 6);
     }

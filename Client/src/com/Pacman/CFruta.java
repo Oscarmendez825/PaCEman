@@ -18,8 +18,7 @@ public class CFruta extends CGameObjects{
      * @param cFondo: Color
      * @param X: Integer
      * @param Y: Integer
-     */
-    
+     */ 
    public CFruta(Color cFondo,int X, int Y){
         cColor = cFondo;
         super.iPosX = X;
@@ -40,16 +39,13 @@ public class CFruta extends CGameObjects{
     {
       super.iPosX = PosX;
     }
-    
     /**
      * Establece la posicion en Y de la fruta
      * @param PosY : Integer
      */
-    
     public void setY(int PosY){
       super.iPosY = PosY;
     }
-    
     /**
      * Brinda la posicion en X de la fruta
      * @return Integer
@@ -58,7 +54,6 @@ public class CFruta extends CGameObjects{
     {
         return (iPosX/25);
     }
-    
     /**
      * Brinda la posicion en Y de la fruta
      * @return Integer
@@ -75,14 +70,15 @@ public class CFruta extends CGameObjects{
 
     @Override
     public void paintElements(Graphics g) {
-        //Color de la fruta
         g.setColor(cColor);
-        //Forma de la fruta
+        
         g.fillOval(iPosX, iPosY, 15, 15);
         g.fillOval(iPosX+12, iPosY, 15, 15);
+        
+        
     }
 
-    /**
+     /**
      * Brinda el color de la fruta
      * @return Color
      */

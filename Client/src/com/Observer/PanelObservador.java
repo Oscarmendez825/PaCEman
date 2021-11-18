@@ -1,4 +1,3 @@
-
 package com.Observer;
 
 import com.Pacman.CMuro;
@@ -18,7 +17,6 @@ import javax.swing.JPanel;
  * @author  Daniela Brenes
  * @author  Oscar Mendez
  */
-
 public class PanelObservador extends JPanel implements Runnable,KeyListener,InterfaceGame{
     private TableroObservador  tablero = new TableroObservador();
     public boolean    isPause = false;
@@ -29,26 +27,22 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
      * Constructor de la clase PanelObsrvador
      * En este se crea el hilo necesario para el juego
      */
-    
      public PanelObservador()
      {
         hilo = new Thread(this);
         setFocusable(true);
      }
-
       /**
       * Inicia el hilo
-      */ 
+      */
      public void iniciar()
      {
         iCont = 0; 
         hilo.start();
      }
-     
-     /**
+    /**
       * Pausa el hilo
       */ 
-     
      public void pausar()
      {
         hilo.suspend();
@@ -56,31 +50,25 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
       /**
       * Continua con el hilo
       */
-     
      public void continuar()
      {
         hilo.resume();
      }
-    
       /**
       * Detiene el hilo
       */
-     
     public void detener()
     {
         hilo.stop();
     }
-
     /**
      * Metodo que corre los metodos del juego
      */ 
-    
     @Override
     public void run() 
     {
       try
       {
-          //Se definen las direcciones iniciales
           tablero.setRandomDirectionGhosts();
           tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
@@ -92,7 +80,7 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
           {
             iCont = 0;
           }
-          //Se cambian las direcciones del Pacman
+          
            switch(tablero.Pacman.getDireccion())
            {
                  case IZQ: 
@@ -121,12 +109,12 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
              repaint();
              iCont++;
          }
-         //Mensaje de ganador
+         
           if( tablero.esGanador() && !tablero.isPlaying())
           {
-               JOptionPane.showMessageDialog(this, "! Felicidades ganaste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(this, "Pasaste de Nivel!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               tablero.repintar();
           }
-          //Mensaje de perdedor
           else{
                JOptionPane.showMessageDialog(this, "! Perdiste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
           }
@@ -138,11 +126,7 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
       }
       
     }
-
-     /**
-     * Metodo para pintar los elementos del juego
-     * @param g : Graphics
-     */  
+    
     @Override
      public void paintComponent(Graphics g)
      {
