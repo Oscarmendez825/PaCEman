@@ -1,6 +1,9 @@
 #include "server.h"
-#include "/home/dani/Documents/GitHub/PaCEman/Server/variables.h"
+#include "variables.h"
+#include "players.h"
 
+int PORT = 8080;
+void handleMessage(char* msg);
 
 // Metodo que inicializa todo el servidor
 void init_server()
@@ -51,7 +54,7 @@ void run()
         puts("Conexion aceptada");
 
         // Thread para cada conexion especifica
-        if( pthread_create(&thread_id, NULL,  connection_handler, (void*) &client_sock) < 0)
+        if( pthread_create(&thread_id, NULL, connection_handler, (void*) &client_sock) < 0)
         {
             perror("No se pudo crear el thread ");
             return;
@@ -85,6 +88,13 @@ void *connection_handler(void *socket_desc)
     {
         // Mensajes devueltos a todos los clientes
         send_to_all(strcat(client_message, "\n"));
+
+        // Analizar mensaje
+        if (client_message != "")
+        {
+            handleMessage(client_message);
+        }
+        
         bzero(client_message, 256);
     }
 
@@ -96,6 +106,62 @@ void *connection_handler(void *socket_desc)
     else if (read_size == -1)
     {
         perror("recv failed");
+    }
+}
+
+// Analiza los mensajes entrantes del cliente
+void handleMessage(char* msg) {
+    char buf[256];
+    strcpy(buf, msg);
+    int i = 0;
+    char *p = strtok(buf, ",");
+    char *array[3];
+    int player = 1;
+
+    // Se crea un array con cada token del string (tokenizado con ,)
+    while (p != NULL)
+    {
+        array[i++] = p;
+        p = strtok(NULL, ",");
+    }
+
+    // Se verifica cual jugador envio el mensaje, con el primer token
+    if (strcmp(array[0], "Cliente1") == 0)
+    {   
+        player = 1;
+    }
+    else if (strcmp(array[0], "Cliente2") == 0)
+    {
+        player = 2;
+    }
+
+    // Se analiza el resto del mensaje (otros tokens)
+    if (strcmp(array[1], "ComeMoneda\n") == 0)
+    {
+        addScore(player, 10);
+    }
+    else if (strcmp(array[1], "PierdeVida") == 0)
+    {
+        modifyLives(player, -1); 
+    }
+    else if (strcmp(array[1], "ComeFruta") == 0)
+    {
+        if (strcmp(array[2], "Naranja"))
+        {
+            addScore(player, 4000);
+        }
+        else if (strcmp(array[2], "Limon"))
+        {
+            addScore(player, 5000);
+        }
+        else if (strcmp(array[2], "Cereza"))
+        {
+            addScore(player, 6000);
+        }
+    }
+    else {
+        printf("basura \n");
+
     }
 }
 
@@ -122,4 +188,3 @@ void set_client(int* sock)
 
     pthread_mutex_unlock(&locker);
 }
-

@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "/home/dani/Documents/GitHub/PaCEman/Server/server.h"
+#include "server.h"
+#include "players.h"
 
 void* run_server(void* h);
 

@@ -1,2 +1,2 @@
 server: server.c
-	gcc server.c main.c -o main -pthread
+	gcc server.c players.c main.c -o main -pthread
