@@ -11,8 +11,8 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <netinet/in.h>
-#include "/home/dani/Downloads/Servidor_PaceMan-master/server/client.h"
-#include "/home/dani/Downloads/Servidor_PaceMan-master/server/variables.h"
+#include "/home/dani/Documents/GitHub/PaCEman/Server/client.h"
+#include "/home/dani/Documents/GitHub/PaCEman/Server/variables.h"
 
 int socket_desc , client_sock , c;
 struct sockaddr_in server , client;
