@@ -10,6 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * Clase que crea la ventana del juego del cliente 1
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
+ */
 
 public class Ventana extends JFrame{
     
@@ -18,7 +24,9 @@ public class Ventana extends JFrame{
     private JButton JBInicio;
     private boolean b_Iniciado = false ;
     
-    
+   /**
+    * Constructor de la clase Ventana
+    */ 
     public Ventana()
     { 
         super("Pacman");
@@ -26,9 +34,11 @@ public class Ventana extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         
+        //Creacion del panel de la clase CPanelPrincipal
         PanelMain = new CPanelPrincipal();
         panel     = new JPanel();
         
+        //Creacion del boton iniciar
         JBInicio = new JButton("Iniciar");
        
        
@@ -38,18 +48,18 @@ public class Ventana extends JFrame{
 
             @Override
             public void focusGained(FocusEvent arg0) {
-//                JOptionPane.showMessageDialog(null, "Gane el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
 
             @Override
             public void focusLost(FocusEvent arg0) {
- //JOptionPane.showMessageDialog(null, "perdi el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         
     }
    
-    
+/**
+ * Se pintan los elementos necesarios en la ventana
+ */    
      public void PintarElementos()
      {           
        Container Content = getContentPane();
@@ -65,7 +75,6 @@ public class Ventana extends JFrame{
                   JBInicio.setText("Pausar");
                   PanelMain.iniciar();
                   JBInicio.setEnabled(false);
-                 // JBInicio.setEnabled(false);
                  
                   b_Iniciado = true;
                }

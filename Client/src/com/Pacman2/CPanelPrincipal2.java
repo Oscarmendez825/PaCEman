@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.Pacman2;
 
 import com.Pacman.CMuro;
@@ -15,8 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Oscar
+ * Clase que crea el panel principal del juego 2
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
  */
 public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,InterfaceGame{
     private CTablero2  tablero = new CTablero2();
@@ -24,39 +23,64 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
     private Thread    hilo;
     static int       iCont;
     
+     /**
+     * Constructor de la clase PanelPrincipal
+     * En este se crea el hilo necesario para el juego
+     */
+    
     public CPanelPrincipal2()
      {
-    //    this.addKeyListener(this); //escuchador de las teclas
         hilo = new Thread(this);
         setFocusable(true);
      }
-     
+    
+    /**
+      * Inicia el hilo
+      */ 
+    
      public void iniciar()
      {
         iCont = 0; 
         hilo.start();
      }
      
+     /**
+      * Pausa el hilo
+      */ 
+     
      public void pausar()
      {
         hilo.suspend();
      }
+     
+      /**
+      * Continua con el hilo
+      */
     
      public void continuar()
      {
         hilo.resume();
      }
-    
+
+      /**
+      * Detiene el hilo
+      */
+     
     public void detener()
     {
         hilo.stop();
     }
+    
+    /**
+     * Metodo que corre los metodos del juego
+     */  
     
     @Override
     public void run() 
     {
       try
       {
+          //Se definen las direcciones iniciales
           tablero.setRandomDirectionGhosts();
           tablero.Pacman.setDireccion(0);
          while( !tablero.isPlaying() && !tablero.esGanador())
@@ -68,7 +92,7 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
           {
             iCont = 0;
           }
-          
+          //Se cambian las direcciones del Pacman
            switch(tablero.Pacman.getDireccion())
            {
                  case IZQ: 
@@ -96,11 +120,12 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
              repaint();
              iCont++;
          }
-         
+         //Mensaje de ganador
           if( tablero.esGanador() && !tablero.isPlaying())
           {
                JOptionPane.showMessageDialog(this, "! Felicidades ganaste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
           }
+         //Mensaje de perdedor
           else{
                JOptionPane.showMessageDialog(this, "! Perdiste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
           }
@@ -113,10 +138,15 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
       
     }
     
+    /**
+     * Metodo para pintar los elementos del juego
+     * @param g : Graphics
+     */  
+    
     @Override
      public void paintComponent(Graphics g)
      {
-//         fondo blanco
+//         fondo 
          g.setColor(Color.black);
          g.fillRect(0, 0, getWidth(), getHeight());
          
@@ -160,6 +190,11 @@ public class CPanelPrincipal2 extends JPanel implements Runnable,KeyListener,Int
         
     }
 
+/**
+ * Eventos de teclas presionadas
+ * @param arg0 : KeyEvent
+ */
+    
     @Override
     public void keyPressed(KeyEvent arg0) 
     {

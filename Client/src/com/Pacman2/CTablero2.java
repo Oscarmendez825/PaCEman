@@ -40,6 +40,7 @@ public class CTablero2 implements InterfaceGame{
     private static boolean isPower = false;
     private static int  vidas = 3;
     
+    //Creacion del tablero del juego
     private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -66,7 +67,11 @@ public class CTablero2 implements InterfaceGame{
                                };
 
     
- 
+  /**
+  * Constructor de la clase tablero2
+  * Se definene los arrays de los elementos del juego
+  */
+    
  public CTablero2()
  {
     client = new Cliente2(this);
@@ -81,7 +86,8 @@ public class CTablero2 implements InterfaceGame{
     frutas = new ArrayList<>();
     
 
-    
+     // Se agregan los elementos de acuerdo a las posiciones de la matriz
+   
     for(int i=0; i < 23; i++)
     {
         for(int j=0; j < 23; j++)
@@ -89,17 +95,17 @@ public class CTablero2 implements InterfaceGame{
            switch(iMatrizObj[i][j])
            {
                case 1:
-//                   Es muro
+            //Es un muro    
                    cuadritos.add(nMuros,new CMuro(j*25,i*25) );
                    nMuros++;
                    break;
                case 2:
-//                   Es un ghost
+            //Es un fantasma    
                     fantasmitas.add(nGhost,new CFantasma( this.getRandomColor(), j*25, i*25));
                     nGhost++;
                    break;
                case 3:
-//                   Es pacman
+            //Es pacman
                      Pacman.setX(j*25);
                      Pacman.setY(i*25);
                      Pacman.setDireccion( IZQ );
@@ -127,6 +133,10 @@ public class CTablero2 implements InterfaceGame{
 
  }
   
+  /**
+  * Brinda un color para los fantasmas
+  * @return Color
+  */
     public Color getRandomColor()
     {
         Color c = Color.BLACK;
@@ -154,16 +164,33 @@ public class CTablero2 implements InterfaceGame{
          return c;
     }
     
+      /**
+     * Brinda el valor de la posicion de la matriz
+     * @param iFila: Integer
+     * @param iCol: Integer
+     * @return Integer
+     */  
     public int getObject(int iFila, int iCol)
     {
       return  iMatrizObj [iFila][iCol];   
     }
+   
+    /**
+    * Establece el objeto en la matriz
+    * @param obj: Integer
+    * @param iFila: Integer
+    * @param iCol : Integer
+    */ 
     
     public void setObject(int obj,int iFila, int iCol)
     {
         iMatrizObj [iFila][iCol] = obj; 
     }
-    
+ 
+    /**
+     * Metodo para mover al pacman en la matriz
+     * Envia los datos de la direccion al servidor
+     */
     public void moverPacman()
     {
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
@@ -173,6 +200,11 @@ public class CTablero2 implements InterfaceGame{
       enviarDatos(direccionPacman);
     }
     
+    /**
+     * Metodo para mover a los fantasmas en la matriz
+     * @param iPos : Integer
+     * Envia los datos de la direccion del fantasma al servidor
+     */
     private void moverGhost(int iPos)
     {
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
@@ -182,7 +214,10 @@ public class CTablero2 implements InterfaceGame{
       enviarDatos(direccionFantasma);
     }
     
-    
+    /**
+     *Metodo para mover fantasmas las posiciones necesarias y cambiar la posicion 
+     * @param iTiempo : Integer
+     */ 
     public void moverFantasmas(int iTiempo)
     {
             for(int i = 0; i < fantasmitas.size(); i++)
@@ -256,6 +291,10 @@ public class CTablero2 implements InterfaceGame{
             }    
     }
     
+    /**
+     * Valida si el jugador no ha muerto
+     * @return Boolean
+     */
     public boolean isPlaying()
      {
           boolean bFinish = false;
@@ -285,7 +324,10 @@ public class CTablero2 implements InterfaceGame{
 
           return bFinish;
      }
-     
+
+    /**
+     * Establece una direccion random para los fantasmas
+     */
     public void setRandomDirectionGhosts()
     {
       for(int i = 0;i <  fantasmitas.size() ; i++)
@@ -293,7 +335,10 @@ public class CTablero2 implements InterfaceGame{
         fantasmitas.get(i).setDireccion( this.getRandomDirection() );
       }
     }
-           
+      /**
+     * Valida si el jugador es ganador
+     * @return Boolean
+     */    
     public boolean esGanador()
     {  
 //        si se acaban las monedas ganas
@@ -304,7 +349,10 @@ public class CTablero2 implements InterfaceGame{
         return coins.isEmpty();
     } 
 
-    
+
+     /**
+     * Metodo para comer monedas
+     */   
     public void checkCoins()
     {
        for(int i=0; i < coins.size() ;i++)
@@ -316,6 +364,10 @@ public class CTablero2 implements InterfaceGame{
             }
        } 
     }
+    
+   /**
+     * Metodo para comer pastillas
+     */
     public void checkPastillas()
     {
        for(int i=0; i < pastillas.size() ;i++)
@@ -327,7 +379,10 @@ public class CTablero2 implements InterfaceGame{
             }
        } 
     }
-    
+
+        /**
+     * Metodo para comer frutas
+     */
    public void checkFrutas()
     {
        for(int i=0; i < frutas.size() ;i++)
@@ -352,21 +407,36 @@ public class CTablero2 implements InterfaceGame{
        } 
     }
     
-    
+    /**
+     * Brinda una direccion random
+     * @return Integer
+     */ 
     public int getRandomDirection()
     {
          Random rnd = new Random();
          return (rnd.nextInt(4)+1);
     }
 
+    /**
+ * Metodo para mover elemento
+ * @param iEstado : Integer
+ */ 
     @Override
     public void moverElemento(int iEstado) {
     }
 
+    /**
+     * Brinda la posicion de matriz
+     * @return Integer
+     */
     public int[][] getiMatrizObj() {
         return iMatrizObj;
     }
 
+    /**
+     * Establece el dato en la matriz por posicion
+     * @param iMatrizObj : Integer
+     */
     public void setiMatrizObj(int[][] iMatrizObj) {
         this.iMatrizObj = iMatrizObj;
     }
