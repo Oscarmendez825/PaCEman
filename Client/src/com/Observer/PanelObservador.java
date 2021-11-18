@@ -101,7 +101,8 @@ public class PanelObservador extends JPanel implements Runnable,KeyListener,Inte
          
           if( tablero.esGanador() && !tablero.isPlaying())
           {
-               JOptionPane.showMessageDialog(this, "! Felicidades ganaste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(this, "Pasaste de Nivel!", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+               tablero.repintar();
           }
           else{
                JOptionPane.showMessageDialog(this, "! Perdiste !", "Advertencia", JOptionPane.INFORMATION_MESSAGE);

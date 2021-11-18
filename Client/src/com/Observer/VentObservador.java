@@ -73,12 +73,10 @@ public class VentObservador extends JFrame{
 
             @Override
             public void focusGained(FocusEvent arg0) {
-//                JOptionPane.showMessageDialog(null, "Gane el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
 
             @Override
             public void focusLost(FocusEvent arg0) {
- //JOptionPane.showMessageDialog(null, "perdi el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         
@@ -100,7 +98,6 @@ public class VentObservador extends JFrame{
                   JBInicio.setText("Pausar");
                   PanelMain.iniciar();
                   JBInicio.setEnabled(false);
-                 // JBInicio.setEnabled(false);
                  
                   b_Iniciado = true;
                }

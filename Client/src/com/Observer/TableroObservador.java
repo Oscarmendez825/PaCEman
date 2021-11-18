@@ -36,7 +36,7 @@ private int nPills = 0;
 private int nFruits = 0;
 public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
-
+private int mTemporal[][];
  
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -77,51 +77,9 @@ public ArrayList <CFruta>     frutas;
     fantasmitas = new ArrayList<>();
     pastillas = new ArrayList<>();
     frutas = new ArrayList<>();
-    
+    mTemporal = iMatrizObj;
+    pintarMapa(iMatrizObj);
 
-    
-    for(int i=0; i < 23; i++)
-    {
-        for(int j=0; j < 23; j++)
-        {
-           switch(iMatrizObj[i][j])
-           {
-               case 1:
-//                   Es muro
-                   cuadritos.add(nMuros,new CMuro(j*25,i*25) );
-                   nMuros++;
-                   break;
-               case 2:
-//                   Es un ghost
-                    fantasmitas.add(nGhost,new CFantasma( this.getRandomColor(), j*25, i*25));
-                    nGhost++;
-                   break;
-               case 3:
-//                   Es pacman
-                     Pacman.setX(j*25);
-                     Pacman.setY(i*25);
-                     Pacman.setDireccion( IZQ );
-                   break;
-               case 4:
-//                   Es moneda
-                     coins.add(nCoins,new CMoneda(j*25,i*25));
-                     nCoins++;
-                   break;
-                   
-               case 5:
-//                  Es pastilla
-                   pastillas.add(nPills, new CPastilla(j*25,i*25));
-                   nPills++;
-                   break;
-                   
-                case 6:
-//                  Es Fruta
-                   frutas.add(nFruits, new CFruta(Color.RED,j*25,i*25));
-                   nFruits++;
-                   break;
-           }
-        }
-    }
 
  }
   
@@ -426,5 +384,52 @@ public ArrayList <CFruta>     frutas;
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
-    
+        private void pintarMapa(int[][] iMatrizObj) {
+        for(int i=0; i < 23; i++)
+    {
+        for(int j=0; j < 23; j++)
+        {
+           switch(iMatrizObj[i][j])
+           {
+               case 1:
+//                   Es muro
+                   cuadritos.add(nMuros,new CMuro(j*25,i*25) );
+                   nMuros++;
+                   break;
+               case 2:
+//                   Es un ghost
+                    fantasmitas.add(nGhost,new CFantasma( this.getRandomColor(), j*25, i*25));
+                    nGhost++;
+                   break;
+               case 3:
+//                   Es pacman
+                     Pacman.setX(j*25);
+                     Pacman.setY(i*25);
+                     Pacman.setDireccion( IZQ );
+                   break;
+               case 4:
+//                   Es moneda
+                     coins.add(nCoins,new CMoneda(j*25,i*25));
+                     nCoins++;
+                   break;
+                   
+               case 5:
+//                  Es pastilla
+                   pastillas.add(nPills, new CPastilla(j*25,i*25));
+                   nPills++;
+                   break;
+                   
+                case 6:
+//                  Es Fruta
+                   frutas.add(nFruits, new CFruta(Color.GREEN,j*25,i*25));
+                   nFruits++;
+                   break;
+           }
+        }
+    }
+    }
+    public void repintar(){
+       iMatrizObj = mTemporal;
+       pintarMapa(iMatrizObj);
+    }
 }
