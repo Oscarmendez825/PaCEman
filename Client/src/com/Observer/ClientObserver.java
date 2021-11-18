@@ -102,6 +102,12 @@ public class ClientObserver implements Runnable{
             case "FObservador":
                 genFrutas(cadena);
                 break;
+            case "JP":
+                VentObservador.getPuntos().setText(cadena[1]);
+                break;
+            case "JV":
+                VentObservador.getVidas().setText(cadena[1]);
+                break;
 
     }
 

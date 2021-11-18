@@ -489,5 +489,6 @@ private static int  vidas = 3;
         mensaje = data.trim();
         client.mandarMensaje(mensaje);
     }
-
+    
+    
     }
