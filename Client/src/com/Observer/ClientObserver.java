@@ -188,17 +188,20 @@ public class ClientObserver implements Runnable{
         int j = Integer.parseInt(cadena[3]);
         switch(cadena[1]){
             case "Cereza":
-                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.RED,j*25,i*25));
+                CFruta cereza = new CFruta(Color.RED, j*25, i*25);
+                tablero.frutas.add(cereza);
                 tablero.getiMatrizObj()[i][j] = 6;
                 break;
             case "Limon":
-                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.GREEN,j*25,i*25));
+                CFruta limon = new CFruta(Color.GREEN,j*25,i*25);
+                tablero.frutas.add(limon);
                 tablero.getiMatrizObj()[i][j] = 6;
                 break;
             case "Naranja":
-                tablero.frutas.add(tablero.getnFruits(), new CFruta(Color.ORANGE,j*25,i*25));
+                CFruta naranja = new CFruta(Color.ORANGE,j*25,i*25);
+                tablero.frutas.add(naranja);
                 tablero.getiMatrizObj()[i][j] = 6;
-                break;   
+                break; 
          }
         
     }
@@ -209,7 +212,8 @@ public class ClientObserver implements Runnable{
     private void agregarPastila(String[] cadena) {
        int i = Integer.parseInt(cadena[1]);
        int j = Integer.parseInt(cadena[2]);
-       tablero.pastillas.add(tablero.getnPills(), new CPastilla(j*25,i*25));
+       CPastilla pastilla = new CPastilla(j*25,i*25);
+       tablero.pastillas.add(pastilla);
        tablero.getiMatrizObj()[i][j] = 6;
     }
     /**
