@@ -5,8 +5,10 @@
 package com.Pacman2;
 
 /**
- *
- * @author Oscar
+ *Clase main del jugador 2
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
  */
 public class Main {
     

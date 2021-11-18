@@ -1,30 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Pacman2;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Oscar
+ * Clase que crea la ventana del juego del cliente 2
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
  */
 public class Ventana2 extends JFrame{
      public CPanelPrincipal2 PanelMain; 
     private JPanel panel;
     private JButton JBInicio;
     private boolean b_Iniciado = false ;
-    
-    
+    private static JLabel puntos;
+    private JLabel textP;
+    private static JLabel vidas;
+    private JLabel textV;
+  
+    /**
+    * Constructor de la clase Ventana
+    */  
     public Ventana2()
     { 
         super("Pacman");
@@ -32,30 +39,55 @@ public class Ventana2 extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         
+    //Creacion del panel de la clase CPanelPrincipal
         PanelMain = new CPanelPrincipal2();
         panel     = new JPanel();
-        
+        puntos = new JLabel();
+        textP = new JLabel();
+        vidas = new JLabel();
+        textV = new JLabel();
         JBInicio = new JButton("Iniciar");
-       
+        
        
         panel.add(JBInicio);
+        panel.add(textP);
+        panel.add(puntos);
+        panel.add(textV);
+        panel.add(vidas);
+        textP.setText("       PUNTUACION");
+        textP.setForeground(Color.BLACK);
+        textP.setFont(new Font("Serif", Font.PLAIN, 14));
+
+        puntos.setText("0");
+        puntos.setForeground(Color.BLACK);
+        puntos.setFont(new Font("Serif", Font.PLAIN, 14));
+        
+        
+        textV.setText("      VIDAS");
+        textV.setForeground(Color.BLACK);
+        textV.setFont(new Font("Serif", Font.PLAIN, 14));
+        
+        vidas.setText("3");
+        vidas.setForeground(Color.BLACK);
+        vidas.setFont(new Font("Serif", Font.PLAIN, 14));
         PanelMain.addKeyListener(PanelMain);
         PanelMain.addFocusListener(new FocusListener() {
 
             @Override
             public void focusGained(FocusEvent arg0) {
-//                JOptionPane.showMessageDialog(null, "Gane el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
 
             @Override
             public void focusLost(FocusEvent arg0) {
- //JOptionPane.showMessageDialog(null, "perdi el foco", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         
     }
    
-    
+   
+    /**
+    * Se pintan los elementos necesarios en la ventana
+    */ 
      public void PintarElementos()
      {           
        Container Content = getContentPane();
@@ -90,6 +122,15 @@ public class Ventana2 extends JFrame{
        Content.add(panel,BorderLayout.SOUTH);
        
     }
+
+    public static JLabel getPuntos() {
+        return puntos;
+    }
+
+    public static JLabel getVidas() {
+        return vidas;
+    }
+     
 }
     
 

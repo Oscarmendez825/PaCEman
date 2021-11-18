@@ -4,13 +4,23 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
- * @author Gabriel
+ * Clase base de fantasmas
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
+
  */
 public class CFantasma extends CGameObjects implements InterfaceGame{
 
     private Color cColor;
     private int iDireccion;
+    
+     /**
+     * Constructor de la clase Fantasma
+     * @param cFondo: Color
+     * @param posX : Integer
+     * @param posY : Integer
+     */  
     
    public CFantasma(Color cFondo, int posX, int posY)
     {
@@ -23,33 +33,62 @@ public class CFantasma extends CGameObjects implements InterfaceGame{
     {
         
     }
-    
+   
+     /** 
+    * Establece la direccion del fantasma
+    * @param iDir : Integer
+    */  
     public void setDireccion(int iDir){
         iDireccion=iDir;
     }
-    
+     /**
+     * Brinda la direccion del fantasma
+     * @return  Integer
+     */  
     public int getDireccion(){
         return iDireccion;
     }
+    
+     /**
+     * Establece la posicion en X del fantasma
+     * @param PosX:Integer 
+     */   
+    
      public void setX(int PosX)
     {
       super.iPosX = PosX;
     }
-    
+ 
+     /**
+     * Establece la posicion en Y del fantasma
+     * @param PosY : Integer
+     */
     public void setY(int PosY){
       super.iPosY = PosY;
     }
     
+    /**
+     * Brinda la posicion horizontal del fantasma
+     * @return : Integer
+     */ 
     public int getX()
     {
         return (iPosX/25);
     }
     
+    /**
+     * Brinda la posición vertical del fantasma
+     * @return : Integer
+     */ 
     public int getY()
     {
         return (iPosY/25);
     }
     
+    /**
+     * Se pintan los fantasmas a partir de figuras
+     * @param g : Graphics
+     */
     @Override
     public void paintElements(Graphics g) {
         
@@ -72,6 +111,10 @@ public class CFantasma extends CGameObjects implements InterfaceGame{
         g.drawArc(iPosX+7, iPosY+15, 5, 5, 0, 180);
     }
 
+     /**
+     * Metodo para mover el fantasma las posiciones necesarias
+     * @param iEstado : Integer
+     */
     @Override
     public void moverElemento(int iEstado) {
          switch (iEstado)

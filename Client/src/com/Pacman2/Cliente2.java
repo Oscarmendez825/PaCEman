@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Pacman2;
 
 import com.Pacman.CFantasma;
@@ -17,8 +13,12 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- *
- * @author Oscar
+ * 
+ * @author Oscar Mendez
+ * @author Gabriel Gonzalez
+ * @author Daniela Brenes
+ * Clase cliente de comunicacion por sockets del jugador 2
+ * 
  */
 public class Cliente2 implements Runnable{
     
@@ -30,7 +30,11 @@ public class Cliente2 implements Runnable{
     private InputStreamReader inputStreamReader;
     private BufferedReader bufferedReader;
     
-        
+    /**
+    * Constructor de la clase Cliente
+    * @param juego:CTablero2
+    */    
+    
     public Cliente2(CTablero2 juego){
         this.tablero = juego;
 
@@ -43,12 +47,21 @@ public class Cliente2 implements Runnable{
 
         }
     }
+    /**
+    * Envia mensaje del cliente al servidor
+    * @param message:String
+    */
     public void mandarMensaje(String message){
         try {
             dataout.write(("Cliente2,"+message).getBytes());
         } catch (IOException e) {
         }
 }
+    /**
+     * 
+     * Responsable de la comunicacion continua entre el servidor y cliente
+     * 
+     */
     @Override
      public void run() {
         try{
@@ -64,26 +77,25 @@ public class Cliente2 implements Runnable{
         }
 
     }
-         
+     /**
+     * Decide que accion realizar segun lo que el servidor le indique
+     * @param cadena:String[]
+     * 
+     */    
      private void accion(String[] cadena){
          switch(cadena[0]){
              case "Enemigo":
                  switch(cadena[1]){
                      case "Shadow":
-                         //System.out.println("Crear Shadow");
-                         //AGREGAR FANTASMA (ERROR A VECES)
                          addFantasma("rojo");
                          break;
                      case "Speedy":
-                         //System.out.println("Crear Speedy");
                          addFantasma("rosado");
                          break;
                      case "Bashful":
-                         //System.out.println("Crear Bashful");
                          addFantasma("celeste");
                          break;   
                      case "Pokey":
-                         //System.out.println("Crear Pokey");
                          addFantasma("naranja");
                          break;
                  }
@@ -97,14 +109,21 @@ public class Cliente2 implements Runnable{
             case "Puntuacion":
                  int puntaje = Integer.parseInt(cadena[1]);
                  tablero.setPuntaje(puntaje);
+                 Ventana2.getPuntos().setText(cadena[1]);
+                 mandarMensaje("JP,"+cadena[1]);
                  break;
              case "Vida":
                  int vidas = Integer.parseInt(cadena[1]);
                  CTablero2.setVidas(vidas);
+                 Ventana2.getVidas().setText(cadena[1]);
+                 mandarMensaje("JV,"+cadena[1]);
                  break;
          }
      }
-        
+    /**
+     * Agrega un fantasma en la interfaz del jugador
+     * @param color:String
+     */         
     private void addFantasma(String color){
         int i = getRandom(22);
         int j = getRandom(22);
@@ -155,7 +174,10 @@ public class Cliente2 implements Runnable{
         }
     }
 
-    
+    /**
+     * Agrega una fruta en la interfaz del jugador
+     * @param cadena:String
+     */    
     private void addFruta(String[] cadena){
         int i = getRandom(22);
         int j = getRandom(22);
@@ -187,6 +209,9 @@ public class Cliente2 implements Runnable{
          }
          
     }
+    /**
+     * Agrega una pastilla en la interfaz del jugador
+     */
     private void addPastilla(){
         int i = getRandom(22);
         int j = getRandom(22);
@@ -201,7 +226,11 @@ public class Cliente2 implements Runnable{
         mandarMensaje(datos);
     
     }
-    
+    /**
+     * Elimina elemento de un array
+     * @param arr:String[]
+     * @return String[]
+     */    
     private String[] eliminar(String[] arr){
     String[] newArr = null;
         
@@ -219,7 +248,11 @@ public class Cliente2 implements Runnable{
         }
         return newArr;
     }
-    
+    /**
+     * Brinda un numero random en un rango definido
+     * @param num:Integer
+     * @return Integer
+     */    
     private int getRandom(int num){
         Random random = new Random();
         int numX = random.nextInt(num);
