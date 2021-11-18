@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.Observer;
 
 import java.awt.BorderLayout;
@@ -18,8 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Oscar
+ * Clase que crea la ventana del juego del observador
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
  */
 public class VentObservador extends JFrame{
     public PanelObservador PanelMain; 
@@ -31,6 +30,9 @@ public class VentObservador extends JFrame{
     private static JLabel vidas;
     private JLabel textV;
     
+    /**
+    * Constructor de la clase Ventana
+    */  
     public VentObservador()
     { 
         super("Pacman");
@@ -38,6 +40,7 @@ public class VentObservador extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         
+        //Creacion del panel de la clase CPanelPrincipal
         PanelMain = new PanelObservador();
         panel     = new JPanel();
         puntos = new JLabel();
@@ -82,7 +85,9 @@ public class VentObservador extends JFrame{
         
     }
    
-    
+    /**
+    * Se pintan los elementos necesarios en la ventana
+    */ 
      public void PintarElementos()
      {           
        Container Content = getContentPane();

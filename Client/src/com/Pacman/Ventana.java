@@ -14,7 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/**
+ * Clase que crea la ventana del juego del cliente 1
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
+ */
 public class Ventana extends JFrame{
     
     public CPanelPrincipal PanelMain; 
@@ -25,6 +30,11 @@ public class Ventana extends JFrame{
     private JLabel textP;
     private static JLabel vidas;
     private JLabel textV;
+    
+   /**
+    * Constructor de la clase Ventana
+    */ 
+    
     public Ventana()
     { 
         super("Pacman");
@@ -32,6 +42,7 @@ public class Ventana extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         
+        //Creacion del panel de la clase CPanelPrincipal
         PanelMain = new CPanelPrincipal();
         panel     = new JPanel();
         puntos = new JLabel();
@@ -81,7 +92,9 @@ public class Ventana extends JFrame{
         
     }
    
-    
+/**
+ * Se pintan los elementos necesarios en la ventana
+ */ 
      public void PintarElementos()
      {           
        Container Content = getContentPane();

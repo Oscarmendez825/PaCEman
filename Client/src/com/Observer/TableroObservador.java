@@ -38,6 +38,7 @@ public ArrayList <CPastilla>  pastillas;
 public ArrayList <CFruta>     frutas;
 private int mTemporal[][];
  
+ //Creacion del tablero del juego
  private int iMatrizObj [][] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                                  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                  {1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -64,7 +65,10 @@ private int mTemporal[][];
                                };
 
     
- 
+  /**
+  * Constructor de la clase tableroObservador
+  * Se definene los arrays de los elementos del juego
+  */
  public TableroObservador()
  {
     client = new ClientObserver(this);
@@ -82,7 +86,11 @@ private int mTemporal[][];
 
 
  }
-  
+ 
+   /**
+  * Brinda un color para los fantasmas
+  * @return Color
+  */
     public Color getRandomColor()
     {
         Color c = Color.BLACK;
@@ -110,16 +118,31 @@ private int mTemporal[][];
          return c;
     }
     
+     /**
+     * Brinda el valor de la posicion de la matriz
+     * @param iFila: Integer
+     * @param iCol: Integer
+     * @return Integer
+     */
     public int getObject(int iFila, int iCol)
     {
       return  iMatrizObj [iFila][iCol];   
     }
     
+    /**
+    * Establece el objeto en la matriz
+    * @param obj: Integer
+    * @param iFila: Integer
+    * @param iCol : Integer
+    */ 
     public void setObject(int obj,int iFila, int iCol)
     {
         iMatrizObj [iFila][iCol] = obj; 
     }
-    
+    /**
+     * Metodo para mover al pacman en la matriz
+     * Envia los datos de la direccion al servidor
+     */
     public void moverPacman()
     {
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 0;  
@@ -127,7 +150,11 @@ private int mTemporal[][];
       iMatrizObj [ Pacman.getY() ][ Pacman.getX() ] = 3;
 
     }
-    
+    /**
+     * Metodo para mover a los fantasmas en la matriz
+     * @param iPos : Integer
+     * Envia los datos de la direccion del fantasma al servidor
+     */
     private void moverGhost(int iPos)
     {
       iMatrizObj [ fantasmitas.get(iPos).getY() ][fantasmitas.get(iPos).getX()] = 0;
@@ -136,7 +163,10 @@ private int mTemporal[][];
 
     }
     
-    
+    /**
+     *Metodo para mover fantasmas las posiciones necesarias y cambiar la posicion 
+     * @param iTiempo : Integer
+     */ 
     public void moverFantasmas(int iTiempo)
     {
             for(int i = 0; i < fantasmitas.size(); i++)
@@ -209,7 +239,10 @@ private int mTemporal[][];
                     }  
             }    
     }
-    
+    /**
+     * Valida si el jugador no ha muerto
+     * @return Boolean
+     */
      public boolean isPlaying()
      {
           boolean bFinish = false;
@@ -225,7 +258,9 @@ private int mTemporal[][];
 
           return bFinish;
      }
-     
+     /**
+     * Establece una direccion random para los fantasmas
+     */
     public void setRandomDirectionGhosts()
     {
       for(int i = 0;i <  fantasmitas.size() ; i++)
@@ -233,7 +268,10 @@ private int mTemporal[][];
         fantasmitas.get(i).setDireccion( this.getRandomDirection() );
       }
     }
-           
+     /**
+     * Valida si el jugador es ganador
+     * @return Boolean
+     */        
     public boolean esGanador()
     {  
 //        si se acaban las monedas ganas
@@ -244,7 +282,9 @@ private int mTemporal[][];
         return coins.isEmpty();
     } 
 
-    
+    /**
+     * Metodo para comer monedas
+     */ 
     public void checkCoins()
     {
        for(int i=0; i < coins.size() ;i++)
@@ -256,6 +296,9 @@ private int mTemporal[][];
             }
        } 
     }
+     /**
+     * Metodo para comer pastillas
+     */
     public void checkPastillas()
     {
        for(int i=0; i < pastillas.size() ;i++)
@@ -267,7 +310,9 @@ private int mTemporal[][];
             }
        } 
     }
-    
+    /**
+     * Metodo para comer frutas
+     */
    public void checkFrutas()
     {
        for(int i=0; i < frutas.size() ;i++)
@@ -280,17 +325,27 @@ private int mTemporal[][];
        } 
     }
     
-    
+    /**
+     * Brinda una direccion random
+     * @return Integer
+     */ 
     public int getRandomDirection()
     {
          Random rnd = new Random();
          return (rnd.nextInt(4)+1);
     }
-
+/**
+ * Metodo para mover elemento
+ * @param iEstado : Integer
+ */
     @Override
     public void moverElemento(int iEstado) {
     }
-
+    
+/**
+ * 
+ * @return 
+ */
     public int[][] getiMatrizObj() {
         return iMatrizObj;
     }
@@ -384,6 +439,11 @@ private int mTemporal[][];
     public void setnFruits(int nFruits) {
         this.nFruits = nFruits;
     }
+    /**
+     * Metodo para pintar el mapa tras pasar de nivel
+     * @param iMatrizObj 
+     */
+    
         private void pintarMapa(int[][] iMatrizObj) {
         for(int i=0; i < 23; i++)
     {

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Pacman2;
 
 import java.awt.BorderLayout;
@@ -18,8 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Oscar
+ * Clase que crea la ventana del juego del cliente 2
+ * @author Gabriel Gonzalez
+ * @author  Daniela Brenes
+ * @author  Oscar Mendez
  */
 public class Ventana2 extends JFrame{
      public CPanelPrincipal2 PanelMain; 
@@ -30,7 +28,10 @@ public class Ventana2 extends JFrame{
     private JLabel textP;
     private static JLabel vidas;
     private JLabel textV;
-    
+  
+    /**
+    * Constructor de la clase Ventana
+    */  
     public Ventana2()
     { 
         super("Pacman");
@@ -38,6 +39,7 @@ public class Ventana2 extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         
+    //Creacion del panel de la clase CPanelPrincipal
         PanelMain = new CPanelPrincipal2();
         panel     = new JPanel();
         puntos = new JLabel();
@@ -82,7 +84,10 @@ public class Ventana2 extends JFrame{
         
     }
    
-    
+   
+    /**
+    * Se pintan los elementos necesarios en la ventana
+    */ 
      public void PintarElementos()
      {           
        Container Content = getContentPane();
